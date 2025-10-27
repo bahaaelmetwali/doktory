@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "333151990063",
+    "project_id": "doktory-89318",
+    "storage_bucket": "doktory-89318.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:333151990063:android:14c9ea172145d6b8d371da",
+        "android_client_info": {
+          "package_name": "com.example.doktory"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3eiWzLcati5kXfDM_CRQiT__QhouDpC0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
