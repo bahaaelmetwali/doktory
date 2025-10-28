@@ -13,5 +13,5 @@ abstract class AppColors {
   static const Color darkText = Color(0xff1C1C1C);
 
   static const Color lightText = Color(0xffFFFFFF);
-  static const mainLogo = 'assets/logos/AppLogo.png';
+  static const lottieSplash = 'assets/lottie/animation.json';
 }
