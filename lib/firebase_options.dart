@@ -85,4 +85,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'doktory-89318.firebasestorage.app',
     measurementId: 'G-JB6E6WLH4H',
   );
+
 }
