@@ -1,6 +1,6 @@
 import 'package:doktory/core/router/app_router_names.dart';
-import 'package:doktory/features/splash/presentation/home_screen.dart';
-import 'package:doktory/features/splash/presentation/splash_screen.dart';
+import 'package:doktory/features/splash/presentation/views/select_role_screen.dart';
+import 'package:doktory/features/splash/presentation/views/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -15,13 +15,15 @@ abstract class AppRouter {
       GoRoute(
         path: AppRouterNames.splashScreen,
         builder: (BuildContext context, GoRouterState state) {
-
           return const SplashScreen();
         },
-      ),  GoRoute(
-        path: AppRouterNames.homeScreen,
+      ),
+      GoRoute(
+        path: AppRouterNames.selectRoleScreen,
         builder: (BuildContext context, GoRouterState state) {
-
-          return const HomeScreen();
+          return const SelectRoleScreen();
         },
-      )]);}
+      ),
+    ],
+  );
+}

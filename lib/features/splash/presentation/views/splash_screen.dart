@@ -16,10 +16,9 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    // TODO: implement initState
-    Future.delayed(const Duration(seconds: 6), () {
+    Future.delayed(const Duration(seconds: 7), () {
       if (mounted) {
-        context.go(AppRouterNames.homeScreen);
+        context.go(AppRouterNames.selectRoleScreen);
       }
     });
     super.initState();
@@ -44,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   animatedTexts: [
                     TypewriterAnimatedText(
                       'دكتوري',
-                      speed: Duration(milliseconds: 600),
+                      speed: Duration(milliseconds: 550),
                       cursor: '',
                     ),
                   ],

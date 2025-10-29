@@ -1,6 +1,4 @@
 class AppRouterNames {
-    static const splashScreen = '/';
-    static const homeScreen = '/homeScreen';
-
-
+  static const splashScreen = '/';
+  static const selectRoleScreen = '/selectRoleScreen';
 }

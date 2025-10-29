@@ -43,6 +43,16 @@ abstract class Styles {
     fontSize: 20.sp,
     fontWeight: FontWeight.w600,
   );
+  static final TextStyle textStyle24SemiBold = TextStyle(
+    fontFamily: 'Cairo',
+    fontSize: 24.sp,
+    fontWeight: FontWeight.w600,
+  );
+  static final TextStyle textStyle28SemiBold = TextStyle(
+    fontFamily: 'Cairo',
+    fontSize: 28.sp,
+    fontWeight: FontWeight.w600,
+  );
 
   static final TextStyle textStyle32SemiBold = TextStyle(
     fontFamily: 'Cairo',
