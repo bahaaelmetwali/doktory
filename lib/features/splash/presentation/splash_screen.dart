@@ -1,8 +1,9 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:doktory/core/constants.dart';
 import 'package:doktory/core/utils/styles.dart';
+import 'package:doktory/features/splash/widgets/logo_splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -28,30 +29,24 @@ class _SplashScreenState extends State<SplashScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             LogoSplash(),
-            const SizedBox(height: 20),
-            Text('دوكتوري', style: Styles.textStyle28Bold),
+            SizedBox(
+              child: DefaultTextStyle(
+                style: Styles.textStyle28Bold.copyWith(
+                  color: AppColors.primary,
+                ),
+                child: AnimatedTextKit(
+                  animatedTexts: [
+            
+                    TypewriterAnimatedText(
+                      'دكتوري',
+                      speed: Duration(milliseconds: 600),
+                      cursor: '',
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class LogoSplash extends StatelessWidget {
-  const LogoSplash({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Flexible(
-      fit: FlexFit.loose,
-      child: Padding(
-        padding: EdgeInsets.only(left: 52.w),
-        child: LottieBuilder.asset(
-          AppColors.lottieSplash,
-          width: 350.w,
-          height: 350.h,
-          fit: BoxFit.contain,
-          alignment: Alignment.center,
         ),
       ),
     );
