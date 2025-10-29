@@ -1,9 +1,13 @@
 import 'package:doktory/core/constants.dart';
+import 'package:doktory/core/router/app_router_names.dart';
+import 'package:doktory/core/utils/cache_helper.dart';
+import 'package:doktory/core/utils/service_locator.dart';
 import 'package:doktory/core/utils/styles.dart';
 import 'package:doktory/core/widgets/custom_button.dart';
 import 'package:doktory/features/splash/widgets/role_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class SelectedRoleScreenBody extends StatefulWidget {
   const SelectedRoleScreenBody({super.key});
@@ -62,7 +66,17 @@ class _SelectedRoleScreenBodyState extends State<SelectedRoleScreenBody> {
                 ],
               ),
               SizedBox(height: 40.h),
-              CustomButton(onPressed: () {}, text: 'تأكيد'),
+              CustomButton(
+                onPressed: () async {
+                  final cacheHelper = getIt<CacheHelper>();
+                  await cacheHelper.saveRole(
+                    role: isSelected ? 'دكتور' : 'عميل',
+                  );
+                  print("Button pressed!");
+                  context.push(AppRouterNames.signUpScreen);
+                },
+                text: 'تأكيد',
+              ),
             ],
           ),
         ),
