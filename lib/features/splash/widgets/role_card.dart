@@ -8,6 +8,7 @@ class RoleCard extends StatelessWidget {
   final String iconPath;
   final String label;
   final VoidCallback onTap;
+  final bool isSelected;
 
   const RoleCard({
     super.key,
@@ -16,7 +17,7 @@ class RoleCard extends StatelessWidget {
     required this.onTap,
     required this.isSelected,
   });
-  final bool isSelected;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -24,7 +25,7 @@ class RoleCard extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(12.r),
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 500),
+          duration: const Duration(milliseconds: 200),
           curve: Curves.easeInOut,
           width: 150.w,
           decoration: BoxDecoration(
@@ -40,17 +41,26 @@ class RoleCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 AnimatedContainer(
-                  duration: const Duration(milliseconds: 500),
+                  duration: const Duration(milliseconds: 200),
                   curve: Curves.easeInOut,
-                  width: 150.w,
-                  height: 150.h,
+                  width: isSelected ? 125.w : 115.w,
+                  height: isSelected ? 125.h : 115.h,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: isSelected
                         ? AppColors.primary
                         : Colors.grey.shade300,
                   ),
-                  child: SvgPicture.asset(iconPath, width: 40.w, height: 40.h),
+                  child: AnimatedScale(
+                    scale: isSelected ? 1.1 : 1.0,
+                    duration: const Duration(milliseconds: 200),
+                    curve: Curves.easeInOut,
+                    child: SvgPicture.asset(
+                      iconPath,
+                      width: 60.w,
+                      height: 60.h,
+                    ),
+                  ),
                 ),
                 SizedBox(height: 10.h),
                 Text(label, style: Styles.textStyle18SemiBold),
@@ -64,9 +74,10 @@ class RoleCard extends StatelessWidget {
                   ),
                   child: Center(
                     child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 500),
+                      duration: const Duration(milliseconds: 200),
                       curve: Curves.easeInOut,
-
+                      width: 16.w,
+                      height: 16.h,
                       decoration: BoxDecoration(
                         color: isSelected
                             ? AppColors.primary
