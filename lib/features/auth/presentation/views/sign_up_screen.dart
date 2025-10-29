@@ -1,3 +1,5 @@
+import 'package:doktory/core/constants.dart';
+import 'package:doktory/features/auth/presentation/widgets/sign_up_screen_body.dart';
 import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -5,6 +7,9 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      backgroundColor: AppColors.scaffold,
+      body: SignUpScreenBody(),
+    );
   }
 }
