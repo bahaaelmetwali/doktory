@@ -14,32 +14,68 @@ class RoleCard extends StatelessWidget {
     required this.iconPath,
     required this.label,
     required this.onTap,
+    required this.isSelected,
   });
-
+  final bool isSelected;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
         padding: EdgeInsets.all(12.r),
-        child: Container(
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
           width: 150.w,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16.r),
-            border: Border.all(color: Colors.grey.shade300, width: 2.w),
+            border: Border.all(
+              color: isSelected ? AppColors.primary : Colors.grey.shade300,
+              width: 2.w,
+            ),
           ),
           child: Padding(
             padding: EdgeInsets.all(12.r),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                CircleAvatar(
-                  radius: 60.r,
-                  backgroundColor: AppColors.bright,
-                  child: SvgPicture.asset(iconPath, width: 80.w, height: 80.h),
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
+                  width: 150.w,
+                  height: 150.h,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: isSelected
+                        ? AppColors.primary
+                        : Colors.grey.shade300,
+                  ),
+                  child: SvgPicture.asset(iconPath, width: 40.w, height: 40.h),
                 ),
                 SizedBox(height: 10.h),
                 Text(label, style: Styles.textStyle18SemiBold),
+                SizedBox(height: 6.h),
+                Container(
+                  width: 22.w,
+                  height: 22.h,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.grey.shade300, width: 2.w),
+                  ),
+                  child: Center(
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.easeInOut,
+
+                      decoration: BoxDecoration(
+                        color: isSelected
+                            ? AppColors.primary
+                            : Colors.grey.shade300,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
