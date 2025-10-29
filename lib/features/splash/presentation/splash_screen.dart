@@ -1,9 +1,10 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:doktory/core/constants.dart';
+import 'package:doktory/core/router/app_router_names.dart';
 import 'package:doktory/core/utils/styles.dart';
 import 'package:doktory/features/splash/widgets/logo_splash.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,6 +17,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     // TODO: implement initState
+    Future.delayed(const Duration(seconds: 6), () {
+      if (mounted) {
+        context.go(AppRouterNames.homeScreen);
+      }
+    });
     super.initState();
   }
 
@@ -36,7 +42,6 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
                 child: AnimatedTextKit(
                   animatedTexts: [
-            
                     TypewriterAnimatedText(
                       'دكتوري',
                       speed: Duration(milliseconds: 600),

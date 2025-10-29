@@ -1,4 +1,4 @@
-import 'package:doktory/features/splash/presentation/splash_screen.dart';
+import 'package:doktory/core/router/app_router.dart';
 import 'package:doktory/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -18,9 +18,10 @@ class Doktory extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
-      builder: (context, child) => MaterialApp(
+      builder: (context, child) => MaterialApp.router(
+        routerConfig: AppRouter.router,
+
         debugShowCheckedModeBanner: false,
-        home: const SplashScreen(),
       ),
     );
   }
