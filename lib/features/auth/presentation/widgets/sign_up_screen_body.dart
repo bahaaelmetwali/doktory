@@ -1,8 +1,11 @@
 import 'package:doktory/core/constants.dart';
+import 'package:doktory/core/utils/cache_helper.dart';
+import 'package:doktory/core/utils/service_locator.dart';
 import 'package:doktory/core/utils/styles.dart';
 import 'package:doktory/core/widgets/custom_button.dart';
 import 'package:doktory/core/widgets/show_or_hide_pass.dart';
 import 'package:doktory/features/auth/presentation/widgets/governorate_dropdown.dart';
+import 'package:doktory/features/auth/presentation/widgets/specializations_dropdown.dart';
 import 'package:doktory/features/auth/presentation/widgets/text_fields_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,6 +18,14 @@ class SignUpScreenBody extends StatefulWidget {
 }
 
 class _SignUpScreenBodyState extends State<SignUpScreenBody> {
+  @override
+  void initState() {
+    final cache = getIt<CacheHelper>();
+    final role = cache.getRole();
+    selectedRole = role;
+    super.initState();
+  }
+
   final _formKey = GlobalKey<FormState>();
 
   final nameController = TextEditingController();
@@ -22,7 +33,8 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
   final passwordController = TextEditingController();
   final phoneController = TextEditingController();
   bool obsecureText = false;
-
+  String? selectedRole;
+  String? selectedSpecialization;
   String? selectedGovernorate;
   @override
   Widget build(BuildContext context) {
@@ -68,8 +80,17 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
                     });
                   },
                 ),
+                selectedRole == 'دكتور'
+                    ? SpecializationsDropdown(
+                        selectedSpecialization: selectedSpecialization,
+                        onChanged: (String? value) {
+                          setState(() {
+                            selectedSpecialization = value;
+                          });
+                        },
+                      )
+                    : const SizedBox.shrink(),
                 SizedBox(height: 20.h),
-
                 Center(
                   child: CustomButton(
                     text: 'إنشاء حساب',

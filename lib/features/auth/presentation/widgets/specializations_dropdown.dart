@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class GovernorateDropdown extends StatelessWidget {
-  final String? selectedGovernorate;
+class SpecializationsDropdown extends StatelessWidget {
+  final String? selectedSpecialization;
   final ValueChanged<String?> onChanged;
 
-  const GovernorateDropdown({
+  const SpecializationsDropdown({
     super.key,
-    required this.selectedGovernorate,
+    required this.selectedSpecialization,
     required this.onChanged,
   });
 
@@ -21,7 +21,7 @@ class GovernorateDropdown extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('المحافظة', style: Styles.textStyle16Medium),
+          Text('التخصص', style: Styles.textStyle16Medium),
           SizedBox(height: 8.h),
           Container(
             height: 48.h,
@@ -36,7 +36,7 @@ class GovernorateDropdown extends StatelessWidget {
               child: Row(
                 children: [
                   SvgPicture.asset(
-                    'assets/icons/location.svg',
+                    'assets/icons/bag.svg',
                     height: 20.h,
                     width: 20.w,
                   ),
@@ -45,15 +45,15 @@ class GovernorateDropdown extends StatelessWidget {
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton<String>(
                         hint: Text(
-                          'اختر المحافظة',
+                          'اختر التخصص',
                           style: Styles.textStyle16Medium.copyWith(
                             color: Colors.grey,
                           ),
                         ),
-                        value: selectedGovernorate,
+                        value: selectedSpecialization,
                         isExpanded: true,
                         icon: const Icon(Icons.keyboard_arrow_down),
-                        items: Constants.egyptGovernorates.map((gov) {
+                        items: Constants.doctorSpecializations.map((gov) {
                           return DropdownMenuItem<String>(
                             value: gov,
                             child: Text(gov, style: Styles.textStyle16Medium),
