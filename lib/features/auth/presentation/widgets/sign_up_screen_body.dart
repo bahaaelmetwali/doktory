@@ -1,10 +1,9 @@
 import 'package:doktory/core/constants.dart';
 import 'package:doktory/core/utils/styles.dart';
-import 'package:doktory/core/utils/validator.dart';
 import 'package:doktory/core/widgets/custom_button.dart';
-import 'package:doktory/core/widgets/custom_text_form_field.dart';
 import 'package:doktory/core/widgets/show_or_hide_pass.dart';
 import 'package:doktory/features/auth/presentation/widgets/governorate_dropdown.dart';
+import 'package:doktory/features/auth/presentation/widgets/text_fields_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -46,44 +45,13 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
                   ),
                 ),
                 SizedBox(height: 10.h),
-
-                CustomTextFormField(
-                  controller: nameController,
-
-                  hintText: 'الاسم الكامل',
-                  name: 'الاسم الكامل',
-
-                  iconPath: 'assets/icons/profile.svg',
-                  validator: Validator.nameValidator,
-                ),
-
-                CustomTextFormField(
-                  controller: emailController,
-                  hintText: 'البريد الإلكتروني',
-                  name: 'البريد الإلكتروني',
-
-                  iconPath: 'assets/icons/sms.svg',
-                  validator: Validator.emailValidator,
-                ),
-                CustomTextFormField(
-                  controller: phoneController,
-                  hintText: 'رقم الهاتف',
-                  name: 'رقم الهاتف',
-
-                  iconPath: 'assets/icons/phone.svg',
-                  obscureText: false,
-                  validator: Validator.passwordValidator,
-                ),
-
-                CustomTextFormField(
-                  controller: passwordController,
-                  hintText: 'كلمة المرور',
-                  name: 'كلمة المرور',
-                  iconPath: 'assets/icons/lock.svg',
-                  validator: Validator.passwordValidator,
-                  obscureText: obsecureText,
-
-                  suffixIcon: ShowOrHidePass(
+                TextFieldsSection(
+                  nameController: nameController,
+                  emailController: emailController,
+                  phoneController: phoneController,
+                  passwordController: passwordController,
+                  obsecureText: obsecureText,
+                  showorHidePass: ShowOrHidePass(
                     onToggle: () {
                       setState(() {
                         obsecureText = !obsecureText;
@@ -102,35 +70,31 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
                 ),
                 SizedBox(height: 20.h),
 
-                Builder(
-                  builder: (context) {
-                    return Center(
-                      child: CustomButton(
-                        text: 'إنشاء حساب',
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            if (selectedGovernorate == null ||
-                                selectedGovernorate!.isEmpty) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: const Text('من فضلك اختر المحافظة'),
-                                  backgroundColor: Colors.redAccent,
-                                  behavior: SnackBarBehavior.floating,
-                                  duration: const Duration(seconds: 2),
-                                ),
-                              );
-                              return;
-                            }
+                Center(
+                  child: CustomButton(
+                    text: 'إنشاء حساب',
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        if (selectedGovernorate == null ||
+                            selectedGovernorate!.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: const Text('من فضلك اختر المحافظة'),
+                              backgroundColor: Colors.redAccent,
+                              behavior: SnackBarBehavior.floating,
+                              duration: const Duration(seconds: 2),
+                            ),
+                          );
+                          return;
+                        }
 
-                            print('✅ Name: ${nameController.text}');
-                            print('✅ Email: ${emailController.text}');
-                            print('✅ Password: ${passwordController.text}');
-                            print('✅ Governorate: $selectedGovernorate');
-                          }
-                        },
-                      ),
-                    );
-                  },
+                        print('✅ Name: ${nameController.text}');
+                        print('✅ Email: ${emailController.text}');
+                        print('✅ Password: ${passwordController.text}');
+                        print('✅ Governorate: $selectedGovernorate');
+                      }
+                    },
+                  ),
                 ),
               ],
             ),
