@@ -36,7 +36,7 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(12.r),
+      padding: EdgeInsets.all(8.r),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -48,7 +48,6 @@ class CustomTextFormField extends StatelessWidget {
           ),
           SizedBox(height: 4.h),
           SizedBox(
-            height: height,
             width: 335.w,
             child: TextFormField(
               obscureText: obscureText,
@@ -63,9 +62,10 @@ class CustomTextFormField extends StatelessWidget {
 
               keyboardType: textInputType,
               decoration: InputDecoration(
+                isDense: false,
                 contentPadding: EdgeInsets.symmetric(
-                  vertical: height != null ? height! / 3.5 : 12,
-                  horizontal: 12,
+                  horizontal: 12.w,
+                  vertical: 12.h,
                 ),
                 prefixIcon: iconPath != null
                     ? Padding(
