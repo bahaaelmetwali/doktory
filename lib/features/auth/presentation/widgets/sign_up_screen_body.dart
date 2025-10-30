@@ -3,6 +3,7 @@ import 'package:doktory/core/utils/styles.dart';
 import 'package:doktory/core/utils/validator.dart';
 import 'package:doktory/core/widgets/custom_button.dart';
 import 'package:doktory/core/widgets/custom_text_form_field.dart';
+import 'package:doktory/core/widgets/show_or_hide_pass.dart';
 import 'package:doktory/features/auth/presentation/widgets/governorate_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,6 +22,7 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final phoneController = TextEditingController();
+  bool obsecureText = false;
 
   String? selectedGovernorate;
   @override
@@ -77,10 +79,18 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
                   controller: passwordController,
                   hintText: 'كلمة المرور',
                   name: 'كلمة المرور',
-
                   iconPath: 'assets/icons/lock.svg',
-                  obscureText: true,
                   validator: Validator.passwordValidator,
+                  obscureText: obsecureText,
+
+                  suffixIcon: ShowOrHidePass(
+                    onToggle: () {
+                      setState(() {
+                        obsecureText = !obsecureText;
+                      });
+                    },
+                    obsecureText: obsecureText,
+                  ),
                 ),
                 GovernorateDropdown(
                   selectedGovernorate: selectedGovernorate,
