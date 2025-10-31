@@ -18,7 +18,6 @@ class SignUpScreenBody extends StatefulWidget {
 }
 
 class _SignUpScreenBodyState extends State<SignUpScreenBody> {
-  @override
   void initState() {
     final cache = getIt<CacheHelper>();
     final role = cache.getRole();
@@ -27,13 +26,12 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
   }
 
   final _formKey = GlobalKey<FormState>();
-
+  String? selectedRole;
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final phoneController = TextEditingController();
   bool obsecureText = false;
-  String? selectedRole;
   String? selectedSpecialization;
   String? selectedGovernorate;
   @override
