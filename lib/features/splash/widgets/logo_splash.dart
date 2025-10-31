@@ -1,4 +1,3 @@
-
 import 'package:doktory/core/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,7 +32,7 @@ class _LogoSplashState extends State<LogoSplash>
   @override
   Widget build(BuildContext context) {
     return Lottie.asset(
-      AppColors.lottieSplash,
+      Constants.lottieSplash,
       width: 400.w,
       height: 400.h,
       fit: BoxFit.contain,
