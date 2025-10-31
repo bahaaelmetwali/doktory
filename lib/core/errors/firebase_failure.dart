@@ -1,4 +1,4 @@
-import 'package:doktory/core/errors/Failure.dart';
+import 'package:doktory/core/errors/failure.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseFailure extends Failure {

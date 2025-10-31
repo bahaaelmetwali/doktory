@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:doktory/core/errors/Failure.dart';
+import 'package:doktory/core/errors/failure.dart';
 
 class ServiceFailure extends Failure {
   ServiceFailure(super.errorMessage);
