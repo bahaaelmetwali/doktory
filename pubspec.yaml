@@ -47,6 +47,7 @@ dependencies:
   flutter_localization: ^0.3.3
   easy_localization: ^3.0.8
   firebase_storage: ^12.4.10
+  dio: ^5.9.0
 
 dev_dependencies:
   flutter_test:
@@ -68,7 +69,7 @@ flutter:
   assets:
     - assets/lottie/splash_animation.json
     - assets/icons/
-
+    - assets/logos/
   fonts:
     - family: Cairo
       fonts:

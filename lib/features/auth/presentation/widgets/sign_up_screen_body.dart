@@ -29,8 +29,11 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
           child: Form(
             key: _formKey,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Image.asset(Constants.mainLogo, height: 120.h, width: 120.w),
+                SizedBox(height: 10.h),
                 Center(
                   child: Text(
                     'إنشاء حساب جديد',
