@@ -6,7 +6,6 @@ void showCustomSnackBar(
   required String message,
   bool isError = false,
 }) {
-  final color = isError ? Colors.redAccent : Colors.greenAccent.shade400;
   final icon = isError ? Iconsax.close_circle : Iconsax.tick_circle;
 
   ScaffoldMessenger.of(context).showSnackBar(

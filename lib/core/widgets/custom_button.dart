@@ -20,14 +20,11 @@ class CustomButton extends StatelessWidget {
           color: AppColors.primary,
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              text,
-              style: Styles.textStyle24SemiBold.copyWith(color: Colors.white),
-            ),
-          ],
+        child: Center(
+          child: Text(
+            text,
+            style: Styles.textStyle24SemiBold.copyWith(color: Colors.white),
+          ),
         ),
       ),
     );

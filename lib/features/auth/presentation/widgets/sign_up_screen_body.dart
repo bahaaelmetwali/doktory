@@ -1,6 +1,7 @@
 import 'package:doktory/core/constants.dart';
 import 'package:doktory/core/utils/styles.dart';
 import 'package:doktory/core/widgets/custom_button.dart';
+import 'package:doktory/core/widgets/custom_loading_indicator.dart';
 import 'package:doktory/core/widgets/show_custom_snack_bar.dart';
 import 'package:doktory/core/widgets/show_or_hide_pass.dart';
 import 'package:doktory/features/auth/presentation/cubits/cubit/register_cubit.dart';
@@ -98,17 +99,21 @@ class RegisterProcess extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        return Center(
-          child: CustomButton(
-            text: 'إنشاء حساب',
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                print('✅ Email: ${emailController.text}');
-                print('✅ Password: ${passwordController.text}');
-              }
-            },
-          ),
-        );
+        if (state is RegisterLoading) {
+          return Center(
+            child: CustomButton(
+              text: 'إنشاء حساب',
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  print('✅ Email: ${emailController.text}');
+                  print('✅ Password: ${passwordController.text}');
+                }
+              },
+            ),
+          );
+        } else {
+          return CustomLoadingIndicator();
+        }
       },
     );
   }
