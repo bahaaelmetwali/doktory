@@ -1,5 +1,6 @@
 import 'package:doktory/core/constants.dart';
 import 'package:doktory/core/utils/styles.dart';
+import 'package:doktory/core/widgets/custom_navigation_button.dart';
 import 'package:doktory/core/widgets/show_or_hide_pass.dart';
 import 'package:doktory/features/auth/presentation/cubits/cubit/register_cubit.dart';
 import 'package:doktory/features/auth/presentation/widgets/register_process.dart';
@@ -73,6 +74,11 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
                         formKey: _formKey,
                         emailController: emailController,
                         passwordController: passwordController,
+                      ),
+                      CustomNavigationButton(
+                        solidText: 'لديك حساب ؟',
+                        navigationText: 'تسجيل الدخول',
+                        onPressed: () {},
                       ),
                     ],
                   ),
