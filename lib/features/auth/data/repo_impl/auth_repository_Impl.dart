@@ -25,4 +25,15 @@ class AuthRepositoryImpl implements AuthRepository {
       },
     );
   }
+  
+  @override
+  Future<Either<Failure, UserModel?>> logIn(AuthRequestModel model) {
+return handleRequest(request: ()async{
+  final user = await _authRemoteDataSource.login(
+    email: model.email,
+    password: model.password,
+  );
+  if (user == null) return null;
+  return UserModel.fromFirebaseUser(user); 
+})   ;}
 }

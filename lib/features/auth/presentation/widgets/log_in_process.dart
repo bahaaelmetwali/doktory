@@ -1,47 +1,48 @@
+
 import 'package:doktory/core/widgets/custom_button.dart';
 import 'package:doktory/core/widgets/custom_loading_indicator.dart';
 import 'package:doktory/core/widgets/show_custom_snack_bar.dart';
 import 'package:doktory/features/auth/data/models/auth_request_model.dart';
-import 'package:doktory/features/auth/presentation/cubits/register/register_cubit.dart';
+import 'package:doktory/features/auth/presentation/cubits/log_in/log_in_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class RegisterProcess extends StatelessWidget {
-  const RegisterProcess({
+class LogInProcess extends StatelessWidget {
+  const LogInProcess({
     super.key,
-    required GlobalKey<FormState> formKey,
+    required this.formKey,
     required this.emailController,
     required this.passwordController,
-  }) : _formKey = formKey;
+  }) ;
 
-  final GlobalKey<FormState> _formKey;
+  final GlobalKey<FormState> formKey;
   final TextEditingController emailController;
   final TextEditingController passwordController;
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<RegisterCubit, RegisterState>(
+    return BlocConsumer<LogInCubit, LogInState>(
       listener: (context, state) {
-        if (state is RegisterSuccess) {
-          showCustomSnackBar(context, message: 'تم إنشاء حساب بنجاح');
-        } else if (state is RegisterFailure) {
+        if (state is  LogInSuccess) {
+          showCustomSnackBar(context, message: 'تم تسجيل الدخول');
+        } else if (state is LogInFailure) {
           showCustomSnackBar(context, message: state.message, isError: true);
         }
       },
       builder: (context, state) {
-        if (state is RegisterLoading) {
+        if (state is LogInLoading) {
           return CustomLoadingIndicator();
         } else {
           return Center(
             child: CustomButton(
-              text: 'إنشاء حساب',
+text: 'تسجيل الدخول',
               onPressed: () {
-                if (_formKey.currentState!.validate()) {
+                if (formKey.currentState!.validate()) {
                   final AuthRequestModel model = AuthRequestModel(
                     email: emailController.text,
                     password: passwordController.text,
                   );
-                  context.read<RegisterCubit>().registerUser(model);
+                  context.read<LogInCubit>().loginUser(model);
                 }
               },
             ),

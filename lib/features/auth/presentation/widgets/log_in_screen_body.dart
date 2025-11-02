@@ -1,15 +1,11 @@
 import 'package:doktory/core/constants.dart';
 import 'package:doktory/core/router/app_router_names.dart';
 import 'package:doktory/core/utils/styles.dart';
-import 'package:doktory/core/widgets/custom_button.dart';
 import 'package:doktory/core/widgets/custom_navigation_button.dart';
 import 'package:doktory/core/widgets/show_or_hide_pass.dart';
-import 'package:doktory/features/auth/data/models/auth_request_model.dart';
-import 'package:doktory/features/auth/presentation/cubits/cubit/register_cubit.dart';
-import 'package:doktory/features/auth/presentation/widgets/register_process.dart';
+import 'package:doktory/features/auth/presentation/widgets/log_in_process.dart';
 import 'package:doktory/features/auth/presentation/widgets/text_fields_section.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -66,18 +62,7 @@ class _LogInScreenBodyState extends State<LogInScreenBody> {
                     ),
                   ),
                   SizedBox(height: 20.h),
-                  CustomButton(
-                    text: 'تسجيل الدخول',
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        final AuthRequestModel model = AuthRequestModel(
-                          email: emailController.text,
-                          password: passwordController.text,
-                        );
-                        context.read<RegisterCubit>().registerUser(model);
-                      }
-                    },
-                  ),
+               LogInProcess(formKey: _formKey, emailController: emailController, passwordController: passwordController),
                   CustomNavigationButton(
                     solidText: 'ليس لديك  حساب ؟',
                     navigationText: 'تسجيل حساب',

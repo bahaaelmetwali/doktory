@@ -1,6 +1,6 @@
 import 'package:doktory/core/constants.dart';
 import 'package:doktory/core/utils/service_locator.dart';
-import 'package:doktory/features/auth/presentation/cubits/cubit/register_cubit.dart';
+import 'package:doktory/features/auth/presentation/cubits/register/register_cubit.dart';
 import 'package:doktory/features/auth/presentation/widgets/sign_up_screen_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

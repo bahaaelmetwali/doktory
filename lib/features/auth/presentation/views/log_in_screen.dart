@@ -1,15 +1,21 @@
 import 'package:doktory/core/constants.dart';
+import 'package:doktory/core/utils/service_locator.dart';
+import 'package:doktory/features/auth/presentation/cubits/log_in/log_in_cubit.dart';
 import 'package:doktory/features/auth/presentation/widgets/log_in_screen_body.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LogInScreen extends StatelessWidget {
   const LogInScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.scaffold,
-      body: SafeArea(child: LogInScreenBody()),
+    return BlocProvider(
+      create: (context) => getIt<LogInCubit>(),
+      child: Scaffold(
+        backgroundColor: AppColors.scaffold,
+        body: SafeArea(child: LogInScreenBody()),
+      ),
     );
   }
 }

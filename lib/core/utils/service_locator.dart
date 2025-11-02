@@ -3,8 +3,10 @@ import 'package:doktory/core/utils/cache_helper.dart';
 import 'package:doktory/features/auth/data/data_source/auth_remote_data_source.dart';
 import 'package:doktory/features/auth/data/data_source/firebase_auth_service.dart';
 import 'package:doktory/features/auth/data/repo_impl/auth_repository_Impl.dart';
+import 'package:doktory/features/auth/domain/usecases/login_use_case.dart';
 import 'package:doktory/features/auth/domain/usecases/register_use_case.dart';
-import 'package:doktory/features/auth/presentation/cubits/cubit/register_cubit.dart';
+import 'package:doktory/features/auth/presentation/cubits/log_in/log_in_cubit.dart';
+import 'package:doktory/features/auth/presentation/cubits/register/register_cubit.dart';
 import 'package:doktory/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -44,5 +46,11 @@ Future<void> setupServiceLocator() async {
   );
   getIt.registerLazySingleton<RegisterCubit>(
     () => RegisterCubit(getIt<RegisterUseCase>()),
+  );
+   getIt.registerLazySingleton<LoginUseCase>(
+    () => LoginUseCase(getIt<AuthRepositoryImpl>()),
+  );
+  getIt.registerLazySingleton<LogInCubit>(
+    () => LogInCubit(getIt<LoginUseCase>()),
   );
 }

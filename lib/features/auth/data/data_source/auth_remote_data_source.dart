@@ -10,7 +10,7 @@ class AuthRemoteDataSource {
     return authService.registerWithEmail(email: email, password: password);
   }
 
-  Future<User?> login(String email, String password) {
+  Future<User?> login({required String email,required  String password}) {
     return authService.loginWithEmail(email: email, password: password);
   }
 
