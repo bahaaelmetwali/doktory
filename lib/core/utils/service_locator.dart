@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doktory/core/utils/cache_helper.dart';
 import 'package:doktory/features/auth/data/data_source/auth_remote_data_source.dart';
 import 'package:doktory/features/auth/data/data_source/firebase_auth_service.dart';
+import 'package:doktory/features/auth/data/data_source/firestore_user_service.dart';
+import 'package:doktory/features/auth/data/data_source/user_remote_data_source.dart';
 import 'package:doktory/features/auth/data/repo_impl/auth_repository_Impl.dart';
 import 'package:doktory/features/auth/domain/usecases/login_use_case.dart';
 import 'package:doktory/features/auth/domain/usecases/register_use_case.dart';
@@ -27,6 +29,10 @@ Future<void> setupServiceLocator() async {
     () => FirebaseAuthService(getIt<FirebaseAuth>()),
   );
 
+  getIt.registerLazySingleton<FirestoreUserService>(
+    () => FirestoreUserService(getIt<FirebaseFirestore>()),
+  );
+
   getIt.registerLazySingleton<FirebaseStorage>(() => FirebaseStorage.instance);
   //shared_preferences
   final prefs = await SharedPreferences.getInstance();
@@ -38,8 +44,15 @@ Future<void> setupServiceLocator() async {
   getIt.registerLazySingleton<AuthRemoteDataSource>(
     () => AuthRemoteDataSource(getIt<FirebaseAuthService>()),
   );
+
+  getIt.registerLazySingleton<UserRemoteDataSource>(
+    () => UserRemoteDataSource(getIt<FirestoreUserService>()),
+  );
   getIt.registerLazySingleton<AuthRepositoryImpl>(
-    () => AuthRepositoryImpl(getIt<AuthRemoteDataSource>()),
+    () => AuthRepositoryImpl(
+      getIt<AuthRemoteDataSource>(),
+      getIt<UserRemoteDataSource>(),
+    ),
   );
   getIt.registerLazySingleton<RegisterUseCase>(
     () => RegisterUseCase(getIt<AuthRepositoryImpl>()),
@@ -47,7 +60,7 @@ Future<void> setupServiceLocator() async {
   getIt.registerLazySingleton<RegisterCubit>(
     () => RegisterCubit(getIt<RegisterUseCase>()),
   );
-   getIt.registerLazySingleton<LoginUseCase>(
+  getIt.registerLazySingleton<LoginUseCase>(
     () => LoginUseCase(getIt<AuthRepositoryImpl>()),
   );
   getIt.registerLazySingleton<LogInCubit>(

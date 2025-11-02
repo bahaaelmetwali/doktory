@@ -4,10 +4,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 class AuthRemoteDataSource {
   final FirebaseAuthService authService;
 
-  AuthRemoteDataSource(this.authService);
+
+  AuthRemoteDataSource( this.authService,);
 
   Future<User?> register({required String email, required String password}) {
     return authService.registerWithEmail(email: email, password: password);
+    
   }
 
   Future<User?> login({required String email,required  String password}) {
