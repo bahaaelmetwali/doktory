@@ -12,10 +12,17 @@ class AuthCheckCubit extends Cubit<AuthCheckState> {
   Future<void> checkAuth() async {
     emit(AuthCheckLoading());
     final user = await _getCurrentUser();
-    if (user != null) {
-      emit(AuthCheckAuthenticated(user));
-    } else {
+    if (user == null) {
       emit(AuthCheckUnauthenticated());
+    } else {
+      if (user.name == null ||
+          user.phone == null ||
+          user.governorate == null ||
+          user.role == null) {
+        emit(AuthCheckNeedsCompletion(user));
+      } else {
+        emit(AuthCheckAuthenticated(user));
+      }
     }
   }
 }

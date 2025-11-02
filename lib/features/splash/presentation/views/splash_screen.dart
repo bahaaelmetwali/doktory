@@ -24,20 +24,23 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     _authCubit = getIt<AuthCheckCubit>();
 
-    // التحقق من المستخدم المسجل
-    _authCubit.checkAuth();
+    Future.delayed(const Duration(seconds: 6), () {
+      _authCubit.checkAuth();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => _authCubit,
+    return BlocProvider<AuthCheckCubit>.value(
+      value: _authCubit,
       child: BlocListener<AuthCheckCubit, AuthCheckState>(
         listener: (context, state) {
           if (state is AuthCheckAuthenticated) {
-            context.go(AppRouterNames.signUpScreen);
+            context.go(AppRouterNames.selectRoleScreen);
+          } else if (state is AuthCheckNeedsCompletion) {
+            context.go(AppRouterNames.selectRoleScreen);
           } else if (state is AuthCheckUnauthenticated) {
-            context.go(AppRouterNames.signUpScreen); 
+            context.go(AppRouterNames.signUpScreen);
           }
         },
         child: Scaffold(
