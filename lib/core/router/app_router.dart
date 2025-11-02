@@ -1,7 +1,7 @@
 import 'package:doktory/core/router/app_router_names.dart';
 import 'package:doktory/features/auth/presentation/views/log_in_screen.dart';
 import 'package:doktory/features/auth/presentation/views/sign_up_screen.dart';
-import 'package:doktory/features/splash/presentation/views/select_role_screen.dart';
+import 'package:doktory/features/auth/presentation/views/select_role_screen.dart';
 import 'package:doktory/features/splash/presentation/views/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

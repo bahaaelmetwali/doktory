@@ -1,5 +1,5 @@
 import 'package:doktory/core/constants.dart';
-import 'package:doktory/features/splash/widgets/selected_role_screen_body.dart';
+import 'package:doktory/features/auth/presentation/widgets/selected_role_screen_body.dart';
 import 'package:flutter/material.dart';
 
 class SelectRoleScreen extends StatelessWidget {
