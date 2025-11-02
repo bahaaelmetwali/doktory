@@ -1,4 +1,5 @@
 import 'package:doktory/core/router/app_router_names.dart';
+import 'package:doktory/features/auth/presentation/views/log_in_screen.dart';
 import 'package:doktory/features/auth/presentation/views/sign_up_screen.dart';
 import 'package:doktory/features/splash/presentation/views/select_role_screen.dart';
 import 'package:doktory/features/splash/presentation/views/splash_screen.dart';
@@ -29,6 +30,12 @@ abstract class AppRouter {
         path: AppRouterNames.signUpScreen,
         builder: (BuildContext context, GoRouterState state) {
           return const SignUpScreen();
+        },
+      ),
+            GoRoute(
+        path: AppRouterNames.LogInScreen,
+        builder: (BuildContext context, GoRouterState state) {
+          return const LogInScreen();
         },
       ),
     ],

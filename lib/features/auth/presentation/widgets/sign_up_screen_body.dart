@@ -1,4 +1,5 @@
 import 'package:doktory/core/constants.dart';
+import 'package:doktory/core/router/app_router_names.dart';
 import 'package:doktory/core/utils/styles.dart';
 import 'package:doktory/core/widgets/custom_navigation_button.dart';
 import 'package:doktory/core/widgets/show_or_hide_pass.dart';
@@ -8,6 +9,7 @@ import 'package:doktory/features/auth/presentation/widgets/text_fields_section.d
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class SignUpScreenBody extends StatefulWidget {
   const SignUpScreenBody({super.key});
@@ -78,7 +80,9 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
                       CustomNavigationButton(
                         solidText: 'لديك حساب ؟',
                         navigationText: 'تسجيل الدخول',
-                        onPressed: () {},
+                        onPressed: () {
+                          context.go(AppRouterNames.LogInScreen);
+                        },
                       ),
                     ],
                   ),
