@@ -43,4 +43,10 @@ return handleRequest(request: ()async{
   if (user == null) return null;
   return UserModel.fromFirebaseUser(user); 
 })   ;}
+
+  @override
+  Future<UserModel?> getUser() async{
+  final user = _authRemoteDataSource.getCurrentUser();
+  if (user == null) return null;
+  return UserModel.fromFirebaseUser(user);  }
 }

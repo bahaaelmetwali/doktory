@@ -1,0 +1,21 @@
+import 'package:bloc/bloc.dart';
+import 'package:doktory/features/auth/data/models/user_model.dart';
+import 'package:doktory/features/auth/domain/usecases/get_current_user.dart';
+
+part 'auth_check_state.dart';
+
+class AuthCheckCubit extends Cubit<AuthCheckState> {
+  final GetCurrentUserUseCase _getCurrentUser;
+
+  AuthCheckCubit(this._getCurrentUser) : super(AuthCheckInitial());
+
+  Future<void> checkAuth() async {
+    emit(AuthCheckLoading());
+    final user = await _getCurrentUser();
+    if (user != null) {
+      emit(AuthCheckAuthenticated(user));
+    } else {
+      emit(AuthCheckUnauthenticated());
+    }
+  }
+}
