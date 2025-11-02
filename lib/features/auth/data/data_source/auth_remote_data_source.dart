@@ -6,7 +6,7 @@ class AuthRemoteDataSource {
 
   AuthRemoteDataSource(this.authService);
 
-  Future<User?> register(String email, String password) {
+  Future<User?> register({required String email, required String password}) {
     return authService.registerWithEmail(email: email, password: password);
   }
 
