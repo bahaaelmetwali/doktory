@@ -4,7 +4,7 @@ import 'package:doktory/core/utils/service_locator.dart';
 import 'package:doktory/core/utils/styles.dart';
 import 'package:doktory/core/utils/validator.dart';
 import 'package:doktory/core/widgets/custom_text_form_field.dart';
-import 'package:doktory/features/auth/presentation/widgets/get_location_section.dart';
+import 'package:doktory/features/auth/presentation/widgets/complete_data_screen/get_location_section.dart';
 import 'package:doktory/features/auth/presentation/widgets/governorate_dropdown.dart';
 import 'package:doktory/features/auth/presentation/widgets/specializations_dropdown.dart';
 import 'package:flutter/material.dart';
@@ -43,13 +43,6 @@ class _CompleteDataScreenBodyState extends State<CompleteDataScreenBody> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
-                child: Image.asset(
-                  Constants.mainLogo,
-                  height: 120.h,
-                  width: 120.w,
-                ),
-              ),
               SizedBox(height: 10.h),
               Center(
                 child: Text(
