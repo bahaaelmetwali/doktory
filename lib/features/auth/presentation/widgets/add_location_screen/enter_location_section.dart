@@ -28,13 +28,13 @@ class EnterLocationSection extends StatelessWidget {
               builder: (context, state) {
                 if (state is LocationLoading) {
                   return Padding(
-                    padding: EdgeInsets.all(12),
+                    padding: EdgeInsets.all(8.r),
                     child: CircularProgressIndicator(color: AppColors.primary),
                   );
                 } else if (state is LocationLoaded) {
                   return Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: 12.w,
+                      horizontal: 8.w,
                       vertical: 8.h,
                     ),
                     child: Row(
@@ -52,7 +52,7 @@ class EnterLocationSection extends StatelessWidget {
                             state.location.displayName,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
-                            style: Styles.textStyle12SemiBold.copyWith(
+                            style: Styles.textStyle14Regular.copyWith(
                               color: const Color(0xFF1D1B20),
                             ),
                           ),
@@ -62,7 +62,7 @@ class EnterLocationSection extends StatelessWidget {
                   );
                 } else if (state is LocationError) {
                   return Padding(
-                    padding: EdgeInsets.all(12.r),
+                    padding: EdgeInsets.all(8.r),
                     child: Text(
                       state.message,
                       style: const TextStyle(color: Colors.red),

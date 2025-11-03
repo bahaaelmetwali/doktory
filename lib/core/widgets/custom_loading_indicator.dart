@@ -9,13 +9,13 @@ class CustomLoadingIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 60.h,
-      width: 335.w,
+      width: 340.w,
 
       decoration: BoxDecoration(
         color: AppColors.primary,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Center(child: CircularProgressIndicator(color: Colors.white,)),
+      child: Center(child: CircularProgressIndicator(color: Colors.white)),
     );
   }
 }

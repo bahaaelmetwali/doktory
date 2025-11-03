@@ -22,50 +22,53 @@ class _AddLocationScreenBodyState extends State<AddLocationScreenBody> {
   Widget build(BuildContext context) {
     final locationCubit = context.read<LocationCubit>();
 
-    return SizedBox.expand(
-      child: Stack(
-        children: [
-          MapSection(
-            mapController: _mapController,
-            onMapCreated: (controller) {
-              _mapController = controller;
-            },
-            onTap: (position) {
-              setState(() {
-                _selectedLocation = position;
-                locationCubit.getLocation(
-                  latitude: position.latitude,
-                  longitude: position.longitude,
-                );
-              });
-            },
-            selectedLocation: _selectedLocation,
-          ),
-          GetMyLocationSection(
-            onPressed: () async {
-              final position = await SetLocation.getLocation();
-              setState(() {
-                if (position != null) {
-                  _selectedLocation = LatLng(
-                    position.latitude,
-                    position.longitude,
-                  );
-                  _mapController?.animateCamera(
-                    CameraUpdate.newLatLngZoom(_selectedLocation!, 15),
-                  );
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: SizedBox.expand(
+        child: Stack(
+          children: [
+            MapSection(
+              mapController: _mapController,
+              onMapCreated: (controller) {
+                _mapController = controller;
+              },
+              onTap: (position) {
+                setState(() {
+                  _selectedLocation = position;
                   locationCubit.getLocation(
                     latitude: position.latitude,
                     longitude: position.longitude,
                   );
-                }
-              });
-            },
-          ),
+                });
+              },
+              selectedLocation: _selectedLocation,
+            ),
+            GetMyLocationSection(
+              onPressed: () async {
+                final position = await SetLocation.getLocation();
+                setState(() {
+                  if (position != null) {
+                    _selectedLocation = LatLng(
+                      position.latitude,
+                      position.longitude,
+                    );
+                    _mapController?.animateCamera(
+                      CameraUpdate.newLatLngZoom(_selectedLocation!, 15),
+                    );
+                    locationCubit.getLocation(
+                      latitude: position.latitude,
+                      longitude: position.longitude,
+                    );
+                  }
+                });
+              },
+            ),
 
-          _selectedLocation != null
-              ? EnterLocationSection(selectedLocation: _selectedLocation)
-              : SizedBox.shrink(),
-        ],
+            _selectedLocation != null
+                ? EnterLocationSection(selectedLocation: _selectedLocation)
+                : SizedBox.shrink(),
+          ],
+        ),
       ),
     );
   }
