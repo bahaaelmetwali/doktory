@@ -72,8 +72,7 @@ class _SelectedRoleScreenBodyState extends State<SelectedRoleScreenBody> {
                   await cacheHelper.saveRole(
                     role: isSelected ? 'دكتور' : 'عميل',
                   );
-                  print("Button pressed!");
-                  context.push(AppRouterNames.signUpScreen);
+                  context.push(AppRouterNames.completeDataScreen);
                 },
                 text: 'تأكيد',
               ),

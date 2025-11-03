@@ -81,7 +81,7 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
                         solidText: 'لديك حساب ؟',
                         navigationText: 'تسجيل الدخول',
                         onPressed: () {
-                          context.go(AppRouterNames.LogInScreen);
+                          context.go(AppRouterNames.logInScreen);
                         },
                       ),
                     ],
