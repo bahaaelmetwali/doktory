@@ -49,6 +49,7 @@ dependencies:
   dio: ^5.9.0
   dartz: ^0.10.1
   iconsax_flutter: ^1.0.1
+  geolocator: ^14.0.2
 
 dev_dependencies:
   flutter_test:
