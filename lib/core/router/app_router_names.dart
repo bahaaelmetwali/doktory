@@ -4,4 +4,5 @@ class AppRouterNames {
   static const signUpScreen = '/signUpScreen';
   static const logInScreen = '/logInScreen';
   static const completeDataScreen = '/completeDataScreen';
+  static const addLocationScreen = '/addLocationScreen';
 }

@@ -4,6 +4,7 @@ import 'package:doktory/core/utils/service_locator.dart';
 import 'package:doktory/core/utils/styles.dart';
 import 'package:doktory/core/utils/validator.dart';
 import 'package:doktory/core/widgets/custom_text_form_field.dart';
+import 'package:doktory/features/auth/presentation/widgets/get_location_section.dart';
 import 'package:doktory/features/auth/presentation/widgets/governorate_dropdown.dart';
 import 'package:doktory/features/auth/presentation/widgets/specializations_dropdown.dart';
 import 'package:flutter/material.dart';
@@ -40,9 +41,15 @@ class _CompleteDataScreenBodyState extends State<CompleteDataScreenBody> {
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(Constants.mainLogo, height: 120.h, width: 120.w),
+              Center(
+                child: Image.asset(
+                  Constants.mainLogo,
+                  height: 120.h,
+                  width: 120.w,
+                ),
+              ),
               SizedBox(height: 10.h),
               Center(
                 child: Text(
@@ -85,6 +92,9 @@ class _CompleteDataScreenBodyState extends State<CompleteDataScreenBody> {
                         });
                       },
                     )
+                  : SizedBox.shrink(),
+              selectedRole == 'دكتور'
+                  ? GetLocationSection()
                   : SizedBox.shrink(),
             ],
           ),

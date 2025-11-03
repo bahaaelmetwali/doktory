@@ -1,4 +1,5 @@
 import 'package:doktory/core/router/app_router_names.dart';
+import 'package:doktory/features/auth/presentation/views/add_location_screen.dart';
 import 'package:doktory/features/auth/presentation/views/complete_data_screen.dart';
 import 'package:doktory/features/auth/presentation/views/log_in_screen.dart';
 import 'package:doktory/features/auth/presentation/views/sign_up_screen.dart';
@@ -43,6 +44,12 @@ abstract class AppRouter {
         path: AppRouterNames.completeDataScreen,
         builder: (BuildContext context, GoRouterState state) {
           return const CompleteDataScreen();
+        },
+      ),
+      GoRoute(
+        path: AppRouterNames.addLocationScreen,
+        builder: (BuildContext context, GoRouterState state) {
+          return const AddLocationScreen();
         },
       ),
     ],
