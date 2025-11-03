@@ -5,8 +5,8 @@ import 'package:doktory/core/utils/styles.dart';
 import 'package:doktory/core/utils/validator.dart';
 import 'package:doktory/core/widgets/custom_text_form_field.dart';
 import 'package:doktory/features/auth/presentation/widgets/complete_data_screen/get_location_section.dart';
-import 'package:doktory/features/auth/presentation/widgets/governorate_dropdown.dart';
-import 'package:doktory/features/auth/presentation/widgets/specializations_dropdown.dart';
+import 'package:doktory/features/auth/presentation/widgets/complete_data_screen/governorate_dropdown.dart';
+import 'package:doktory/features/auth/presentation/widgets/complete_data_screen/specializations_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -46,7 +46,7 @@ class _CompleteDataScreenBodyState extends State<CompleteDataScreenBody> {
               SizedBox(height: 10.h),
               Center(
                 child: Text(
-                  ' ادخل البيانات',
+                  ' ادخال البيانات',
                   style: Styles.textStyle28SemiBold.copyWith(
                     color: AppColors.primary,
                   ),

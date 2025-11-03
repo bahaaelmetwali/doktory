@@ -1,5 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
+import 'package:doktory/core/location/cubit/location_cubit_cubit.dart';
+import 'package:doktory/core/location/data/data_source/location_data_source.dart';
+import 'package:doktory/core/location/data/repo_impl/location_repo_impl.dart';
+import 'package:doktory/core/location/domain/usecases/location_use_case.dart';
 import 'package:doktory/core/utils/cache_helper.dart';
+import 'package:doktory/core/utils/location_api_service.dart';
 import 'package:doktory/features/auth/data/data_source/auth_remote_data_source.dart';
 import 'package:doktory/features/auth/data/data_source/firebase_auth_service.dart';
 import 'package:doktory/features/auth/data/data_source/firestore_user_service.dart';
@@ -20,6 +26,32 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 final getIt = GetIt.instance;
 Future<void> setupServiceLocator() async {
+  //location
+  final dioLocation = Dio(
+    BaseOptions(
+      baseUrl: LocationApiService.baseUrl,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    ),
+  );
+
+  getIt.registerLazySingleton<LocationApiService>(
+    () => LocationApiService(dioLocation),
+  );
+  getIt.registerLazySingleton<LocationDataSourceImpl>(
+    () => LocationDataSourceImpl(getIt<LocationApiService>()),
+  );
+  getIt.registerLazySingleton<LocationRepoImpl>(
+    () => LocationRepoImpl(getIt<LocationDataSourceImpl>()),
+  );
+  getIt.registerLazySingleton<LocationUseCase>(
+    () => LocationUseCase(getIt<LocationRepoImpl>()),
+  );
+  getIt.registerFactory<LocationCubit>(
+    () => LocationCubit(getIt<LocationUseCase>()),
+  );
   //firebase
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   getIt.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
