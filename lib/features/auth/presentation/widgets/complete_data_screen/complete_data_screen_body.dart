@@ -6,6 +6,7 @@ import 'package:doktory/core/utils/validator.dart';
 import 'package:doktory/core/widgets/custom_text_form_field.dart';
 import 'package:doktory/features/auth/presentation/widgets/complete_data_screen/get_location_section.dart';
 import 'package:doktory/features/auth/presentation/widgets/complete_data_screen/governorate_dropdown.dart';
+import 'package:doktory/features/auth/presentation/widgets/complete_data_screen/pick_image_section.dart';
 import 'package:doktory/features/auth/presentation/widgets/complete_data_screen/specializations_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -47,11 +48,14 @@ class _CompleteDataScreenBodyState extends State<CompleteDataScreenBody> {
               Center(
                 child: Text(
                   ' ادخال البيانات',
-                  style: Styles.textStyle28SemiBold.copyWith(
+                  style: Styles.textStyle24SemiBold.copyWith(
                     color: AppColors.primary,
                   ),
                 ),
               ),
+              SizedBox(height: 20),
+              PickImageSection(),
+
               CustomTextFormField(
                 controller: nameController,
                 hintText: ' الاسم',

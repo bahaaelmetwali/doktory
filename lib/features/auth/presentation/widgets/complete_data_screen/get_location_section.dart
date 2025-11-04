@@ -40,11 +40,13 @@ class _GetLocationSectionState extends State<GetLocationSection> {
                     final result = await context.push<Map<String, dynamic>>(
                       AppRouterNames.addLocationScreen,
                     );
-                    selectedLocation = LatLng(
-                      result!['latitude'],
-                      result['longitude'],
-                    );
-                    adress = result['address'];
+                    setState(() {
+                      selectedLocation = LatLng(
+                        result!['latitude'],
+                        result['longitude'],
+                      );
+                      adress = result['address'];
+                    });
                   },
                   child: Icon(
                     selectedLocation != null
