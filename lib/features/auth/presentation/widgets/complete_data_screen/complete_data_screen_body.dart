@@ -2,14 +2,15 @@ import 'package:doktory/core/constants.dart';
 import 'package:doktory/core/utils/cache_helper.dart';
 import 'package:doktory/core/utils/service_locator.dart';
 import 'package:doktory/core/utils/styles.dart';
-import 'package:doktory/core/utils/validator.dart';
-import 'package:doktory/core/widgets/custom_text_form_field.dart';
+import 'package:doktory/core/widgets/custom_button.dart';
 import 'package:doktory/features/auth/presentation/widgets/complete_data_screen/get_location_section.dart';
 import 'package:doktory/features/auth/presentation/widgets/complete_data_screen/governorate_dropdown.dart';
+import 'package:doktory/features/auth/presentation/widgets/complete_data_screen/name_and_phone_text_fields_section.dart';
 import 'package:doktory/features/auth/presentation/widgets/complete_data_screen/pick_image_section.dart';
 import 'package:doktory/features/auth/presentation/widgets/complete_data_screen/specializations_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class CompleteDataScreenBody extends StatefulWidget {
   const CompleteDataScreenBody({super.key});
@@ -25,6 +26,9 @@ class _CompleteDataScreenBodyState extends State<CompleteDataScreenBody> {
     final cache = getIt<CacheHelper>();
     selectedRole = cache.getRole();
   }
+
+  LatLng? selectedLocation;
+  String? adress;
 
   String? selectedRole;
   final _formKey = GlobalKey<FormState>();
@@ -56,21 +60,9 @@ class _CompleteDataScreenBodyState extends State<CompleteDataScreenBody> {
               SizedBox(height: 20),
               selectedRole == 'دكتور' ? PickImageSection() : SizedBox.shrink(),
 
-              CustomTextFormField(
-                controller: nameController,
-                hintText: ' الاسم',
-                name: ' الاسم',
-
-                iconPath: 'assets/icons/profile.svg',
-                validator: Validator.nameValidator,
-              ),
-
-              CustomTextFormField(
-                controller: phoneController,
-                hintText: 'رقم الهاتف',
-                name: 'رقم الهاتف',
-                iconPath: 'assets/icons/call.svg',
-                validator: Validator.passwordValidator,
+              NameandPhoneTextFieldsSection(
+                nameController: nameController,
+                phoneController: phoneController,
               ),
               GovernorateDropdown(
                 selectedGovernorate: selectedGovernorate,
@@ -91,8 +83,19 @@ class _CompleteDataScreenBodyState extends State<CompleteDataScreenBody> {
                     )
                   : SizedBox.shrink(),
               selectedRole == 'دكتور'
-                  ? GetLocationSection()
+                  ? GetLocationSection(
+                      selectedLocation: selectedLocation,
+                      adress: adress,
+                      onLocationChanged:
+                          (LatLng newLocation, String newAddress) {
+                            setState(() {
+                              selectedLocation = newLocation;
+                              adress = newAddress;
+                            });
+                          },
+                    )
                   : SizedBox.shrink(),
+              CustomButton(onPressed: () {}, text: 'التسجيل'),
             ],
           ),
         ),

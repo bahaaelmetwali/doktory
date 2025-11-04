@@ -9,16 +9,21 @@ import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class GetLocationSection extends StatefulWidget {
-  const GetLocationSection({super.key});
+  const GetLocationSection({
+    super.key,
+    required this.selectedLocation,
+    required this.adress,
+    required this.onLocationChanged,
+  });
+  final LatLng? selectedLocation;
+  final String? adress;
+  final Function(LatLng newLocation, String newAddress) onLocationChanged;
 
   @override
   State<GetLocationSection> createState() => _GetLocationSectionState();
 }
 
 class _GetLocationSectionState extends State<GetLocationSection> {
-  LatLng? selectedLocation;
-  String? adress;
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -41,15 +46,14 @@ class _GetLocationSectionState extends State<GetLocationSection> {
                       AppRouterNames.addLocationScreen,
                     );
                     setState(() {
-                      selectedLocation = LatLng(
-                        result!['latitude'],
-                        result['longitude'],
+                      widget.onLocationChanged(
+                        LatLng(result!['latitude'], result['longitude']),
+                        result['address'],
                       );
-                      adress = result['address'];
                     });
                   },
                   child: Icon(
-                    selectedLocation != null
+                    widget.selectedLocation != null
                         ? Icons.edit_location_alt_rounded
                         : Icons.add_location_alt_rounded,
                     color: AppColors.success,
@@ -60,13 +64,13 @@ class _GetLocationSectionState extends State<GetLocationSection> {
             ],
           ),
           SizedBox(height: 4.h),
-          selectedLocation == null
+          widget.selectedLocation == null
               ? SizedBox.shrink()
               : Column(
                   children: [
-                    ShownMapSection(selectedLocation: selectedLocation),
+                    ShownMapSection(selectedLocation: widget.selectedLocation),
                     SizedBox(height: 8.h),
-                    AdressSection(adress: adress),
+                    AdressSection(adress: widget.adress),
                   ],
                 ),
         ],
