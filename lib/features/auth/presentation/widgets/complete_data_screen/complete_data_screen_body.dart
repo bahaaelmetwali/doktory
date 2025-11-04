@@ -95,7 +95,10 @@ class _CompleteDataScreenBodyState extends State<CompleteDataScreenBody> {
                           },
                     )
                   : SizedBox.shrink(),
-              CustomButton(onPressed: () {}, text: 'التسجيل'),
+              SizedBox(height: 10.h),
+              Center(
+                child: CustomButton(onPressed: () {}, text: 'التسجيل'),
+              ),
             ],
           ),
         ),

@@ -25,7 +25,7 @@ class GovernorateDropdown extends StatelessWidget {
           SizedBox(height: 8.h),
           Container(
             height: 48.h,
-            width: 335.w,
+            width: 345.w,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10.r),
