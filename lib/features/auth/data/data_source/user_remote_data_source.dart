@@ -1,4 +1,3 @@
-
 import 'package:doktory/features/auth/data/data_source/firestore_user_service.dart';
 import 'package:doktory/features/auth/data/models/user_model.dart';
 
@@ -11,8 +10,11 @@ class UserRemoteDataSource {
     await firestoreUserService.createUser(user);
   }
 
-  Future<void> updateUser(String uid, Map<String, dynamic> data) async {
-    await firestoreUserService.updateUser(uid, data);
+  Future<void> updateUser({
+    required String uid,
+    required Map<String, dynamic> data,
+  }) async {
+    await firestoreUserService.updateUser(uid: uid, data: data);
   }
 
   Future<UserModel?> getUser(String uid) async {

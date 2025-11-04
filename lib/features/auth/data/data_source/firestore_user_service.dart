@@ -9,7 +9,10 @@ class FirestoreUserService {
     await _firestore.collection('users').doc(user.uid).set(user.toMap());
   }
 
-  Future<void> updateUser(String uid, Map<String, dynamic> data) async {
+  Future<void> updateUser({
+    required String uid,
+    required Map<String, dynamic> data,
+  }) async {
     await _firestore.collection('users').doc(uid).update(data);
   }
 
