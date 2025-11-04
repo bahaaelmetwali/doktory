@@ -54,7 +54,7 @@ class _CompleteDataScreenBodyState extends State<CompleteDataScreenBody> {
                 ),
               ),
               SizedBox(height: 20),
-              PickImageSection(),
+              selectedRole == 'دكتور' ? PickImageSection() : SizedBox.shrink(),
 
               CustomTextFormField(
                 controller: nameController,

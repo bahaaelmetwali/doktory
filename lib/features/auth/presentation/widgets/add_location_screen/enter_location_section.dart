@@ -28,13 +28,13 @@ class EnterLocationSection extends StatelessWidget {
               builder: (context, state) {
                 if (state is LocationLoading) {
                   return Padding(
-                    padding: EdgeInsets.all(8.r),
+                    padding: EdgeInsets.all(12.r),
                     child: CircularProgressIndicator(color: AppColors.primary),
                   );
                 } else if (state is LocationLoaded) {
                   return Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: 8.w,
+                      horizontal: 12.w,
                       vertical: 8.h,
                     ),
                     child: Row(
@@ -43,7 +43,7 @@ class EnterLocationSection extends StatelessWidget {
                         SvgPicture.asset(
                           'assets/icons/location.svg',
                           width: 24.w,
-                          height: 24.h,
+                          height: 26.h,
                           color: AppColors.primary,
                         ),
                         SizedBox(width: 6.w),
@@ -62,7 +62,7 @@ class EnterLocationSection extends StatelessWidget {
                   );
                 } else if (state is LocationError) {
                   return Padding(
-                    padding: EdgeInsets.all(8.r),
+                    padding: EdgeInsets.all(12.r),
                     child: Text(
                       state.message,
                       style: const TextStyle(color: Colors.red),
@@ -73,25 +73,28 @@ class EnterLocationSection extends StatelessWidget {
                 return const SizedBox.shrink();
               },
             ),
-            CustomButton(
-              onPressed: () {
-                if (selectedLocation != null) {
-                  final state = context.read<LocationCubit>().state;
-                  String? address;
+            Padding(
+              padding: EdgeInsets.all(12.r),
+              child: CustomButton(
+                onPressed: () {
+                  if (selectedLocation != null) {
+                    final state = context.read<LocationCubit>().state;
+                    String? address;
 
-                  if (state is LocationLoaded) {
-                    address = state.location.displayName;
+                    if (state is LocationLoaded) {
+                      address = state.location.displayName;
+                    }
+
+                    context.pop({
+                      'latitude': selectedLocation!.latitude,
+                      'longitude': selectedLocation!.longitude,
+                      'address': address,
+                    });
                   }
+                },
 
-                  context.pop({
-                    'latitude': selectedLocation!.latitude,
-                    'longitude': selectedLocation!.longitude,
-                    'address': address,
-                  });
-                }
-              },
-
-              text: 'أضف الموقع',
+                text: 'أضف الموقع',
+              ),
             ),
           ],
         ),

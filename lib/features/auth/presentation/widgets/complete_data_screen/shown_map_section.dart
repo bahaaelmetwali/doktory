@@ -3,10 +3,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class ShownMapSection extends StatelessWidget {
+class ShownMapSection extends StatefulWidget {
   const ShownMapSection({super.key, required this.selectedLocation});
 
   final LatLng? selectedLocation;
+
+  @override
+  State<ShownMapSection> createState() => _ShownMapSectionState();
+}
+
+class _ShownMapSectionState extends State<ShownMapSection> {
+  GoogleMapController? _mapController;
+  @override
+  void didUpdateWidget(covariant ShownMapSection oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.selectedLocation != oldWidget.selectedLocation &&
+        widget.selectedLocation != null) {
+      _mapController?.animateCamera(
+        CameraUpdate.newLatLng(widget.selectedLocation!),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,15 +38,19 @@ class ShownMapSection extends StatelessWidget {
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8.r),
+
         child: GoogleMap(
+          onMapCreated: (controller) {
+            _mapController = controller;
+          },
           initialCameraPosition: CameraPosition(
-            target: selectedLocation!,
+            target: widget.selectedLocation!,
             zoom: 14,
           ),
           markers: {
             Marker(
               markerId: const MarkerId('position'),
-              position: selectedLocation!,
+              position: widget.selectedLocation!,
             ),
           },
           zoomControlsEnabled: false,

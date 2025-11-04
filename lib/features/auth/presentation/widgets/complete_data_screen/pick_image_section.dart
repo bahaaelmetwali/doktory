@@ -31,7 +31,7 @@ class _PickImageSectionState extends State<PickImageSection> {
         alignment: Alignment.bottomRight,
         children: [
           CircleAvatar(
-            radius: 60.r,
+            radius: 50.r,
             backgroundColor: Colors.grey[200],
             backgroundImage: _selectedImage != null
                 ? FileImage(_selectedImage!)

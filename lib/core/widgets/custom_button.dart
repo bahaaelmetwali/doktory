@@ -13,8 +13,8 @@ class CustomButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        height: 60.h,
-        width: 340.w,
+        height: 40.h,
+        width: 345.w,
 
         decoration: BoxDecoration(
           color: AppColors.primary,
@@ -23,7 +23,7 @@ class CustomButton extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: Styles.textStyle20SemiBold.copyWith(color: Colors.white),
+            style: Styles.textStyle18SemiBold.copyWith(color: Colors.white),
           ),
         ),
       ),
