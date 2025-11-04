@@ -8,7 +8,10 @@ class UserModel {
   final String? governorate;
   final String? image;
   final String? role;
-
+  final String? specialization;
+  final String? address;
+  final double? latitude;
+  final double? longitude;
   UserModel({
     required this.uid,
     required this.email,
@@ -17,13 +20,14 @@ class UserModel {
     this.governorate,
     this.image,
     this.role,
+    this.specialization,
+    this.address,
+    this.latitude,
+    this.longitude,
   });
 
   factory UserModel.fromFirebaseUser(User user) {
-    return UserModel(
-      uid: user.uid,
-      email: user.email ?? '',
-    );
+    return UserModel(uid: user.uid, email: user.email ?? '');
   }
 
   Map<String, dynamic> toMap() {
@@ -35,6 +39,10 @@ class UserModel {
       'governorate': governorate ?? '',
       'image': image ?? '',
       'role': role ?? '',
+      'specialization': specialization ?? '',
+      'address': address ?? '',
+      'latitude': latitude ?? 0,
+      'longitude': longitude ?? 0,
       'createdAt': DateTime.now(),
     };
   }
@@ -48,6 +56,10 @@ class UserModel {
       governorate: map['governorate'],
       image: map['image'],
       role: map['role'],
+      specialization: map['specialization'],
+      address: map['address'],
+      latitude: (map['latitude'] != null) ? map['latitude'] * 1.0 : null,
+      longitude: (map['longitude'] != null) ? map['longitude'] * 1.0 : null,
     );
   }
 }

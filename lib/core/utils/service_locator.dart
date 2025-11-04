@@ -83,10 +83,7 @@ Future<void> setupServiceLocator() async {
     () => UserRemoteDataSource(getIt<FirestoreUserService>()),
   );
   getIt.registerLazySingleton<AuthRepositoryImpl>(
-    () => AuthRepositoryImpl(
-      getIt<AuthRemoteDataSource>(),
-      getIt<UserRemoteDataSource>(),
-    ),
+    () => AuthRepositoryImpl(getIt<AuthRemoteDataSource>()),
   );
   getIt.registerLazySingleton<RegisterUseCase>(
     () => RegisterUseCase(getIt<AuthRepositoryImpl>()),
