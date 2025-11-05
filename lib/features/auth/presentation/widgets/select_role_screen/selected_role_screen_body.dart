@@ -4,7 +4,7 @@ import 'package:doktory/core/utils/cache_helper.dart';
 import 'package:doktory/core/utils/service_locator.dart';
 import 'package:doktory/core/utils/styles.dart';
 import 'package:doktory/core/widgets/custom_button.dart';
-import 'package:doktory/features/auth/presentation/widgets/role_card.dart';
+import 'package:doktory/features/auth/presentation/widgets/select_role_screen/role_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';

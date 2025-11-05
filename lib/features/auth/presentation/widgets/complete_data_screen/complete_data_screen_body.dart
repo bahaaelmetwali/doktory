@@ -6,7 +6,7 @@ import 'package:doktory/core/widgets/custom_button.dart';
 import 'package:doktory/core/widgets/custom_loading_indicator.dart';
 import 'package:doktory/core/widgets/show_custom_snack_bar.dart';
 import 'package:doktory/features/auth/data/models/user_model.dart';
-import 'package:doktory/features/auth/presentation/cubits/cubit/complete_user_data_cubit.dart';
+import 'package:doktory/features/auth/presentation/cubits/complete_user_data_cubit/complete_user_data_cubit.dart';
 import 'package:doktory/features/auth/presentation/widgets/complete_data_screen/get_location_section.dart';
 import 'package:doktory/features/auth/presentation/widgets/complete_data_screen/governorate_dropdown.dart';
 import 'package:doktory/features/auth/presentation/widgets/complete_data_screen/name_and_phone_text_fields_section.dart';

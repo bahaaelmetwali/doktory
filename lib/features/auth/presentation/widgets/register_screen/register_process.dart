@@ -3,7 +3,7 @@ import 'package:doktory/core/widgets/custom_button.dart';
 import 'package:doktory/core/widgets/custom_loading_indicator.dart';
 import 'package:doktory/core/widgets/show_custom_snack_bar.dart';
 import 'package:doktory/features/auth/data/models/auth_request_model.dart';
-import 'package:doktory/features/auth/presentation/cubits/register/register_cubit.dart';
+import 'package:doktory/features/auth/presentation/cubits/register_cubit/register_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -26,7 +26,7 @@ class RegisterProcess extends StatelessWidget {
       listener: (context, state) {
         if (state is RegisterSuccess) {
           showCustomSnackBar(context, message: 'تم إنشاء حساب بنجاح');
-          context.go(AppRouterNames.selectRoleScreen) ;
+          context.go(AppRouterNames.selectRoleScreen);
         } else if (state is RegisterFailure) {
           showCustomSnackBar(context, message: state.message, isError: true);
         }
