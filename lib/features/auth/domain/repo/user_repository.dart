@@ -4,8 +4,5 @@ import 'package:doktory/features/auth/data/models/user_model.dart';
 
 abstract class UserRepository {
   Future<Either<Failure, void>> createUser(UserModel user);
-  Future<Either<Failure, void>> completeUserData({
-    required String uid,
-    required Map<String, dynamic> data,
-  });
+  Future<Either<Failure, void>> completeUserData({required UserModel user});
 }

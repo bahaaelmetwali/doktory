@@ -12,11 +12,13 @@ import 'package:doktory/features/auth/data/data_source/firestore_user_service.da
 import 'package:doktory/features/auth/data/data_source/user_remote_data_source.dart';
 import 'package:doktory/features/auth/data/repo_impl/auth_repository_Impl.dart';
 import 'package:doktory/features/auth/data/repo_impl/user_repository_Impl.dart';
+import 'package:doktory/features/auth/domain/usecases/complete_user_data_use_case.dart';
 import 'package:doktory/features/auth/domain/usecases/create_user_use_case.dart';
 import 'package:doktory/features/auth/domain/usecases/get_current_user.dart';
 import 'package:doktory/features/auth/domain/usecases/login_use_case.dart';
 import 'package:doktory/features/auth/domain/usecases/register_use_case.dart';
 import 'package:doktory/features/auth/presentation/cubits/auth_check/auth_check_cubit.dart';
+import 'package:doktory/features/auth/presentation/cubits/cubit/complete_user_data_cubit.dart';
 import 'package:doktory/features/auth/presentation/cubits/log_in/log_in_cubit.dart';
 import 'package:doktory/features/auth/presentation/cubits/register/register_cubit.dart';
 import 'package:doktory/firebase_options.dart';
@@ -112,5 +114,11 @@ Future<void> setupServiceLocator() async {
   );
   getIt.registerLazySingleton<AuthCheckCubit>(
     () => AuthCheckCubit(getIt<GetCurrentUserUseCase>()),
+  );
+  getIt.registerLazySingleton<CompleteUserDataUseCase>(
+    () => CompleteUserDataUseCase(getIt<UserRepositoryImpl>()),
+  );
+  getIt.registerLazySingleton<CompleteUserDataCubit>(
+    () => CompleteUserDataCubit(getIt<CompleteUserDataUseCase>()),
   );
 }

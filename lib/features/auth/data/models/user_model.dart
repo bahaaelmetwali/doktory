@@ -12,6 +12,7 @@ class UserModel {
   final String? address;
   final double? latitude;
   final double? longitude;
+
   UserModel({
     required this.uid,
     required this.email,
@@ -31,20 +32,23 @@ class UserModel {
   }
 
   Map<String, dynamic> toMap() {
-    return {
+    final data = <String, dynamic>{
       'uid': uid,
       'email': email,
-      'name': name ?? '',
-      'phone': phone ?? '',
-      'governorate': governorate ?? '',
-      'image': image ?? '',
-      'role': role ?? '',
-      'specialization': specialization ?? '',
-      'address': address ?? '',
-      'latitude': latitude ?? 0,
-      'longitude': longitude ?? 0,
+      'name': name,
+      'phone': phone,
+      'governorate': governorate,
+      'image': image,
+      'role': role,
+      'specialization': specialization,
+      'address': address,
+      'latitude': latitude,
+      'longitude': longitude,
       'createdAt': DateTime.now(),
     };
+    data.removeWhere((key, value) => value == null);
+
+    return data;
   }
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
@@ -58,8 +62,8 @@ class UserModel {
       role: map['role'],
       specialization: map['specialization'],
       address: map['address'],
-      latitude: (map['latitude'] != null) ? map['latitude'] * 1.0 : null,
-      longitude: (map['longitude'] != null) ? map['longitude'] * 1.0 : null,
+      latitude: map['latitude'] != null ? map['latitude'] * 1.0 : null,
+      longitude: map['longitude'] != null ? map['longitude'] * 1.0 : null,
     );
   }
 }

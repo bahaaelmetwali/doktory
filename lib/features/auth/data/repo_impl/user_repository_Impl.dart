@@ -19,13 +19,13 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, void>> completeUserData({
-    required String uid,
-    required Map<String, dynamic> data,
-  }) {
+  Future<Either<Failure, void>> completeUserData({required UserModel user}) {
     return handleRequest(
       request: () async {
-        await _userRemoteDataSource.updateUser(uid: uid, data: data);
+        await _userRemoteDataSource.updateUser(
+          uid: user.uid,
+          data: user.toMap(),
+        );
       },
     );
   }
