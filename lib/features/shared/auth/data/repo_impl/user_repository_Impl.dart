@@ -29,4 +29,14 @@ class UserRepositoryImpl implements UserRepository {
       },
     );
   }
+
+  @override
+  Future<Either<Failure, UserModel?>> getUserData({required String uid}) {
+    return handleRequest(
+      request: () async {
+        UserModel? user = await _userRemoteDataSource.getUser(uid);
+        return user;
+      },
+    );
+  }
 }

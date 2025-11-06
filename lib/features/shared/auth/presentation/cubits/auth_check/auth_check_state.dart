@@ -14,6 +14,11 @@ class AuthCheckAuthenticated extends AuthCheckState {
 class AuthCheckUnauthenticated extends AuthCheckState {}
 
 class AuthCheckNeedsCompletion extends AuthCheckState {
-  final UserModel user;
+  final UserModel? user;
   AuthCheckNeedsCompletion(this.user);
+}
+
+class AuthCheckFailure extends AuthCheckState {
+  final String errorMessage;
+  AuthCheckFailure(this.errorMessage);
 }

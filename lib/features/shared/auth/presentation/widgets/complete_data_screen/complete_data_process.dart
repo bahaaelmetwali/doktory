@@ -50,7 +50,7 @@ class CompleteDataProcess extends StatelessWidget {
           return Center(
             child: CustomButton(
               text: 'تسجيل الدخول',
-              onPressed: () {
+              onPressed: () async {
                 if (formKey.currentState!.validate()) {
                   final firebaseAuth = getIt<FirebaseAuth>();
                   final currentUser = firebaseAuth.currentUser;
@@ -88,7 +88,7 @@ class CompleteDataProcess extends StatelessWidget {
                         : null,
                   );
 
-                  context.read<CompleteUserDataCubit>().completeUserData(
+                  await context.read<CompleteUserDataCubit>().completeUserData(
                     user: userModel,
                   );
                 }

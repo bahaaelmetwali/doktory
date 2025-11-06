@@ -49,6 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
             context.go(AppRouterNames.signUpScreen);
           }
         },
+
         child: Scaffold(
           backgroundColor: AppColors.scaffold,
           body: Center(

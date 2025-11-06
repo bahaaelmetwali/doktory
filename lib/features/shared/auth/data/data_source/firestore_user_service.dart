@@ -13,7 +13,10 @@ class FirestoreUserService {
     required String uid,
     required Map<String, dynamic> data,
   }) async {
-    await _firestore.collection('users').doc(uid).update(data);
+    await _firestore
+        .collection('users')
+        .doc(uid)
+        .set(data, SetOptions(merge: true));
   }
 
   Future<UserModel?> getUser(String uid) async {

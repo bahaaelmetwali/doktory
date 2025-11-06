@@ -15,6 +15,7 @@ import 'package:doktory/features/shared/auth/data/repo_impl/user_repository_Impl
 import 'package:doktory/features/shared/auth/domain/usecases/complete_user_data_use_case.dart';
 import 'package:doktory/features/shared/auth/domain/usecases/create_user_use_case.dart';
 import 'package:doktory/features/shared/auth/domain/usecases/get_current_user.dart';
+import 'package:doktory/features/shared/auth/domain/usecases/get_user_data_use_case.dart';
 import 'package:doktory/features/shared/auth/domain/usecases/login_use_case.dart';
 import 'package:doktory/features/shared/auth/domain/usecases/register_use_case.dart';
 import 'package:doktory/features/shared/auth/presentation/cubits/auth_check/auth_check_cubit.dart';
@@ -112,8 +113,14 @@ Future<void> setupServiceLocator() async {
   getIt.registerLazySingleton<GetCurrentUserUseCase>(
     () => GetCurrentUserUseCase(getIt<AuthRepositoryImpl>()),
   );
+  getIt.registerLazySingleton<GetUserDataUseCase>(
+    () => GetUserDataUseCase(getIt<UserRepositoryImpl>()),
+  );
   getIt.registerLazySingleton<AuthCheckCubit>(
-    () => AuthCheckCubit(getIt<GetCurrentUserUseCase>()),
+    () => AuthCheckCubit(
+      getCurrentUser: getIt<GetCurrentUserUseCase>(),
+      getUserDataUseCase: getIt<GetUserDataUseCase>(),
+    ),
   );
   getIt.registerLazySingleton<CompleteUserDataUseCase>(
     () => CompleteUserDataUseCase(getIt<UserRepositoryImpl>()),
