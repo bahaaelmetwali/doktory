@@ -39,74 +39,79 @@ class _CompleteDataScreenBodyState extends State<CompleteDataScreenBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Padding(
-        padding: EdgeInsets.all(8.r),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 10.h),
-              Center(
-                child: Text(
-                  ' ادخال البيانات',
-                  style: Styles.textStyle24SemiBold.copyWith(
-                    color: AppColors.primary,
+    return Form(
+      key: _formKey,
+      child: Directionality(
+        textDirection: TextDirection.rtl,
+        child: Padding(
+          padding: EdgeInsets.all(8.r),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 10.h),
+                Center(
+                  child: Text(
+                    ' ادخال البيانات',
+                    style: Styles.textStyle24SemiBold.copyWith(
+                      color: AppColors.primary,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 20),
-              selectedRole == 'دكتور' ? PickImageSection() : SizedBox.shrink(),
+                SizedBox(height: 20),
+                selectedRole == 'دكتور'
+                    ? PickImageSection()
+                    : SizedBox.shrink(),
 
-              NameandPhoneTextFieldsSection(
-                nameController: nameController,
-                phoneController: phoneController,
-              ),
-              GovernorateDropdown(
-                selectedGovernorate: selectedGovernorate,
-                onChanged: (value) {
-                  setState(() {
-                    selectedGovernorate = value;
-                  });
-                },
-              ),
-              selectedRole == 'دكتور'
-                  ? SpecializationsDropdown(
-                      selectedSpecialization: selectedSpecialization,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedSpecialization = value;
-                        });
-                      },
-                    )
-                  : SizedBox.shrink(),
-              selectedRole == 'دكتور'
-                  ? GetLocationSection(
-                      selectedLocation: selectedLocation,
-                      adress: adress,
-                      onLocationChanged:
-                          (LatLng newLocation, String newAddress) {
-                            setState(() {
-                              selectedLocation = newLocation;
-                              adress = newAddress;
-                            });
-                          },
-                    )
-                  : SizedBox.shrink(),
-              SizedBox(height: 10.h),
-              CompleteDataProcess(
-                formKey: _formKey,
-                nameController: nameController,
-                phoneController: phoneController,
-                selectedGovernorate: selectedGovernorate,
-                selectedRole: selectedRole,
-                selectedSpecialization: selectedSpecialization,
-                selectedLocation: selectedLocation,
-                address: adress,
-              ),
-            ],
+                NameandPhoneTextFieldsSection(
+                  nameController: nameController,
+                  phoneController: phoneController,
+                ),
+                GovernorateDropdown(
+                  selectedGovernorate: selectedGovernorate,
+                  onChanged: (value) {
+                    setState(() {
+                      selectedGovernorate = value;
+                    });
+                  },
+                ),
+                selectedRole == 'دكتور'
+                    ? SpecializationsDropdown(
+                        selectedSpecialization: selectedSpecialization,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedSpecialization = value;
+                          });
+                        },
+                      )
+                    : SizedBox.shrink(),
+                selectedRole == 'دكتور'
+                    ? GetLocationSection(
+                        selectedLocation: selectedLocation,
+                        adress: adress,
+                        onLocationChanged:
+                            (LatLng newLocation, String newAddress) {
+                              setState(() {
+                                selectedLocation = newLocation;
+                                adress = newAddress;
+                              });
+                            },
+                      )
+                    : SizedBox.shrink(),
+                SizedBox(height: 10.h),
+                CompleteDataProcess(
+                  formKey: _formKey,
+                  nameController: nameController,
+                  phoneController: phoneController,
+                  selectedGovernorate: selectedGovernorate,
+                  selectedRole: selectedRole,
+                  selectedSpecialization: selectedSpecialization,
+                  selectedLocation: selectedLocation,
+                  address: adress,
+                ),
+              ],
+            ),
           ),
         ),
       ),

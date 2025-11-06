@@ -8,8 +8,8 @@ class CustomLoadingIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60.h,
-      width: 340.w,
+      height: 40.h,
+      width: 345.w,
 
       decoration: BoxDecoration(
         color: AppColors.primary,

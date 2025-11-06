@@ -36,7 +36,13 @@ class _SplashScreenState extends State<SplashScreen> {
       child: BlocListener<AuthCheckCubit, AuthCheckState>(
         listener: (context, state) {
           if (state is AuthCheckAuthenticated) {
-            context.go(AppRouterNames.selectRoleScreen);
+            final currentUser = state.user;
+            final userRole = currentUser.role;
+            if (userRole == 'عميل') {
+              context.go(AppRouterNames.userHomeScreen);
+            } else if (userRole == 'دكتور') {
+              // context.go(AppRouterNames.doctorHomeScreen);
+            }
           } else if (state is AuthCheckNeedsCompletion) {
             context.go(AppRouterNames.selectRoleScreen);
           } else if (state is AuthCheckUnauthenticated) {

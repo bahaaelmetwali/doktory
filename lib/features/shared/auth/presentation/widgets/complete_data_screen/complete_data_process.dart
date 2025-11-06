@@ -1,3 +1,4 @@
+import 'package:doktory/core/router/app_router_names.dart';
 import 'package:doktory/core/utils/service_locator.dart';
 import 'package:doktory/core/widgets/custom_button.dart';
 import 'package:doktory/core/widgets/custom_loading_indicator.dart';
@@ -7,6 +8,7 @@ import 'package:doktory/features/shared/auth/presentation/cubits/complete_user_d
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class CompleteDataProcess extends StatelessWidget {
@@ -36,13 +38,14 @@ class CompleteDataProcess extends StatelessWidget {
       listener: (context, state) {
         if (state is CompleteUserDataSuccess) {
           showCustomSnackBar(context, message: 'تم تسجيل الدخول');
+          context.go(AppRouterNames.userHomeScreen);
         } else if (state is CompleteUserDataFailure) {
           showCustomSnackBar(context, message: state.message, isError: true);
         }
       },
       builder: (context, state) {
         if (state is CompleteUserDataLoading) {
-          return CustomLoadingIndicator();
+          return Center(child: CustomLoadingIndicator());
         } else {
           return Center(
             child: CustomButton(
@@ -50,8 +53,22 @@ class CompleteDataProcess extends StatelessWidget {
               onPressed: () {
                 if (formKey.currentState!.validate()) {
                   final firebaseAuth = getIt<FirebaseAuth>();
-                  final currentUser = firebaseAuth.currentUser!;
+                  final currentUser = firebaseAuth.currentUser;
 
+                  if (currentUser == null) {
+                    showCustomSnackBar(
+                      context,
+                      message: 'حدث خطأ، يرجى تسجيل الدخول أولاً',
+                      isError: true,
+                    );
+                    return;
+                  }
+
+                  print('Governorate: $selectedGovernorate');
+                  print('Role: $selectedRole');
+                  print('Specialization: $selectedSpecialization');
+                  print('Address: $address');
+                  print('Location: $selectedLocation');
                   final userModel = UserModel(
                     uid: currentUser.uid,
                     email: currentUser.email ?? '',
@@ -70,6 +87,7 @@ class CompleteDataProcess extends StatelessWidget {
                         ? selectedLocation?.longitude
                         : null,
                   );
+
                   context.read<CompleteUserDataCubit>().completeUserData(
                     user: userModel,
                   );

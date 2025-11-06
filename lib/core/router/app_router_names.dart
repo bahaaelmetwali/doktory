@@ -5,4 +5,6 @@ class AppRouterNames {
   static const logInScreen = '/logInScreen';
   static const completeDataScreen = '/completeDataScreen';
   static const addLocationScreen = '/addLocationScreen';
+  static const userHomeScreen = '/userHomeScreen';
+  static const doctorsListScreen = '/doctorsListScreen';
 }
