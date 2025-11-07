@@ -60,7 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 const SizedBox(height: 24),
                 DefaultTextStyle(
                   style: Styles.textStyle28Bold.copyWith(
-                    color: AppColors.primary,
+                    color: AppColors.bright,
                   ),
                   child: AnimatedTextKit(
                     isRepeatingAnimation: false,

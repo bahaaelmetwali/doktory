@@ -1,3 +1,4 @@
+import 'package:doktory/core/constants.dart';
 import 'package:doktory/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -54,16 +55,14 @@ class _HomeAppBarState extends State<HomeAppBar> {
               child: CircleAvatar(
                 radius: 25.r,
                 backgroundColor: Colors.grey[200],
-                backgroundImage:
-                    const AssetImage('assets/logos/doctor.png')
-                        as ImageProvider,
+                backgroundImage: const AssetImage('assets/logos/doctor.png'),
               ),
             ),
             SizedBox(width: 10.w),
             Column(
               children: [
                 Text('مرحبا بك !', style: Styles.textStyle14SemiBold),
-                Text('بهاء', style: Styles.textStyle16Medium),
+                Text('بهاء', style: Styles.textStyle14SemiBold),
               ],
             ),
             Spacer(),
@@ -71,7 +70,13 @@ class _HomeAppBarState extends State<HomeAppBar> {
                 CircleAvatar(
                   radius: 20.r,
                   backgroundColor: Colors.grey[200],
-                  child: SvgPicture.asset('assets/icons/notification.svg'),
+                  child: SvgPicture.asset(
+                    'assets/icons/notification.svg',
+                    colorFilter: const ColorFilter.mode(
+                      AppColors.primary,
+                      BlendMode.srcIn,
+                    ),
+                  ),
                 ),
           ],
         ),
