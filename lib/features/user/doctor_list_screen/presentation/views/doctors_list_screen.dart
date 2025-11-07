@@ -1,3 +1,4 @@
+import 'package:doktory/core/constants.dart';
 import 'package:flutter/material.dart';
 
 class DoctorsListScreen extends StatelessWidget {
@@ -5,6 +6,6 @@ class DoctorsListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(backgroundColor: AppColors.scaffold);
   }
 }
