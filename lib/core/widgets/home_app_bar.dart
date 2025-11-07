@@ -55,7 +55,12 @@ class _HomeAppBarState extends State<HomeAppBar> {
               child: CircleAvatar(
                 radius: 25.r,
                 backgroundColor: Colors.grey[200],
-                backgroundImage: const AssetImage('assets/logos/doctor.png'),
+                child: ClipOval(
+                  child: Image.asset(
+                    'assets/logos/doctor.png',
+                    fit: BoxFit.contain,
+                  ),
+                ),
               ),
             ),
             SizedBox(width: 10.w),
