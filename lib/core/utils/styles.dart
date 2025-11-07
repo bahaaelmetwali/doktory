@@ -29,7 +29,7 @@ abstract class Styles {
   static final TextStyle textStyle16Medium = TextStyle(
     fontFamily: 'Cairo',
     fontSize: 16.sp,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w600,
   );
   static final TextStyle textStyle14SemiBold = TextStyle(
     fontFamily: 'Cairo',

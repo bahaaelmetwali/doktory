@@ -14,7 +14,7 @@ class CategoriesSection extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text('التخصصات', style: Styles.textStyle20SemiBold),
+              Text('التخصصات', style: Styles.textStyle18SemiBold),
               Spacer(),
               TextButton(
                 onPressed: () {},
@@ -29,7 +29,7 @@ class CategoriesSection extends StatelessWidget {
           ),
           SizedBox(height: 10.h),
           SizedBox(
-            height: 70.h,
+            height: 40.h,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: Constants.doctorSpecializations.length,
@@ -40,13 +40,13 @@ class CategoriesSection extends StatelessWidget {
                     height: 40.h,
                     width: 100.w,
                     decoration: BoxDecoration(
-                      color: AppColors.secondary,
+                      color: AppColors.primary,
                       borderRadius: BorderRadius.circular(8.r),
                     ),
                     child: Center(
                       child: Text(
                         Constants.doctorSpecializations[index],
-                        style: Styles.textStyle14SemiBold.copyWith(
+                        style: Styles.textStyle12SemiBold.copyWith(
                           color: Colors.white,
                         ),
                         textAlign: TextAlign.center,
