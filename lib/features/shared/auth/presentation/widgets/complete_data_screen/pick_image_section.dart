@@ -1,12 +1,13 @@
 import 'dart:io';
-
+import 'dart:convert';
 import 'package:doktory/core/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:image/image.dart' as img;
 
 class PickImageSection extends StatefulWidget {
-  final void Function(File? imageFile) onImagePicked;
+  final void Function(String? base64Image) onImagePicked;
 
   const PickImageSection({required this.onImagePicked, super.key});
 
@@ -18,13 +19,33 @@ class _PickImageSectionState extends State<PickImageSection> {
   File? _selectedImage;
   final ImagePicker _picker = ImagePicker();
 
+  Future<String?> compressAndConvertToBase64(File file) async {
+    final bytes = await file.readAsBytes();
+    img.Image? image = img.decodeImage(bytes);
+    if (image == null) return null;
+
+    int quality = 90;
+    List<int> jpg;
+    do {
+      jpg = img.encodeJpg(image, quality: quality);
+      quality -= 5;
+      if (quality <= 10) break;
+    } while (jpg.length > 600 * 1024);
+
+    return base64Encode(jpg);
+  }
+
   Future<void> _pickImage() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
+      File file = File(pickedFile.path);
       setState(() {
-        _selectedImage = File(pickedFile.path);
+        _selectedImage = file;
       });
-      widget.onImagePicked(_selectedImage);
+
+      String? base64Image = await compressAndConvertToBase64(file);
+
+      widget.onImagePicked(base64Image);
     }
   }
 

@@ -34,7 +34,7 @@ class CompleteDataProcess extends StatelessWidget {
   final String? selectedSpecialization;
   final LatLng? selectedLocation;
   final String? address;
-  final File? uploadedImageUrl;
+  final String? uploadedImageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -68,11 +68,6 @@ class CompleteDataProcess extends StatelessWidget {
                     return;
                   }
 
-                  print('Governorate: $selectedGovernorate');
-                  print('Role: $selectedRole');
-                  print('Specialization: $selectedSpecialization');
-                  print('Address: $address');
-                  print('Location: $selectedLocation');
                   final userModel = UserModel(
                     uid: currentUser.uid,
                     email: currentUser.email ?? '',

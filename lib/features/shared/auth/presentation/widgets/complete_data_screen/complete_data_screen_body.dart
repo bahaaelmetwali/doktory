@@ -40,7 +40,7 @@ class _CompleteDataScreenBodyState extends State<CompleteDataScreenBody> {
   final phoneController = TextEditingController();
   String? selectedSpecialization;
   String? selectedGovernorate;
-  File? uploadedImageUrl;
+  String? uploadedImageBase64;
 
   @override
   Widget build(BuildContext context) {
@@ -73,8 +73,8 @@ class _CompleteDataScreenBodyState extends State<CompleteDataScreenBody> {
                       SizedBox(height: 20),
 
                       PickImageSection(
-                        onImagePicked: (File? imageFile) {
-                          uploadedImageUrl = imageFile;
+                        onImagePicked: (imageFile) {
+                          uploadedImageBase64 = imageFile;
                         },
                       ),
 
@@ -123,7 +123,7 @@ class _CompleteDataScreenBodyState extends State<CompleteDataScreenBody> {
                         selectedSpecialization: selectedSpecialization,
                         selectedLocation: selectedLocation,
                         address: adress,
-                        uploadedImageUrl: uploadedImageUrl,
+                        uploadedImageUrl: uploadedImageBase64,
                       ),
                     ],
                   ),
