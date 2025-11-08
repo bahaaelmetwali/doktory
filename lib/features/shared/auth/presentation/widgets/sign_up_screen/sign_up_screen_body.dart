@@ -4,7 +4,7 @@ import 'package:doktory/core/utils/styles.dart';
 import 'package:doktory/core/widgets/custom_navigation_button.dart';
 import 'package:doktory/core/widgets/show_or_hide_pass.dart';
 import 'package:doktory/features/shared/auth/presentation/cubits/register_cubit/register_cubit.dart';
-import 'package:doktory/features/shared/auth/presentation/widgets/sign_up_screen/register_process.dart';
+import 'package:doktory/features/shared/auth/presentation/widgets/register_screen/register_process.dart';
 import 'package:doktory/features/shared/auth/presentation/widgets/text_fields_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

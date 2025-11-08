@@ -31,19 +31,19 @@ class _PickImageSectionState extends State<PickImageSection> {
         alignment: Alignment.bottomRight,
         children: [
           CircleAvatar(
-            radius: 50.r,
+            radius: 45.r,
             backgroundColor: Colors.grey[200],
             backgroundImage: _selectedImage != null
                 ? FileImage(_selectedImage!)
                 : null,
             child: _selectedImage == null
-                ? const Icon(Icons.person, size: 60, color: Colors.grey)
+                ? Icon(Icons.person, size: 50.r, color: Colors.grey)
                 : null,
           ),
 
           Positioned(
             bottom: 0,
-            right: 4.w,
+            right: 2.w,
             child: GestureDetector(
               onTap: _pickImage,
               child: Container(
@@ -53,7 +53,7 @@ class _PickImageSectionState extends State<PickImageSection> {
                   shape: BoxShape.circle,
                   border: Border.all(color: Colors.white, width: 2),
                 ),
-                child: const Icon(Icons.edit, color: Colors.white, size: 20),
+                child: Icon(Icons.edit, color: Colors.white, size: 15.r),
               ),
             ),
           ),
