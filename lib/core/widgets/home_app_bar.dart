@@ -1,17 +1,12 @@
 import 'package:doktory/core/constants.dart';
 import 'package:doktory/core/utils/styles.dart';
+import 'package:doktory/core/widgets/profile_avater.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeAppBar extends StatefulWidget {
-  const HomeAppBar({
-    super.key,
-    this.leadingWidget,
-    this.userName,
-    this.userImage,
-  });
-  final Widget? leadingWidget;
+  const HomeAppBar({super.key, this.userName, this.userImage});
   final String? userName;
   final String? userImage;
 
@@ -52,16 +47,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
           children: [
             Padding(
               padding: EdgeInsets.only(left: 6.w),
-              child: CircleAvatar(
-                radius: 25.r,
-                backgroundColor: Colors.grey[200],
-                child: ClipOval(
-                  child: Image.asset(
-                    'assets/logos/doctor.png',
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
+              child: ProfileAvatar(),
             ),
             SizedBox(width: 10.w),
             Column(
@@ -71,18 +57,17 @@ class _HomeAppBarState extends State<HomeAppBar> {
               ],
             ),
             Spacer(),
-            widget.leadingWidget ??
-                CircleAvatar(
-                  radius: 20.r,
-                  backgroundColor: Colors.grey[200],
-                  child: SvgPicture.asset(
-                    'assets/icons/notification.svg',
-                    colorFilter: const ColorFilter.mode(
-                      AppColors.primary,
-                      BlendMode.srcIn,
-                    ),
-                  ),
+            CircleAvatar(
+              radius: 20.r,
+              backgroundColor: Colors.grey[200],
+              child: SvgPicture.asset(
+                'assets/icons/notification.svg',
+                colorFilter: const ColorFilter.mode(
+                  AppColors.primary,
+                  BlendMode.srcIn,
                 ),
+              ),
+            ),
           ],
         ),
       ),
