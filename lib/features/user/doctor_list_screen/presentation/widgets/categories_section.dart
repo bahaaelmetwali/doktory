@@ -44,12 +44,15 @@ class CategoriesSection extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8.r),
                     ),
                     child: Center(
-                      child: Text(
-                        Constants.doctorSpecializations[index],
-                        style: Styles.textStyle12SemiBold.copyWith(
-                          color: Colors.white,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Text(
+                          Constants.doctorSpecializations[index],
+                          style: Styles.textStyle12SemiBold.copyWith(
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
