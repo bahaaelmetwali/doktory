@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:doktory/core/router/app_router_names.dart';
 import 'package:doktory/core/utils/service_locator.dart';
 import 'package:doktory/core/widgets/custom_button.dart';
@@ -22,6 +24,7 @@ class CompleteDataProcess extends StatelessWidget {
     this.selectedSpecialization,
     this.selectedLocation,
     this.address,
+    this.uploadedImageUrl,
   });
   final GlobalKey<FormState> formKey;
   final TextEditingController nameController;
@@ -31,6 +34,7 @@ class CompleteDataProcess extends StatelessWidget {
   final String? selectedSpecialization;
   final LatLng? selectedLocation;
   final String? address;
+  final File? uploadedImageUrl;
 
   @override
   Widget build(BuildContext context) {

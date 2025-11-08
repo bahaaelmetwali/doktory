@@ -1,11 +1,14 @@
 import 'dart:io';
+
 import 'package:doktory/core/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 
 class PickImageSection extends StatefulWidget {
-  const PickImageSection({super.key});
+  final void Function(File? imageFile) onImagePicked;
+
+  const PickImageSection({required this.onImagePicked, super.key});
 
   @override
   State<PickImageSection> createState() => _PickImageSectionState();
@@ -21,6 +24,7 @@ class _PickImageSectionState extends State<PickImageSection> {
       setState(() {
         _selectedImage = File(pickedFile.path);
       });
+      widget.onImagePicked(_selectedImage);
     }
   }
 
@@ -40,7 +44,6 @@ class _PickImageSectionState extends State<PickImageSection> {
                 ? Icon(Icons.person, size: 50.r, color: Colors.grey)
                 : null,
           ),
-
           Positioned(
             bottom: 0,
             right: 2.w,

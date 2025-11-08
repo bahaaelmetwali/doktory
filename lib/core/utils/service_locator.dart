@@ -8,6 +8,7 @@ import 'package:doktory/core/utils/cache_helper.dart';
 import 'package:doktory/core/utils/location_api_service.dart';
 import 'package:doktory/features/shared/auth/data/data_source/auth_remote_data_source.dart';
 import 'package:doktory/features/shared/auth/data/data_source/firebase_auth_service.dart';
+import 'package:doktory/features/shared/auth/data/data_source/firebase_storage_service.dart';
 import 'package:doktory/features/shared/auth/data/data_source/firestore_user_service.dart';
 import 'package:doktory/features/shared/auth/data/data_source/user_remote_data_source.dart';
 import 'package:doktory/features/shared/auth/data/repo_impl/auth_repository_Impl.dart';
@@ -30,8 +31,9 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final getIt = GetIt.instance;
+
 Future<void> setupServiceLocator() async {
-  //location
+  // 🗺️ إعدادات الـ Location API
   final dioLocation = Dio(
     BaseOptions(
       baseUrl: LocationApiService.baseUrl,
@@ -42,28 +44,38 @@ Future<void> setupServiceLocator() async {
     ),
   );
 
+  // 🌍 Services خاصة بالـ Location
   getIt.registerLazySingleton<LocationApiService>(
     () => LocationApiService(dioLocation),
   );
+
   getIt.registerLazySingleton<LocationDataSourceImpl>(
     () => LocationDataSourceImpl(getIt<LocationApiService>()),
   );
+
   getIt.registerLazySingleton<LocationRepoImpl>(
     () => LocationRepoImpl(getIt<LocationDataSourceImpl>()),
   );
+
   getIt.registerLazySingleton<LocationUseCase>(
     () => LocationUseCase(getIt<LocationRepoImpl>()),
   );
+
   getIt.registerFactory<LocationCubit>(
     () => LocationCubit(getIt<LocationUseCase>()),
   );
-  //firebase
+
+  // 🔥 تهيئة Firebase
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  // 🧱 Firebase Instances
   getIt.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
   getIt.registerLazySingleton<FirebaseFirestore>(
     () => FirebaseFirestore.instance,
   );
-  //firebase_auth
+  getIt.registerLazySingleton<FirebaseStorage>(() => FirebaseStorage.instance);
+
+  // 🔐 Firebase Services (Auth, Firestore, Storage)
   getIt.registerLazySingleton<FirebaseAuthService>(
     () => FirebaseAuthService(getIt<FirebaseAuth>()),
   );
@@ -72,59 +84,79 @@ Future<void> setupServiceLocator() async {
     () => FirestoreUserService(getIt<FirebaseFirestore>()),
   );
 
-  getIt.registerLazySingleton<FirebaseStorage>(() => FirebaseStorage.instance);
-  //shared_preferences
+  getIt.registerLazySingleton<FirebaseStorageService>(
+    () => FirebaseStorageService(getIt<FirebaseStorage>()),
+  );
+
+  // 💾 Shared Preferences (التخزين المحلي)
   final prefs = await SharedPreferences.getInstance();
   getIt.registerLazySingleton<SharedPreferences>(() => prefs);
   getIt.registerLazySingleton<CacheHelper>(
     () => CacheHelper(getIt<SharedPreferences>()),
   );
 
+  // 🌐 Remote Data Sources (مصادر البيانات)
   getIt.registerLazySingleton<AuthRemoteDataSource>(
     () => AuthRemoteDataSource(getIt<FirebaseAuthService>()),
   );
 
   getIt.registerLazySingleton<UserRemoteDataSource>(
-    () => UserRemoteDataSource(getIt<FirestoreUserService>()),
+    () => UserRemoteDataSource(
+      firestoreUserService: getIt<FirestoreUserService>(),
+      firebaseStorageService: getIt<FirebaseStorageService>(),
+    ),
   );
+
+  // 🏗️ Repository Implementations (الريبو الفعلي)
   getIt.registerLazySingleton<AuthRepositoryImpl>(
     () => AuthRepositoryImpl(getIt<AuthRemoteDataSource>()),
   );
-  getIt.registerLazySingleton<RegisterUseCase>(
-    () => RegisterUseCase(getIt<AuthRepositoryImpl>()),
-  );
+
   getIt.registerLazySingleton<UserRepositoryImpl>(
     () => UserRepositoryImpl(getIt<UserRemoteDataSource>()),
   );
-  getIt.registerLazySingleton<CreateUserUseCase>(
-    () => CreateUserUseCase(getIt<UserRepositoryImpl>()),
-  );
 
-  getIt.registerLazySingleton<RegisterCubit>(
-    () => RegisterCubit(getIt<RegisterUseCase>(), getIt<CreateUserUseCase>()),
+  // ⚙️ Use Cases (منطق الأعمال)
+  getIt.registerLazySingleton<RegisterUseCase>(
+    () => RegisterUseCase(getIt<AuthRepositoryImpl>()),
   );
 
   getIt.registerLazySingleton<LoginUseCase>(
     () => LoginUseCase(getIt<AuthRepositoryImpl>()),
   );
-  getIt.registerLazySingleton<LogInCubit>(
-    () => LogInCubit(getIt<LoginUseCase>()),
+
+  getIt.registerLazySingleton<CreateUserUseCase>(
+    () => CreateUserUseCase(getIt<UserRepositoryImpl>()),
   );
+
   getIt.registerLazySingleton<GetCurrentUserUseCase>(
     () => GetCurrentUserUseCase(getIt<AuthRepositoryImpl>()),
   );
+
   getIt.registerLazySingleton<GetUserDataUseCase>(
     () => GetUserDataUseCase(getIt<UserRepositoryImpl>()),
   );
+
+  getIt.registerLazySingleton<CompleteUserDataUseCase>(
+    () => CompleteUserDataUseCase(getIt<UserRepositoryImpl>()),
+  );
+
+  // 🧠 Cubits (حالة واجهة المستخدم)
+  getIt.registerLazySingleton<RegisterCubit>(
+    () => RegisterCubit(getIt<RegisterUseCase>(), getIt<CreateUserUseCase>()),
+  );
+
+  getIt.registerLazySingleton<LogInCubit>(
+    () => LogInCubit(getIt<LoginUseCase>()),
+  );
+
   getIt.registerLazySingleton<AuthCheckCubit>(
     () => AuthCheckCubit(
       getCurrentUser: getIt<GetCurrentUserUseCase>(),
       getUserDataUseCase: getIt<GetUserDataUseCase>(),
     ),
   );
-  getIt.registerLazySingleton<CompleteUserDataUseCase>(
-    () => CompleteUserDataUseCase(getIt<UserRepositoryImpl>()),
-  );
+
   getIt.registerLazySingleton<CompleteUserDataCubit>(
     () => CompleteUserDataCubit(getIt<CompleteUserDataUseCase>()),
   );

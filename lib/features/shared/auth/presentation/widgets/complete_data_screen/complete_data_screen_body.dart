@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:doktory/core/constants.dart';
 import 'package:doktory/core/utils/cache_helper.dart';
 import 'package:doktory/core/utils/service_locator.dart';
@@ -38,6 +40,7 @@ class _CompleteDataScreenBodyState extends State<CompleteDataScreenBody> {
   final phoneController = TextEditingController();
   String? selectedSpecialization;
   String? selectedGovernorate;
+  File? uploadedImageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +72,11 @@ class _CompleteDataScreenBodyState extends State<CompleteDataScreenBody> {
                       ),
                       SizedBox(height: 20),
 
-                      PickImageSection(),
+                      PickImageSection(
+                        onImagePicked: (File? imageFile) {
+                          uploadedImageUrl = imageFile;
+                        },
+                      ),
 
                       NameandPhoneTextFieldsSection(
                         nameController: nameController,
@@ -116,6 +123,7 @@ class _CompleteDataScreenBodyState extends State<CompleteDataScreenBody> {
                         selectedSpecialization: selectedSpecialization,
                         selectedLocation: selectedLocation,
                         address: adress,
+                        uploadedImageUrl: uploadedImageUrl,
                       ),
                     ],
                   ),

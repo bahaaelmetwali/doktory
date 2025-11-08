@@ -19,7 +19,7 @@ class FirestoreUserService {
         .set(data, SetOptions(merge: true));
   }
 
-  Future<UserModel?> getUser(String uid) async {
+  Future<UserModel?> getUser({required String uid}) async {
     final doc = await _firestore.collection('users').doc(uid).get();
     if (!doc.exists) return null;
     return UserModel.fromMap(doc.data()!);

@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupServiceLocator();
+  await FirebaseAuth.instance.signOut();
 
   runApp(const Doktory());
 }
