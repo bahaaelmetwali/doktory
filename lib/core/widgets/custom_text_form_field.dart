@@ -20,6 +20,7 @@ class CustomTextFormField extends StatelessWidget {
     this.readOnly = false,
     this.height,
     this.obscureText = false,
+    this.onChanged,
   });
   final String name;
   final TextStyle? nameTextStyle;
@@ -33,6 +34,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool readOnly;
   final double? height;
   final bool obscureText;
+  final void Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -50,6 +52,7 @@ class CustomTextFormField extends StatelessWidget {
           SizedBox(
             width: 345.w,
             child: TextFormField(
+              onChanged: onChanged,
               obscureText: obscureText,
               readOnly: readOnly,
               minLines: isDescription ? 3 : 1,

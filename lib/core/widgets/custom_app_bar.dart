@@ -18,7 +18,7 @@ class CustomAppBar extends StatelessWidget {
         Container(
           color: Colors.white,
           child: Padding(
-            padding: EdgeInsets.only(top: 16.h, right: 8.w, left: 8.w),
+            padding: EdgeInsets.only(top: 24.h, right: 8.w, left: 8.w),
             child: Row(
               children: [
                 GestureDetector(
@@ -37,7 +37,6 @@ class CustomAppBar extends StatelessWidget {
             ),
           ),
         ),
-        Container(width: double.infinity, height: 20.h, color: Colors.white),
       ],
     );
   }
