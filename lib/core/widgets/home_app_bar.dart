@@ -35,8 +35,6 @@ class _HomeAppBarState extends State<HomeAppBar> {
           if (state is AuthCheckAuthenticated) {
             userName = state.user.name ?? 'مرحبا بك !';
             userImage = state.user.image;
-            print('User image URL: $userImage');
-            print('User name : $userName');
           }
 
           return Container(

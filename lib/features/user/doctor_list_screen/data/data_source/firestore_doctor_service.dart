@@ -9,7 +9,7 @@ class FirestoreDoctorService {
   Future<List<UserModel>> getDoctors() async {
     final snapshot = await firestore
         .collection('users')
-        .where('role', isEqualTo: 'doctor')
+        .where('role', isEqualTo: 'دكتور')
         .get();
 
     return snapshot.docs.map((doc) => UserModel.fromMap(doc.data())).toList();

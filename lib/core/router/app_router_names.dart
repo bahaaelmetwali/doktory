@@ -1,5 +1,3 @@
-import 'package:doktory/features/user/user_navigation.dart';
-
 class AppRouterNames {
   static const splashScreen = '/';
   static const selectRoleScreen = '/selectRoleScreen';
