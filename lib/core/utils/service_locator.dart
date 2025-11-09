@@ -22,6 +22,8 @@ import 'package:doktory/features/shared/auth/presentation/cubits/auth_check/auth
 import 'package:doktory/features/shared/auth/presentation/cubits/complete_user_data_cubit/complete_user_data_cubit.dart';
 import 'package:doktory/features/shared/auth/presentation/cubits/log_in_cubit/log_in_cubit.dart';
 import 'package:doktory/features/shared/auth/presentation/cubits/register_cubit/register_cubit.dart';
+import 'package:doktory/features/user/doctor_list_screen/data/data_source/doctor_remote_data_source.dart';
+import 'package:doktory/features/user/doctor_list_screen/data/data_source/firestore_doctor_service.dart';
 import 'package:doktory/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -78,6 +80,10 @@ Future<void> setupServiceLocator() async {
     () => FirebaseAuthService(getIt<FirebaseAuth>()),
   );
 
+  getIt.registerLazySingleton<FirestoreDoctorService>(
+    () => FirestoreDoctorService(getIt<FirebaseFirestore>()),
+  );
+
   getIt.registerLazySingleton<FirestoreUserService>(
     () => FirestoreUserService(getIt<FirebaseFirestore>()),
   );
@@ -90,6 +96,12 @@ Future<void> setupServiceLocator() async {
   );
 
   // 🌐 Remote Data Sources (مصادر البيانات)
+
+  getIt.registerLazySingleton<DoctorRemoteDataSource>(
+    () => DoctorRemoteDataSource(
+      firestoreDoctorService: getIt<FirestoreDoctorService>(),
+    ),
+  );
   getIt.registerLazySingleton<AuthRemoteDataSource>(
     () => AuthRemoteDataSource(getIt<FirebaseAuthService>()),
   );
