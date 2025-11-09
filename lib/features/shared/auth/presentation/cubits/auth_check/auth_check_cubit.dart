@@ -42,4 +42,8 @@ class AuthCheckCubit extends Cubit<AuthCheckState> {
       },
     );
   }
+
+  void updateUser(UserModel newUser) {
+    emit(AuthCheckAuthenticated(newUser));
+  }
 }

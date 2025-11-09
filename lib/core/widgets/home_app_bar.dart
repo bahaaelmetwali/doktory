@@ -36,6 +36,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
             userName = state.user.name ?? 'مرحبا بك !';
             userImage = state.user.image;
             print('User image URL: $userImage');
+            print('User name : $userName');
           }
 
           return Container(
@@ -65,7 +66,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left: 6.w),
-                    child: ProfileAvatar(imageUrl: userImage),
+                    child: ProfileAvatar(base64Image: userImage),
                   ),
                   SizedBox(width: 10.w),
                   Column(

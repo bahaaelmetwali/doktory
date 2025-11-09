@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:doktory/core/errors/failure.dart';
 import 'package:doktory/core/utils/handle_request.dart';
@@ -20,21 +19,10 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, void>> completeUserData({
-    required UserModel user,
-    File? imageFile,
-  }) {
+  Future<Either<Failure, void>> completeUserData({required UserModel user}) {
     return handleRequest(
       request: () async {
-        String? imageUrl;
-        if (imageFile != null) {
-          imageUrl = await _userRemoteDataSource.uploadProfileImage(
-            uid: user.uid,
-            imageFile: imageFile,
-          );
-        }
         final userMap = user.toMap();
-        userMap['image'] = imageUrl;
         await _userRemoteDataSource.updateUser(uid: user.uid, data: userMap);
       },
     );

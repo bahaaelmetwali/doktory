@@ -8,7 +8,6 @@ import 'package:doktory/core/utils/cache_helper.dart';
 import 'package:doktory/core/utils/location_api_service.dart';
 import 'package:doktory/features/shared/auth/data/data_source/auth_remote_data_source.dart';
 import 'package:doktory/features/shared/auth/data/data_source/firebase_auth_service.dart';
-import 'package:doktory/features/shared/auth/data/data_source/firebase_storage_service.dart';
 import 'package:doktory/features/shared/auth/data/data_source/firestore_user_service.dart';
 import 'package:doktory/features/shared/auth/data/data_source/user_remote_data_source.dart';
 import 'package:doktory/features/shared/auth/data/repo_impl/auth_repository_Impl.dart';
@@ -73,7 +72,6 @@ Future<void> setupServiceLocator() async {
   getIt.registerLazySingleton<FirebaseFirestore>(
     () => FirebaseFirestore.instance,
   );
-  getIt.registerLazySingleton<FirebaseStorage>(() => FirebaseStorage.instance);
 
   // 🔐 Firebase Services (Auth, Firestore, Storage)
   getIt.registerLazySingleton<FirebaseAuthService>(
@@ -82,10 +80,6 @@ Future<void> setupServiceLocator() async {
 
   getIt.registerLazySingleton<FirestoreUserService>(
     () => FirestoreUserService(getIt<FirebaseFirestore>()),
-  );
-
-  getIt.registerLazySingleton<FirebaseStorageService>(
-    () => FirebaseStorageService(getIt<FirebaseStorage>()),
   );
 
   // 💾 Shared Preferences (التخزين المحلي)
@@ -103,7 +97,6 @@ Future<void> setupServiceLocator() async {
   getIt.registerLazySingleton<UserRemoteDataSource>(
     () => UserRemoteDataSource(
       firestoreUserService: getIt<FirestoreUserService>(),
-      firebaseStorageService: getIt<FirebaseStorageService>(),
     ),
   );
 

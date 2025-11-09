@@ -1,11 +1,10 @@
-import 'dart:io';
-
 import 'package:doktory/core/router/app_router_names.dart';
 import 'package:doktory/core/utils/service_locator.dart';
 import 'package:doktory/core/widgets/custom_button.dart';
 import 'package:doktory/core/widgets/custom_loading_indicator.dart';
 import 'package:doktory/core/widgets/show_custom_snack_bar.dart';
 import 'package:doktory/features/shared/auth/data/models/user_model.dart';
+import 'package:doktory/features/shared/auth/presentation/cubits/auth_check/auth_check_cubit.dart';
 import 'package:doktory/features/shared/auth/presentation/cubits/complete_user_data_cubit/complete_user_data_cubit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -85,11 +84,13 @@ class CompleteDataProcess extends StatelessWidget {
                     longitude: selectedRole == 'دكتور'
                         ? selectedLocation?.longitude
                         : null,
+                    image: uploadedImageUrl,
                   );
 
                   await context.read<CompleteUserDataCubit>().completeUserData(
                     user: userModel,
                   );
+                  context.read<AuthCheckCubit>().updateUser(userModel);
                 }
               },
             ),

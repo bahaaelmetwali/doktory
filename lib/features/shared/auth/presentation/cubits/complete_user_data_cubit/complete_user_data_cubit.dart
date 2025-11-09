@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:doktory/core/errors/failure.dart';
 import 'package:doktory/features/shared/auth/data/models/user_model.dart';
@@ -14,16 +12,10 @@ class CompleteUserDataCubit extends Cubit<CompleteUserDataState> {
   CompleteUserDataCubit(this._completeUserDataUseCase)
     : super(CompleteUserDataInitial());
 
-  Future<void> completeUserData({
-    required UserModel user,
-    File? imageFile,
-  }) async {
+  Future<void> completeUserData({required UserModel user}) async {
     emit(CompleteUserDataLoading());
 
-    final result = await _completeUserDataUseCase(
-      user: user,
-      imageFile: imageFile,
-    );
+    final result = await _completeUserDataUseCase(user: user);
 
     result.fold(
       (Failure failure) => emit(CompleteUserDataFailure(failure.toString())),

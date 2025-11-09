@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:doktory/core/constants.dart';
 import 'package:doktory/core/utils/cache_helper.dart';
 import 'package:doktory/core/utils/service_locator.dart';
