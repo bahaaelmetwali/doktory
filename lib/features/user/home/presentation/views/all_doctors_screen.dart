@@ -14,7 +14,8 @@ class AllDoctorsScreen extends StatelessWidget {
       create: (context) => getIt<AllDoctorsCubit>()..getDoctors(),
       child: Scaffold(
         backgroundColor: AppColors.scaffold,
-        body: SafeArea(child: AllDoctorsScreenBody()),
+
+        body: AllDoctorsScreenBody(),
       ),
     );
   }

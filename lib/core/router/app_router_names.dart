@@ -8,4 +8,6 @@ class AppRouterNames {
   static const userNavigation = '/userNavigation';
   static const homeUserScreen = '/homeUserScreen';
   static const allDoctorsScreen = '/allDoctorsScreen';
+
+  static const categoryDoctors = '/categoryDoctors';
 }

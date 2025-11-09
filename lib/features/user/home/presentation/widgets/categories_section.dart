@@ -1,7 +1,9 @@
 import 'package:doktory/core/constants.dart';
+import 'package:doktory/core/router/app_router_names.dart';
 import 'package:doktory/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class CategoriesSection extends StatelessWidget {
   const CategoriesSection({super.key});
@@ -21,18 +23,25 @@ class CategoriesSection extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemCount: Constants.doctorSpecializations.length,
               itemBuilder: (context, index) {
+                final specialization = Constants.doctorSpecializations[index];
+
                 return Padding(
                   padding: EdgeInsets.only(left: 8.r),
-                  child: Container(
-                    height: 40.h,
-                    width: 100.w,
-                    decoration: BoxDecoration(
-                      color: AppColors.primary,
-                      borderRadius: BorderRadius.circular(8.r),
-                    ),
-                    child: Center(
-                      child: GestureDetector(
-                        onTap: () {},
+                  child: GestureDetector(
+                    onTap: () {
+                      context.push(
+                        AppRouterNames.categoryDoctors,
+                        extra: specialization,
+                      );
+                    },
+                    child: Container(
+                      height: 40.h,
+                      width: 100.w,
+                      decoration: BoxDecoration(
+                        color: AppColors.primary,
+                        borderRadius: BorderRadius.circular(8.r),
+                      ),
+                      child: Center(
                         child: Text(
                           Constants.doctorSpecializations[index],
                           style: Styles.textStyle12SemiBold.copyWith(

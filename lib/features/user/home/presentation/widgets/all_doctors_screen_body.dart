@@ -25,6 +25,10 @@ class _AllDoctorsScreenBodyState extends State<AllDoctorsScreenBody> {
       textDirection: TextDirection.rtl,
       child: Column(
         children: [
+          Container(
+            height: MediaQuery.of(context).padding.top,
+            color: Colors.white,
+          ),
           CustomAppBar(
             onTap: () => Navigator.pop(context),
             headingText: 'كل الأطباء',

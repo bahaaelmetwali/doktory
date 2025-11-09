@@ -6,6 +6,7 @@ import 'package:doktory/features/shared/auth/presentation/views/sign_up_screen.d
 import 'package:doktory/features/shared/auth/presentation/views/select_role_screen.dart';
 import 'package:doktory/features/shared/splash/presentation/views/splash_screen.dart';
 import 'package:doktory/features/user/home/presentation/views/all_doctors_screen.dart';
+import 'package:doktory/features/user/home/presentation/views/category_doctors_screen.dart';
 import 'package:doktory/features/user/home/presentation/views/home_screen.dart';
 import 'package:doktory/features/user/user_navigation.dart';
 import 'package:flutter/material.dart';
@@ -67,6 +68,13 @@ abstract class AppRouter {
       GoRoute(
         path: AppRouterNames.allDoctorsScreen,
         builder: (context, state) => const AllDoctorsScreen(),
+      ),
+      GoRoute(
+        path: AppRouterNames.categoryDoctors,
+        builder: (context, state) {
+          final specialization = state.extra as String;
+          return CategoryDoctorsScreen(specialization: specialization);
+        },
       ),
     ],
   );
