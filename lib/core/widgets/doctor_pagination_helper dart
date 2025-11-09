@@ -1,0 +1,40 @@
+import 'package:doktory/features/shared/auth/data/models/user_model.dart';
+
+class DoctorPaginationHelper {
+  final List<UserModel> allDoctors;
+  final String? specialization;
+  final String searchText;
+  final int pageSize;
+  int currentPage = 0;
+
+  DoctorPaginationHelper({
+    required this.allDoctors,
+    this.specialization,
+    required this.searchText,
+    this.pageSize = 10,
+  });
+
+  List<UserModel> get filteredDoctors {
+    final filteredBySpec = specialization == null
+        ? allDoctors
+        : allDoctors.where((doc) => doc.specialization == specialization).toList();
+
+    return filteredBySpec
+        .where((doc) => doc.name != null && doc.name!.toLowerCase().contains(searchText.toLowerCase()))
+        .toList();
+  }
+
+  List<UserModel> getNextPage() {
+    final nextPageItems = filteredDoctors.skip(currentPage * pageSize).take(pageSize).toList();
+    if (nextPageItems.isNotEmpty) currentPage++;
+    return nextPageItems;
+  }
+
+  bool hasMore() {
+    return currentPage * pageSize < filteredDoctors.length;
+  }
+
+  void reset() {
+    currentPage = 0;
+  }
+}
