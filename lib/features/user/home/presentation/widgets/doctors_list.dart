@@ -1,9 +1,11 @@
 import 'package:doktory/core/constants.dart';
+import 'package:doktory/core/router/app_router_names.dart';
 import 'package:doktory/core/utils/styles.dart';
 import 'package:doktory/features/shared/auth/data/models/user_model.dart';
-import 'package:doktory/features/user/doctor_list_screen/presentation/widgets/doctor_card.dart';
+import 'package:doktory/features/user/home/presentation/widgets/doctor_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class DoctorsList extends StatelessWidget {
   const DoctorsList({super.key, required this.doctors});
@@ -19,7 +21,9 @@ class DoctorsList extends StatelessWidget {
               Text('كل الأطباء', style: Styles.textStyle18SemiBold),
               const Spacer(),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.push(AppRouterNames.allDoctorsScreen);
+                },
                 child: Text(
                   'عرض الكل',
                   style: Styles.textStyle14SemiBold.copyWith(

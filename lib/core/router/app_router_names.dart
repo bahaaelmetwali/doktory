@@ -7,4 +7,5 @@ class AppRouterNames {
   static const addLocationScreen = '/addLocationScreen';
   static const userNavigation = '/userNavigation';
   static const homeUserScreen = '/homeUserScreen';
+  static const allDoctorsScreen = '/allDoctorsScreen';
 }

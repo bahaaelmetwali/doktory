@@ -1,7 +1,7 @@
 import 'package:doktory/core/constants.dart';
 import 'package:doktory/core/utils/service_locator.dart';
 import 'package:doktory/features/shared/auth/presentation/cubits/auth_check/auth_check_cubit.dart';
-import 'package:doktory/features/user/doctor_list_screen/presentation/widgets/home_screen_body.dart';
+import 'package:doktory/features/user/home/presentation/widgets/home_screen_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

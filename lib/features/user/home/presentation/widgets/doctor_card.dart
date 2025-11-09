@@ -45,7 +45,7 @@ class DoctorCard extends StatelessWidget {
               child: imageBytes != null
                   ? Image.memory(
                       imageBytes,
-                      height: 70.h,
+                      height: 100.h,
                       width: 80.w,
                       fit: BoxFit.cover,
                     )
@@ -68,6 +68,15 @@ class DoctorCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   SizedBox(height: 5.h),
+                  Text(
+                    doctor.governorate!,
+                    style: Styles.textStyle14Regular.copyWith(
+                      color: Colors.grey[700],
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  SizedBox(height: 5.h),
+
                   Text(
                     doctor.address ?? "لا يوجد عنوان محدد",
                     style: Styles.textStyle14Regular.copyWith(

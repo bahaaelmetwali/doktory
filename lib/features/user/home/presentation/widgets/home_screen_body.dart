@@ -1,9 +1,9 @@
 import 'package:doktory/core/utils/service_locator.dart';
 import 'package:doktory/core/widgets/home_app_bar.dart';
-import 'package:doktory/features/user/doctor_list_screen/presentation/cubits/all_doctors/all_doctors_cubit.dart';
-import 'package:doktory/features/user/doctor_list_screen/presentation/widgets/categories_section.dart';
-import 'package:doktory/features/user/doctor_list_screen/presentation/widgets/doctors_list.dart';
-import 'package:doktory/features/user/doctor_list_screen/presentation/widgets/welcome_banner_section.dart';
+import 'package:doktory/features/user/home/presentation/cubits/all_doctors/all_doctors_cubit.dart';
+import 'package:doktory/features/user/home/presentation/widgets/categories_section.dart';
+import 'package:doktory/features/user/home/presentation/widgets/doctors_list.dart';
+import 'package:doktory/features/user/home/presentation/widgets/welcome_banner_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
