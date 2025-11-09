@@ -5,8 +5,8 @@ import 'package:doktory/features/shared/auth/presentation/views/log_in_screen.da
 import 'package:doktory/features/shared/auth/presentation/views/sign_up_screen.dart';
 import 'package:doktory/features/shared/auth/presentation/views/select_role_screen.dart';
 import 'package:doktory/features/shared/splash/presentation/views/splash_screen.dart';
-import 'package:doktory/features/user/doctor_list_screen/presentation/views/doctors_list_screen.dart';
-import 'package:doktory/features/user/user_home_screen.dart';
+import 'package:doktory/features/user/doctor_list_screen/presentation/views/home_screen.dart';
+import 'package:doktory/features/user/user_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -55,13 +55,13 @@ abstract class AppRouter {
         },
       ),
       GoRoute(
-        path: AppRouterNames.userHomeScreen,
-        builder: (context, state) => const UserHomeScreen(),
+        path: AppRouterNames.userNavigation,
+        builder: (context, state) => const UserNavigation(),
       ),
 
       GoRoute(
-        path: AppRouterNames.doctorsListScreen,
-        builder: (context, state) => const DoctorsListScreen(),
+        path: AppRouterNames.homeUserScreen,
+        builder: (context, state) => const HomeUserScreen(),
       ),
     ],
   );

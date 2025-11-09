@@ -1,12 +1,13 @@
 import 'package:doktory/core/constants.dart';
 import 'package:doktory/core/utils/styles.dart';
+import 'package:doktory/features/shared/auth/data/models/user_model.dart';
 import 'package:doktory/features/user/doctor_list_screen/presentation/widgets/doctor_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DoctorsList extends StatelessWidget {
-  const DoctorsList({super.key});
-
+  const DoctorsList({super.key, required this.doctors});
+  final List<UserModel> doctors;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -29,14 +30,21 @@ class DoctorsList extends StatelessWidget {
             ],
           ),
           SizedBox(height: 10.h),
-          ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return DoctorCard();
-            },
-          ),
+          doctors.isEmpty
+              ? Center(
+                  child: Text(
+                    'لا يوجد أطباء حالياً',
+                    style: Styles.textStyle16Medium,
+                  ),
+                )
+              : ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: doctors.length < 10 ? doctors.length : 10,
+                  itemBuilder: (context, index) {
+                    return DoctorCard(doctor: doctors[index]);
+                  },
+                ),
         ],
       ),
     );

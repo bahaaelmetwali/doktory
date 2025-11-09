@@ -24,10 +24,12 @@ import 'package:doktory/features/shared/auth/presentation/cubits/log_in_cubit/lo
 import 'package:doktory/features/shared/auth/presentation/cubits/register_cubit/register_cubit.dart';
 import 'package:doktory/features/user/doctor_list_screen/data/data_source/doctor_remote_data_source.dart';
 import 'package:doktory/features/user/doctor_list_screen/data/data_source/firestore_doctor_service.dart';
+import 'package:doktory/features/user/doctor_list_screen/data/repo_impl/doctor_repository_impl.dart';
+import 'package:doktory/features/user/doctor_list_screen/domain/usecases/get_doctors_use_case.dart';
+import 'package:doktory/features/user/doctor_list_screen/presentation/cubits/all_doctors/all_doctors_cubit.dart';
 import 'package:doktory/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -120,6 +122,9 @@ Future<void> setupServiceLocator() async {
   getIt.registerLazySingleton<UserRepositoryImpl>(
     () => UserRepositoryImpl(getIt<UserRemoteDataSource>()),
   );
+  getIt.registerLazySingleton(
+    () => DoctorRepositoryImpl(getIt<DoctorRemoteDataSource>()),
+  );
 
   // ⚙️ Use Cases (منطق الأعمال)
   getIt.registerLazySingleton<RegisterUseCase>(
@@ -145,6 +150,9 @@ Future<void> setupServiceLocator() async {
   getIt.registerLazySingleton<CompleteUserDataUseCase>(
     () => CompleteUserDataUseCase(getIt<UserRepositoryImpl>()),
   );
+  getIt.registerLazySingleton(
+    () => GetDoctorsUseCase(getIt<DoctorRepositoryImpl>()),
+  );
 
   // 🧠 Cubits (حالة واجهة المستخدم)
   getIt.registerLazySingleton<RegisterCubit>(
@@ -164,5 +172,8 @@ Future<void> setupServiceLocator() async {
 
   getIt.registerLazySingleton<CompleteUserDataCubit>(
     () => CompleteUserDataCubit(getIt<CompleteUserDataUseCase>()),
+  );
+  getIt.registerFactory(
+    () => AllDoctorsCubit(getDoctorsUseCase: getIt<GetDoctorsUseCase>()),
   );
 }
