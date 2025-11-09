@@ -11,22 +11,9 @@ class CategoriesSection extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(8.r),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Text('التخصصات', style: Styles.textStyle18SemiBold),
-              Spacer(),
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  'عرض الكل',
-                  style: Styles.textStyle14SemiBold.copyWith(
-                    color: AppColors.primary,
-                  ),
-                ),
-              ),
-            ],
-          ),
+          Text('التخصصات', style: Styles.textStyle18SemiBold),
           SizedBox(height: 10.h),
           SizedBox(
             height: 40.h,
