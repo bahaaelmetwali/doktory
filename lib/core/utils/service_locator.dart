@@ -21,6 +21,8 @@ import 'package:doktory/features/shared/auth/presentation/cubits/auth_check/auth
 import 'package:doktory/features/shared/auth/presentation/cubits/complete_user_data_cubit/complete_user_data_cubit.dart';
 import 'package:doktory/features/shared/auth/presentation/cubits/log_in_cubit/log_in_cubit.dart';
 import 'package:doktory/features/shared/auth/presentation/cubits/register_cubit/register_cubit.dart';
+import 'package:doktory/features/user/doctor_details/data/data_source/appointment_service.dart';
+import 'package:doktory/features/user/doctor_details/data/data_source/repo_impl/appointments_repository_impl.dart';
 import 'package:doktory/features/user/home/data/data_source/doctor_remote_data_source.dart';
 import 'package:doktory/features/user/home/data/repo_impl/doctor_repository_impl.dart';
 import 'package:doktory/features/user/home/domain/usecases/get_doctors_use_case.dart';
@@ -86,6 +88,10 @@ Future<void> setupServiceLocator() async {
   getIt.registerLazySingleton<DoctorRemoteDataSource>(
     () => DoctorRemoteDataSourceImpl(firestore: getIt<FirebaseFirestore>()),
   );
+  getIt.registerLazySingleton<AppointmentsRemoteDataSource>(
+    () =>
+        AppointmentsRemoteDataSourceImpl(firestore: getIt<FirebaseFirestore>()),
+  );
 
   // 💾 Shared Preferences (التخزين المحلي)
   final prefs = await SharedPreferences.getInstance();
@@ -102,10 +108,12 @@ Future<void> setupServiceLocator() async {
   getIt.registerLazySingleton<UserRepositoryImpl>(
     () => UserRepositoryImpl(getIt<UserRemoteDataSource>()),
   );
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<DoctorRepositoryImpl>(
     () => DoctorRepositoryImpl(getIt<DoctorRemoteDataSource>()),
   );
-
+  getIt.registerLazySingleton<AppointmentsRepositoryImpl>(
+    () => AppointmentsRepositoryImpl(getIt<AppointmentsRemoteDataSource>()),
+  );
   // ⚙️ Use Cases (منطق الأعمال)
   getIt.registerLazySingleton<RegisterUseCase>(
     () => RegisterUseCase(getIt<AuthRepositoryImpl>()),

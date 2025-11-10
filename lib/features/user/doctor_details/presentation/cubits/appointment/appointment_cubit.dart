@@ -1,9 +1,7 @@
-import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:doktory/core/errors/failure.dart';
-import 'package:doktory/features/shared/auth/data/models/user_model.dart';
-import 'package:doktory/features/shared/auth/domain/usecases/get_current_user.dart';
 import 'package:doktory/features/user/doctor_details/data/models/appointment_model.dart';
+import 'package:doktory/features/user/doctor_details/domain/repo/appointments_repository.dart';
 import 'package:doktory/features/user/doctor_details/domain/usecases/get_full_user_data_use_case.dart';
 import 'package:uuid/uuid.dart';
 
