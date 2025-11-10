@@ -34,10 +34,6 @@ class _CategoryDoctorsScreenState extends State<CategoryDoctorsScreen> {
         child: Scaffold(
           body: Column(
             children: [
-              Container(
-                height: MediaQuery.of(context).padding.top,
-                color: Colors.white,
-              ),
               CustomAppBar(
                 onTap: () => Navigator.pop(context),
                 headingText: widget.specialization,

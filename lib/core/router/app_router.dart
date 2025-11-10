@@ -1,10 +1,12 @@
 import 'package:doktory/core/router/app_router_names.dart';
+import 'package:doktory/features/shared/auth/data/models/user_model.dart';
 import 'package:doktory/features/shared/auth/presentation/views/add_location_screen.dart';
 import 'package:doktory/features/shared/auth/presentation/views/complete_data_screen.dart';
 import 'package:doktory/features/shared/auth/presentation/views/log_in_screen.dart';
 import 'package:doktory/features/shared/auth/presentation/views/sign_up_screen.dart';
 import 'package:doktory/features/shared/auth/presentation/views/select_role_screen.dart';
 import 'package:doktory/features/shared/splash/presentation/views/splash_screen.dart';
+import 'package:doktory/features/user/doctor_details/presentation/views/doctor_details_screen.dart';
 import 'package:doktory/features/user/home/presentation/views/all_doctors_screen.dart';
 import 'package:doktory/features/user/home/presentation/views/category_doctors_screen.dart';
 import 'package:doktory/features/user/home/presentation/views/home_screen.dart';
@@ -74,6 +76,13 @@ abstract class AppRouter {
         builder: (context, state) {
           final specialization = state.extra as String;
           return CategoryDoctorsScreen(specialization: specialization);
+        },
+      ),
+      GoRoute(
+        path: AppRouterNames.doctorDetailsScreen,
+        builder: (context, state) {
+          final UserModel doctor = state.extra as UserModel;
+          return DoctorDetailsScreen(doctor: doctor);
         },
       ),
     ],

@@ -16,6 +16,10 @@ class CustomAppBar extends StatelessWidget {
     return Column(
       children: [
         Container(
+          height: MediaQuery.of(context).padding.top,
+          color: Colors.white,
+        ),
+        Container(
           color: Colors.white,
           child: Padding(
             padding: EdgeInsets.only(top: 24.h, right: 8.w, left: 8.w),
