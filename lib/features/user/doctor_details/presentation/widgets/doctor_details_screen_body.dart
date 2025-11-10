@@ -62,13 +62,13 @@ class DoctorDetailsScreenBody extends StatelessWidget {
 
                       if (selectedTime == null) return;
 
-                      final appointmentDateTime = DateTime(
-                        selectedDate.year,
-                        selectedDate.month,
-                        selectedDate.day,
-                        selectedTime.hour,
-                        selectedTime.minute,
-                      );
+                      // final appointmentDateTime = DateTime(
+                      //   selectedDate.year,
+                      //   selectedDate.month,
+                      //   selectedDate.day,
+                      //   selectedTime.hour,
+                      //   selectedTime.minute,
+                      // );
 
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('تم الحجز بنجاح!')),

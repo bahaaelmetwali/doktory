@@ -1,40 +1,49 @@
-import 'package:dartz/dartz.dart';
-import 'package:doktory/core/errors/failure.dart';
+import 'package:bloc/bloc.dart';
+import 'package:doktory/features/shared/auth/data/models/user_model.dart';
+import 'package:doktory/features/shared/auth/domain/usecases/get_current_user.dart';
 import 'package:doktory/features/user/doctor_details/data/models/appointment_model.dart';
-import 'package:doktory/features/user/doctor_details/domain/repo/appointments_repository.dart';
-import 'package:doktory/features/user/doctor_details/domain/usecases/get_full_user_data_use_case.dart';
+import 'package:doktory/features/user/doctor_details/domain/usecases/add_appointment_use_case.dart';
 import 'package:uuid/uuid.dart';
 
 part 'appointment_state.dart';
 
-class BookAppointmentUseCase {
-  final AppointmentsRepository appointmentsRepository;
-  final GetFullUserDataUseCase getFullUserDataUseCase;
+class AppointmentCubit extends Cubit<AppointmentState> {
+  final AddAppointmentUseCase addAppointmentUseCase;
+  final GetCurrentUserUseCase getCurrentUserUseCase;
 
-  BookAppointmentUseCase({
-    required this.appointmentsRepository,
-    required this.getFullUserDataUseCase,
-  });
+  AppointmentCubit({
+    required this.addAppointmentUseCase,
+    required this.getCurrentUserUseCase,
+  }) : super(AppointmentInitial());
 
-  Future<Either<Failure, Unit>> call({
-    required AppointmentModel appointmentInput,
+  Future<void> bookAppointment({
+    required UserModel doctor,
+    required DateTime selectedDateTime,
   }) async {
-    final userResult = await getFullUserDataUseCase();
+    emit(AppointmentLoading());
 
-    return await userResult.fold((failure) => Left(failure), (user) async {
-      if (user == null) return Left(Failure('User not logged in'));
+    final userResult = await getCurrentUserUseCase();
 
+    userResult.fold((failure) => emit(AppointmentFailure(failure.toString())), (
+      user,
+    ) async {
       final appointment = AppointmentModel(
         id: const Uuid().v4(),
-        doctorId: appointmentInput.doctorId,
-        userId: user.uid,
-        doctorName: appointmentInput.doctorName,
+        doctorId: doctor.uid!,
+        userId: user!.uid,
+        doctorName: doctor.name!,
         userName: user.name,
-        appointmentDate: appointmentInput.appointmentDate,
+        appointmentDate: selectedDateTime,
         status: 'pending',
         createdAt: DateTime.now(),
       );
-      return await appointmentsRepository.addAppointment(appointment);
+
+      final result = await addAppointmentUseCase(appointment);
+
+      result.fold(
+        (failure) => emit(AppointmentFailure(failure.toString())),
+        (_) => emit(AppointmentSuccess()),
+      );
     });
   }
 }
