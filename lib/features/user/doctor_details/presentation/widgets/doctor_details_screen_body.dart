@@ -50,7 +50,38 @@ class DoctorDetailsScreenBody extends StatelessWidget {
 
                   LocationDoctorSection(doctor: doctor),
                   SizedBox(height: 20.h),
-                  CustomButton(onPressed: () {}, text: 'احجز الان'),
+                  CustomButton(
+                    onPressed: () async {
+                      DateTime? selectedDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime.now().add(Duration(days: 365)),
+                      );
+
+                      if (selectedDate == null) return;
+
+                      TimeOfDay? selectedTime = await showTimePicker(
+                        context: context,
+                        initialTime: TimeOfDay.now(),
+                      );
+
+                      if (selectedTime == null) return;
+
+                      final appointmentDateTime = DateTime(
+                        selectedDate.year,
+                        selectedDate.month,
+                        selectedDate.day,
+                        selectedTime.hour,
+                        selectedTime.minute,
+                      );
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('تم الحجز بنجاح!')),
+                      );
+                    },
+                    text: 'احجز الان',
+                  ),
                 ],
               ),
             ),
