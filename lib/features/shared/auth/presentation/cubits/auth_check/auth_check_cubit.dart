@@ -17,28 +17,37 @@ class AuthCheckCubit extends Cubit<AuthCheckState> {
   Future<void> checkAuth() async {
     emit(AuthCheckLoading());
 
-    final firebaseUser = await getCurrentUser();
-    if (firebaseUser == null) {
-      emit(AuthCheckUnauthenticated());
-      return;
-    }
+    final currentUserResult = await getCurrentUser();
 
-    final result = await getUserDataUseCase(uid: firebaseUser.uid);
-
-    result.fold(
+    await currentUserResult.fold(
       (failure) {
         emit(AuthCheckFailure(failure.toString()));
       },
-      (userData) {
-        if (userData == null ||
-            userData.role == null ||
-            userData.name == null ||
-            userData.phone == null ||
-            userData.governorate == null) {
-          emit(AuthCheckNeedsCompletion(userData));
-        } else {
-          emit(AuthCheckAuthenticated(userData));
+      (firebaseUser) async {
+        // لو مفيش يوزر داخل
+        if (firebaseUser == null) {
+          emit(AuthCheckUnauthenticated());
+          return;
         }
+
+        final userDataResult = await getUserDataUseCase(uid: firebaseUser.uid);
+
+        userDataResult.fold(
+          (failure) {
+            emit(AuthCheckFailure(failure.toString()));
+          },
+          (userData) {
+            if (userData == null ||
+                userData.role == null ||
+                userData.name == null ||
+                userData.phone == null ||
+                userData.governorate == null) {
+              emit(AuthCheckNeedsCompletion(userData));
+            } else {
+              emit(AuthCheckAuthenticated(userData));
+            }
+          },
+        );
       },
     );
   }

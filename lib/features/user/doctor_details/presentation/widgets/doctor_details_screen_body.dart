@@ -34,6 +34,8 @@ class DoctorDetailsScreenBody extends StatelessWidget {
               onTap: () => Navigator.of(context).pop(),
               headingText: 'المعلومات',
             ),
+            Container(height: 10.h, color: Colors.white),
+
             Padding(
               padding: EdgeInsets.all(12.r),
               child: Column(
@@ -52,19 +54,11 @@ class DoctorDetailsScreenBody extends StatelessWidget {
                   SizedBox(height: 20.h),
                   CustomButton(
                     onPressed: () async {
-                      DateTime? selectedDate = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime.now(),
-                        lastDate: DateTime.now().add(Duration(days: 365)),
-                      );
+                      DateTime? selectedDate = await selectDate(context);
 
                       if (selectedDate == null) return;
 
-                      TimeOfDay? selectedTime = await showTimePicker(
-                        context: context,
-                        initialTime: TimeOfDay.now(),
-                      );
+                      TimeOfDay? selectedTime = await selectTime(context);
 
                       if (selectedTime == null) return;
 
@@ -89,5 +83,23 @@ class DoctorDetailsScreenBody extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<TimeOfDay?> selectTime(BuildContext context) async {
+    TimeOfDay? selectedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+    return selectedTime;
+  }
+
+  Future<DateTime?> selectDate(BuildContext context) async {
+    DateTime? selectedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(Duration(days: 365)),
+    );
+    return selectedDate;
   }
 }

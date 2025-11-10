@@ -43,9 +43,13 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<UserModel?> getUser() async {
-    final user = _authRemoteDataSource.getCurrentUser();
-    if (user == null) return null;
-    return UserModel.fromFirebaseUser(user);
+  Future<Either<Failure, UserModel?>> getUser() {
+    return handleRequest(
+      request: () async {
+        final user = _authRemoteDataSource.getCurrentUser();
+        if (user == null) return null;
+        return UserModel.fromFirebaseUser(user);
+      },
+    );
   }
 }
