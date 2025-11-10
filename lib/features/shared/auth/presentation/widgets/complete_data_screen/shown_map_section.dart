@@ -45,7 +45,7 @@ class _ShownMapSectionState extends State<ShownMapSection> {
           },
           initialCameraPosition: CameraPosition(
             target: widget.selectedLocation!,
-            zoom: 14,
+            zoom: 16,
           ),
           markers: {
             Marker(

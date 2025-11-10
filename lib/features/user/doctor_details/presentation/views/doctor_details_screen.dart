@@ -9,7 +9,7 @@ class DoctorDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.lightText,
+      backgroundColor: AppColors.scaffold,
       body: DoctorDetailsScreenBody(doctor: doctor),
     );
   }
