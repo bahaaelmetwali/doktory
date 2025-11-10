@@ -1,12 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doktory/features/shared/auth/data/models/user_model.dart';
-import 'package:doktory/features/user/home/data/data_source/firestore_doctor_service.dart';
 
-class DoctorRemoteDataSource {
-  final FirestoreDoctorService firestoreDoctorService;
+abstract class DoctorRemoteDataSource {
+  Future<List<UserModel>> getDoctors();
+}
 
-  DoctorRemoteDataSource({required this.firestoreDoctorService});
+class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
+  final FirebaseFirestore firestore;
 
+  DoctorRemoteDataSourceImpl({required this.firestore});
+
+  @override
   Future<List<UserModel>> getDoctors() async {
-    return await firestoreDoctorService.getDoctors();
+    final snapshot = await firestore
+        .collection('users')
+        .where('role', isEqualTo: 'دكتور')
+        .get();
+
+    return snapshot.docs.map((doc) => UserModel.fromMap(doc.data())).toList();
   }
 }

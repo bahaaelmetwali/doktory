@@ -1,24 +1,47 @@
-import 'package:doktory/features/shared/auth/data/data_source/firebase_auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class AuthRemoteDataSource {
-  final FirebaseAuthService authService;
+abstract class AuthRemoteDataSource {
+  AuthRemoteDataSource(FirebaseAuth firebaseAuth);
 
-  AuthRemoteDataSource(this.authService);
+  Future<User?> register({required String email, required String password});
+  Future<User?> login({required String email, required String password});
+  Future<void> logout();
+  User? getCurrentUser();
+}
 
-  Future<User?> register({required String email, required String password}) {
-    return authService.registerWithEmail(email: email, password: password);
+class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
+  final FirebaseAuth firebaseAuth;
+
+  AuthRemoteDataSourceImpl({required this.firebaseAuth});
+
+  @override
+  Future<User?> register({
+    required String email,
+    required String password,
+  }) async {
+    final userCredential = await firebaseAuth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    return userCredential.user;
   }
 
-  Future<User?> login({required String email, required String password}) {
-    return authService.loginWithEmail(email: email, password: password);
+  @override
+  Future<User?> login({required String email, required String password}) async {
+    final userCredential = await firebaseAuth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    return userCredential.user;
   }
 
-  Future<void> logout() {
-    return authService.signOut();
+  @override
+  Future<void> logout() async {
+    await firebaseAuth.signOut();
   }
 
+  @override
   User? getCurrentUser() {
-    return authService.getCurrentUser();
+    return firebaseAuth.currentUser;
   }
 }

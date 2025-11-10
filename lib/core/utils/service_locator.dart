@@ -7,8 +7,7 @@ import 'package:doktory/core/location/domain/usecases/location_use_case.dart';
 import 'package:doktory/core/utils/cache_helper.dart';
 import 'package:doktory/core/utils/location_api_service.dart';
 import 'package:doktory/features/shared/auth/data/data_source/auth_remote_data_source.dart';
-import 'package:doktory/features/shared/auth/data/data_source/firebase_auth_service.dart';
-import 'package:doktory/features/shared/auth/data/data_source/firestore_user_service.dart';
+
 import 'package:doktory/features/shared/auth/data/data_source/user_remote_data_source.dart';
 import 'package:doktory/features/shared/auth/data/repo_impl/auth_repository_Impl.dart';
 import 'package:doktory/features/shared/auth/data/repo_impl/user_repository_Impl.dart';
@@ -23,7 +22,6 @@ import 'package:doktory/features/shared/auth/presentation/cubits/complete_user_d
 import 'package:doktory/features/shared/auth/presentation/cubits/log_in_cubit/log_in_cubit.dart';
 import 'package:doktory/features/shared/auth/presentation/cubits/register_cubit/register_cubit.dart';
 import 'package:doktory/features/user/home/data/data_source/doctor_remote_data_source.dart';
-import 'package:doktory/features/user/home/data/data_source/firestore_doctor_service.dart';
 import 'package:doktory/features/user/home/data/repo_impl/doctor_repository_impl.dart';
 import 'package:doktory/features/user/home/domain/usecases/get_doctors_use_case.dart';
 import 'package:doktory/features/user/home/presentation/cubits/all_doctors/all_doctors_cubit.dart';
@@ -77,17 +75,16 @@ Future<void> setupServiceLocator() async {
     () => FirebaseFirestore.instance,
   );
 
-  // 🔐 Firebase Services (Auth, Firestore, Storage)
-  getIt.registerLazySingleton<FirebaseAuthService>(
-    () => FirebaseAuthService(getIt<FirebaseAuth>()),
+  // 🌐 Remote Data Sources (مصادر البيانات)
+  getIt.registerLazySingleton<AuthRemoteDataSource>(
+    () => AuthRemoteDataSourceImpl(firebaseAuth: getIt<FirebaseAuth>()),
   );
 
-  getIt.registerLazySingleton<FirestoreDoctorService>(
-    () => FirestoreDoctorService(getIt<FirebaseFirestore>()),
+  getIt.registerLazySingleton<UserRemoteDataSource>(
+    () => UserRemoteDataSourceImpl(firestore: getIt<FirebaseFirestore>()),
   );
-
-  getIt.registerLazySingleton<FirestoreUserService>(
-    () => FirestoreUserService(getIt<FirebaseFirestore>()),
+  getIt.registerLazySingleton<DoctorRemoteDataSource>(
+    () => DoctorRemoteDataSourceImpl(firestore: getIt<FirebaseFirestore>()),
   );
 
   // 💾 Shared Preferences (التخزين المحلي)
@@ -95,23 +92,6 @@ Future<void> setupServiceLocator() async {
   getIt.registerLazySingleton<SharedPreferences>(() => prefs);
   getIt.registerLazySingleton<CacheHelper>(
     () => CacheHelper(getIt<SharedPreferences>()),
-  );
-
-  // 🌐 Remote Data Sources (مصادر البيانات)
-
-  getIt.registerLazySingleton<DoctorRemoteDataSource>(
-    () => DoctorRemoteDataSource(
-      firestoreDoctorService: getIt<FirestoreDoctorService>(),
-    ),
-  );
-  getIt.registerLazySingleton<AuthRemoteDataSource>(
-    () => AuthRemoteDataSource(getIt<FirebaseAuthService>()),
-  );
-
-  getIt.registerLazySingleton<UserRemoteDataSource>(
-    () => UserRemoteDataSource(
-      firestoreUserService: getIt<FirestoreUserService>(),
-    ),
   );
 
   // 🏗️ Repository Implementations (الريبو الفعلي)

@@ -1,23 +1,40 @@
-import 'package:doktory/features/shared/auth/data/data_source/firestore_user_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doktory/features/shared/auth/data/models/user_model.dart';
 
-class UserRemoteDataSource {
-  final FirestoreUserService firestoreUserService;
+abstract class UserRemoteDataSource {
+  Future<void> createUser(UserModel user);
+  Future<void> updateUser({
+    required String uid,
+    required Map<String, dynamic> data,
+  });
+  Future<UserModel?> getUser({required String uid});
+}
 
-  UserRemoteDataSource({required this.firestoreUserService});
+class UserRemoteDataSourceImpl implements UserRemoteDataSource {
+  final FirebaseFirestore firestore;
 
+  UserRemoteDataSourceImpl({required this.firestore});
+
+  @override
   Future<void> createUser(UserModel user) async {
-    await firestoreUserService.createUser(user);
+    await firestore.collection('users').doc(user.uid).set(user.toMap());
   }
 
+  @override
   Future<void> updateUser({
     required String uid,
     required Map<String, dynamic> data,
   }) async {
-    await firestoreUserService.updateUser(uid: uid, data: data);
+    await firestore
+        .collection('users')
+        .doc(uid)
+        .set(data, SetOptions(merge: true));
   }
 
+  @override
   Future<UserModel?> getUser({required String uid}) async {
-    return await firestoreUserService.getUser(uid: uid);
+    final doc = await firestore.collection('users').doc(uid).get();
+    if (!doc.exists) return null;
+    return UserModel.fromMap(doc.data()!);
   }
 }
