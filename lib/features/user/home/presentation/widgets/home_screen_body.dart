@@ -1,3 +1,4 @@
+import 'package:doktory/core/constants.dart';
 import 'package:doktory/core/utils/service_locator.dart';
 import 'package:doktory/core/widgets/home_app_bar.dart';
 import 'package:doktory/features/user/home/presentation/cubits/all_doctors/all_doctors_cubit.dart';
@@ -20,11 +21,12 @@ class HomeUserScreenBody extends StatelessWidget {
           Widget doctorsSection;
 
           if (state is AllDoctorsLoading) {
-            doctorsSection = const Center(child: CircularProgressIndicator());
+            doctorsSection = const Center(
+              child: CircularProgressIndicator(color: AppColors.primary),
+            );
           } else if (state is AllDoctorsError) {
             doctorsSection = Center(child: Text('حدث خطأ: ${state.message}'));
           } else if (state is AllDoctorsLoaded) {
-            // ✅ لو الداتا جات بنبعتها لـ DoctorsList
             doctorsSection = DoctorsList(doctors: state.doctors);
           } else {
             doctorsSection = const SizedBox.shrink();

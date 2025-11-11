@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:doktory/core/errors/failure.dart';
 import 'package:doktory/core/utils/handle_request.dart';
-import 'package:doktory/features/user/doctor_details/data/data_source/appointment_service.dart';
+import 'package:doktory/features/user/doctor_details/data/data_source/appointment_data_source.dart';
 import 'package:doktory/features/user/doctor_details/data/models/appointment_model.dart';
 import 'package:doktory/features/user/doctor_details/domain/repo/appointments_repository.dart';
 
