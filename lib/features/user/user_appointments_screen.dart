@@ -1,3 +1,5 @@
+import 'package:doktory/core/constants.dart';
+import 'package:doktory/features/user/doctor_details/presentation/widgets/user_appointments_screen_body.dart';
 import 'package:flutter/material.dart';
 
 class UserAppointmentsScreen extends StatelessWidget {
@@ -5,6 +7,9 @@ class UserAppointmentsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      backgroundColor: AppColors.scaffold,
+      body: UserAppointmentsScreenBody(),
+    );
   }
 }

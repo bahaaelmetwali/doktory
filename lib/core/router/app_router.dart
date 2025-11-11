@@ -9,7 +9,6 @@ import 'package:doktory/features/shared/splash/presentation/views/splash_screen.
 import 'package:doktory/features/user/doctor_details/presentation/views/doctor_details_screen.dart';
 import 'package:doktory/features/user/home/presentation/views/all_doctors_screen.dart';
 import 'package:doktory/features/user/home/presentation/views/category_doctors_screen.dart';
-import 'package:doktory/features/user/home/presentation/views/home_screen.dart';
 import 'package:doktory/features/user/user_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -64,11 +63,11 @@ abstract class AppRouter {
         builder: (context, state) => const UserNavigation(currentIndex: 0),
       ),
       GoRoute(
-        path: AppRouterNames.homeUserScreen,
+        path: AppRouterNames.userAppointmentsScreen,
         builder: (context, state) => const UserNavigation(currentIndex: 1),
       ),
       GoRoute(
-        path: AppRouterNames.homeUserScreen,
+        path: AppRouterNames.userProfileScreen,
         builder: (context, state) => const UserNavigation(currentIndex: 2),
       ),
       GoRoute(

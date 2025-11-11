@@ -14,10 +14,11 @@ class AddAppointmentProcess extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppointmentCubit, AppointmentState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is AppointmentSuccess) {
           showCustomSnackBar(context, message: 'تم الحجز بنجاح');
-          context.go(AppRouterNames.homeUserScreen);
+
+          context.go(AppRouterNames.userAppointmentsScreen);
         } else if (state is AppointmentFailure) {
           showCustomSnackBar(
             context,

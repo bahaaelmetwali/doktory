@@ -8,9 +8,11 @@ class CustomAppBar extends StatelessWidget {
     super.key,
     required this.onTap,
     required this.headingText,
+    this.isBack = true,
   });
   final void Function()? onTap;
   final String headingText;
+  final bool isBack;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -25,14 +27,16 @@ class CustomAppBar extends StatelessWidget {
             padding: EdgeInsets.only(top: 24.h, right: 8.w, left: 8.w),
             child: Row(
               children: [
-                GestureDetector(
-                  onTap: onTap,
-                  child: SvgPicture.asset(
-                    'assets/icons/arrow-right.svg',
-                    height: 20.h,
-                    width: 30.w,
-                  ),
-                ),
+                isBack
+                    ? GestureDetector(
+                        onTap: onTap,
+                        child: SvgPicture.asset(
+                          'assets/icons/arrow-right.svg',
+                          height: 20.h,
+                          width: 30.w,
+                        ),
+                      )
+                    : SizedBox(width: 30.w, height: 20.h),
                 Spacer(),
                 Text(headingText, style: Styles.textStyle20SemiBold),
                 Spacer(),
