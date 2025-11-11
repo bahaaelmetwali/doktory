@@ -25,6 +25,8 @@ class AppointmentCardSection extends StatelessWidget {
       content: [
         CustomRow(title: 'اسم الدكتور', information: appointment.doctorName),
         SizedBox(height: 10.h),
+        CustomRow(title: 'التخصص', information: appointment.specialization!),
+        SizedBox(height: 10.h),
         CustomRow(title: 'تاريخ الحجز', information: dateFormatted),
         SizedBox(height: 10.h),
         CustomRow(title: 'الوقت', information: timeFormatted),
