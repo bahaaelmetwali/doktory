@@ -58,14 +58,18 @@ abstract class AppRouter {
           return const AddLocationScreen();
         },
       ),
-      GoRoute(
-        path: AppRouterNames.userNavigation,
-        builder: (context, state) => const UserNavigation(),
-      ),
 
       GoRoute(
         path: AppRouterNames.homeUserScreen,
-        builder: (context, state) => const HomeUserScreen(),
+        builder: (context, state) => const UserNavigation(currentIndex: 0),
+      ),
+      GoRoute(
+        path: AppRouterNames.homeUserScreen,
+        builder: (context, state) => const UserNavigation(currentIndex: 1),
+      ),
+      GoRoute(
+        path: AppRouterNames.homeUserScreen,
+        builder: (context, state) => const UserNavigation(currentIndex: 2),
       ),
       GoRoute(
         path: AppRouterNames.allDoctorsScreen,

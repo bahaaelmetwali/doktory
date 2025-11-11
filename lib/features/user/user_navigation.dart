@@ -5,19 +5,26 @@ import 'package:flutter/material.dart';
 import 'package:doktory/core/constants.dart';
 
 class UserNavigation extends StatefulWidget {
-  const UserNavigation({super.key});
+  const UserNavigation({super.key, required this.currentIndex});
+  final int currentIndex;
 
   @override
   State<UserNavigation> createState() => _UserHomeScreenState();
 }
 
 class _UserHomeScreenState extends State<UserNavigation> {
+  @override
+  void initState() {
+    super.initState();
+    currentIndex = widget.currentIndex;
+  }
+
   final List<Widget> screens = [
     HomeUserScreen(),
     UserAppointmentsScreen(),
     UserProfileScreen(),
   ];
-  int currentIndex = 0;
+  late int currentIndex;
 
   @override
   Widget build(BuildContext context) {

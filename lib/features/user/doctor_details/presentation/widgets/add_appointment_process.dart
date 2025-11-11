@@ -1,3 +1,4 @@
+import 'package:doktory/core/router/app_router_names.dart';
 import 'package:doktory/core/utils/get_time.dart';
 import 'package:doktory/core/widgets/custom_button.dart';
 import 'package:doktory/core/widgets/custom_loading_indicator.dart';
@@ -5,6 +6,7 @@ import 'package:doktory/core/widgets/show_custom_snack_bar.dart';
 import 'package:doktory/features/user/doctor_details/presentation/cubits/appointment/appointment_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class AddAppointmentProcess extends StatelessWidget {
   const AddAppointmentProcess({super.key, required this.doctor});
@@ -15,6 +17,7 @@ class AddAppointmentProcess extends StatelessWidget {
       listener: (context, state) {
         if (state is AppointmentSuccess) {
           showCustomSnackBar(context, message: 'تم الحجز بنجاح');
+          context.go(AppRouterNames.homeUserScreen);
         } else if (state is AppointmentFailure) {
           showCustomSnackBar(
             context,

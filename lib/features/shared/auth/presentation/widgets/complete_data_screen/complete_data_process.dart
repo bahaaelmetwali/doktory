@@ -41,7 +41,7 @@ class CompleteDataProcess extends StatelessWidget {
       listener: (context, state) {
         if (state is CompleteUserDataSuccess) {
           showCustomSnackBar(context, message: 'تم تسجيل الدخول');
-          context.go(AppRouterNames.userNavigation);
+          context.go(AppRouterNames.homeUserScreen);
         } else if (state is CompleteUserDataFailure) {
           showCustomSnackBar(context, message: state.message, isError: true);
         }
