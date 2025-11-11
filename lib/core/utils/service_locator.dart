@@ -23,6 +23,9 @@ import 'package:doktory/features/shared/auth/presentation/cubits/log_in_cubit/lo
 import 'package:doktory/features/shared/auth/presentation/cubits/register_cubit/register_cubit.dart';
 import 'package:doktory/features/user/doctor_details/data/data_source/appointment_service.dart';
 import 'package:doktory/features/user/doctor_details/data/data_source/repo_impl/appointments_repository_impl.dart';
+import 'package:doktory/features/user/doctor_details/domain/usecases/add_appointment_use_case.dart';
+import 'package:doktory/features/user/doctor_details/domain/usecases/get_full_user_data_use_case.dart';
+import 'package:doktory/features/user/doctor_details/presentation/cubits/appointment/appointment_cubit.dart';
 import 'package:doktory/features/user/home/data/data_source/doctor_remote_data_source.dart';
 import 'package:doktory/features/user/home/data/repo_impl/doctor_repository_impl.dart';
 import 'package:doktory/features/user/home/domain/usecases/get_doctors_use_case.dart';
@@ -138,8 +141,17 @@ Future<void> setupServiceLocator() async {
   getIt.registerLazySingleton<CompleteUserDataUseCase>(
     () => CompleteUserDataUseCase(getIt<UserRepositoryImpl>()),
   );
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<GetDoctorsUseCase>(
     () => GetDoctorsUseCase(getIt<DoctorRepositoryImpl>()),
+  );
+  getIt.registerLazySingleton<AddAppointmentUseCase>(
+    () => AddAppointmentUseCase(getIt<AppointmentsRepositoryImpl>()),
+  );
+  getIt.registerLazySingleton<GetFullUserDataUseCase>(
+    () => GetFullUserDataUseCase(
+      getIt<AuthRepositoryImpl>(),
+      getIt<UserRepositoryImpl>(),
+    ),
   );
 
   // 🧠 Cubits (حالة واجهة المستخدم)
@@ -163,5 +175,11 @@ Future<void> setupServiceLocator() async {
   );
   getIt.registerFactory(
     () => AllDoctorsCubit(getDoctorsUseCase: getIt<GetDoctorsUseCase>()),
+  );
+  getIt.registerLazySingleton<AppointmentCubit>(
+    () => AppointmentCubit(
+      addAppointmentUseCase: getIt<AddAppointmentUseCase>(),
+      getFullUserDataUseCase: getIt<GetFullUserDataUseCase>(),
+    ),
   );
 }
