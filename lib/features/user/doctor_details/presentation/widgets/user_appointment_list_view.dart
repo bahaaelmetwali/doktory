@@ -1,5 +1,6 @@
 import 'package:doktory/core/widgets/show_custom_snack_bar.dart';
 import 'package:doktory/features/user/doctor_details/presentation/cubits/get_user_appointments_/get_user_appointments_cubit.dart';
+import 'package:doktory/features/user/doctor_details/presentation/widgets/user_appointment_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,16 +30,11 @@ class UserAppointmentsListView extends StatelessWidget {
             itemCount: appointments.length,
             itemBuilder: (context, index) {
               final appointment = appointments[index];
-              return ListTile(
-                title: Text(appointment.doctorName),
-                subtitle: Text(
-                  "${appointment.appointmentDate.toLocal()} - ${appointment.status}",
-                ),
-              );
+              return UserAppointmentCard(appointment: appointment);
             },
           );
         } else {
-          return const Center(child: Text('اضغط للتحديث'));
+          return const Center(child: Text('لا يوجد حجوزات حتى الآن'));
         }
       },
     );
