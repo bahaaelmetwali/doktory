@@ -9,6 +9,19 @@ class UserAppointmentCard extends StatelessWidget {
   const UserAppointmentCard({super.key, required this.appointment});
   final AppointmentModel appointment;
 
+  Color _getStatusColor(String status) {
+    switch (status.toLowerCase()) {
+      case 'مؤكد':
+        return Colors.green;
+      case 'قيد الانتظار':
+        return const Color.fromARGB(255, 204, 167, 33);
+      case 'ملغي':
+        return Colors.red;
+      default:
+        return Colors.grey;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final dateFormatted = DateFormat(
@@ -80,8 +93,7 @@ class UserAppointmentCard extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                appointment.status[0].toUpperCase() +
-                    appointment.status.substring(1), // أول حرف كبير
+                appointment.status,
                 style: Styles.textStyle14SemiBold.copyWith(
                   fontWeight: FontWeight.w500,
                   color: _getStatusColor(appointment.status),
@@ -94,18 +106,5 @@ class UserAppointmentCard extends StatelessWidget {
         title: 'بيانات الحجز',
       ),
     );
-  }
-
-  Color _getStatusColor(String status) {
-    switch (status.toLowerCase()) {
-      case 'confirmed':
-        return Colors.green;
-      case 'pending':
-        return const Color.fromARGB(255, 204, 167, 33);
-      case 'canceled':
-        return Colors.red;
-      default:
-        return Colors.grey;
-    }
   }
 }

@@ -34,7 +34,7 @@ class AppointmentCubit extends Cubit<AppointmentState> {
         userId: user!.uid,
         doctorName: doctor.name!,
         appointmentDate: selectedDateTime,
-        status: 'pending',
+        status: 'قيد الانتظار',
         createdAt: DateTime.now(),
       );
 

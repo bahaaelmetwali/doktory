@@ -1,3 +1,4 @@
+import 'package:doktory/core/constants.dart';
 import 'package:doktory/core/widgets/show_custom_snack_bar.dart';
 import 'package:doktory/features/user/doctor_details/presentation/cubits/get_user_appointments_/get_user_appointments_cubit.dart';
 import 'package:doktory/features/user/doctor_details/presentation/widgets/user_appointment_card.dart';
@@ -17,10 +18,12 @@ class UserAppointmentsListView extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is GetUserAppointmentsLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(
+            child: CircularProgressIndicator(color: AppColors.primary),
+          );
         } else if (state is GetUserAppointmentsLoaded) {
-          final user = state.user;
           final appointments = state.appointments;
+          print('📦 عدد المواعيد: ${appointments.length}');
 
           if (appointments.isEmpty) {
             return const Center(child: Text('لا يوجد حجوزات حتى الآن'));

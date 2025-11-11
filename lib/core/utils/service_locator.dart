@@ -181,16 +181,4 @@ Future<void> setupServiceLocator() async {
   getIt.registerFactory(
     () => AllDoctorsCubit(getDoctorsUseCase: getIt<GetDoctorsUseCase>()),
   );
-  getIt.registerLazySingleton<AppointmentCubit>(
-    () => AppointmentCubit(
-      addAppointmentUseCase: getIt<AddAppointmentUseCase>(),
-      getFullUserDataUseCase: getIt<GetFullUserDataUseCase>(),
-    ),
-  );
-  getIt.registerLazySingleton<GetUserAppointmentsCubit>(
-    () => GetUserAppointmentsCubit(
-      getAppointmentsForUserUseCase: getIt<GetAppointmentsForUserUseCase>(),
-      getFullUserDataUseCase: getIt<GetFullUserDataUseCase>(),
-    ),
-  );
 }
