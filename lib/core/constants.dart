@@ -14,6 +14,19 @@ abstract class AppColors {
   static const Color darkText = Color(0xff1C1C1C);
 
   static const Color lightText = Color(0xffFFFFFF);
+
+  static Color getStatusColor(String status) {
+    switch (status.toLowerCase()) {
+      case 'مؤكد':
+        return Colors.green;
+      case 'قيد الانتظار':
+        return const Color.fromARGB(255, 204, 167, 33);
+      case 'ملغي':
+        return Colors.red;
+      default:
+        return Colors.grey;
+    }
+  }
 }
 
 abstract class Constants {
