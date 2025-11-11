@@ -36,6 +36,7 @@ class AppointmentCubit extends Cubit<AppointmentState> {
         appointmentDate: selectedDateTime,
         status: 'قيد الانتظار',
         createdAt: DateTime.now(),
+        specialization: doctor.specialization,
       );
 
       final result = await addAppointmentUseCase(appointment);

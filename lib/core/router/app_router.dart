@@ -94,7 +94,7 @@ abstract class AppRouter {
         path: AppRouterNames.appointmentDetailsView,
         builder: (context, state) {
           final AppointmentModel appointment = state.extra as AppointmentModel;
-          return AppointmentDetailsView(appointment: appointment);
+          return AppointmentDetailsScreen(appointment: appointment);
         },
       ),
     ],

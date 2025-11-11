@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:doktory/core/constants.dart';
 import 'package:doktory/core/utils/service_locator.dart';
 import 'package:doktory/core/widgets/custom_app_bar.dart';
@@ -32,31 +34,62 @@ class AppointmentDetailsScreen extends StatelessWidget {
                 headingText: 'تفاصيل الحجز',
               ),
               Container(height: 20.h, color: Colors.white),
-              Padding(
-                padding: EdgeInsets.all(12.r),
-                child: AppointmentCardSection(appointment: appointment),
-              ),
-              BlocBuilder<DoctorDetailsCubit, DoctorDetailsState>(
-                builder: (context, state) {
-                  if (state is DoctorDetailsLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(
-                        color: AppColors.primary,
-                      ),
-                    );
-                  } else if (state is DoctorDetailsLoaded) {
-                    return LocationDoctorSection(doctor: state.doctor);
-                  } else if (state is DoctorDetailsError) {
-                    return Center(child: Text(state.message));
-                  } else {
-                    return const SizedBox();
-                  }
-                },
-              ),
+              SizedBox(height: 10.h),
+              AppointmentDetailsSection(appointment: appointment),
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class AppointmentDetailsSection extends StatelessWidget {
+  const AppointmentDetailsSection({super.key, required this.appointment});
+
+  final AppointmentModel appointment;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<DoctorDetailsCubit, DoctorDetailsState>(
+      builder: (context, state) {
+        if (state is DoctorDetailsLoading) {
+          return const Center(
+            child: CircularProgressIndicator(color: AppColors.primary),
+          );
+        } else if (state is DoctorDetailsLoaded) {
+          Widget doctorImage = const SizedBox();
+          if (state.doctor.image != null && state.doctor.image!.isNotEmpty) {
+            try {
+              final bytes = base64Decode(state.doctor.image!);
+              doctorImage = CircleAvatar(
+                radius: 50.r,
+                backgroundImage: MemoryImage(bytes),
+              );
+            } catch (e) {
+              doctorImage = CircleAvatar(
+                radius: 50.r,
+                backgroundColor: Colors.grey.shade200,
+                child: Icon(Icons.person, size: 50.r, color: Colors.white),
+              );
+            }
+          }
+
+          return Column(
+            children: [
+              doctorImage,
+              SizedBox(height: 10.h),
+              AppointmentCardSection(appointment: appointment),
+              SizedBox(height: 10.h),
+              LocationDoctorSection(doctor: state.doctor),
+            ],
+          );
+        } else if (state is DoctorDetailsError) {
+          return Center(child: Text(state.message));
+        } else {
+          return const SizedBox();
+        }
+      },
     );
   }
 }

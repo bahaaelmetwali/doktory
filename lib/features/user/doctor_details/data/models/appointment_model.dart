@@ -5,7 +5,7 @@ class AppointmentModel {
   final String doctorId;
   final String userId;
   final String doctorName;
-  final String? userName;
+  final String? specialization;
   final DateTime appointmentDate;
   final String status;
   final DateTime createdAt;
@@ -15,7 +15,7 @@ class AppointmentModel {
     required this.doctorId,
     required this.userId,
     required this.doctorName,
-    this.userName,
+    required this.specialization,
     required this.appointmentDate,
     required this.status,
     required this.createdAt,
@@ -27,7 +27,7 @@ class AppointmentModel {
       'doctorId': doctorId,
       'userId': userId,
       'doctorName': doctorName,
-      'userName': userName,
+      'specialization': specialization,
       'appointmentDate': appointmentDate,
       'status': status,
       'createdAt': createdAt,
@@ -36,13 +36,13 @@ class AppointmentModel {
 
   factory AppointmentModel.fromMap(Map<String, dynamic> map) {
     return AppointmentModel(
-      id: map['id'],
-      doctorId: map['doctorId'],
-      userId: map['userId'],
-      doctorName: map['doctorName'],
-      userName: map['userName'],
+      id: map['id'] ?? '',
+      doctorId: map['doctorId'] ?? '',
+      userId: map['userId'] ?? '',
+      doctorName: map['doctorName'] ?? '',
+      specialization: map['specialization'],
       appointmentDate: (map['appointmentDate'] as Timestamp).toDate(),
-      status: map['status'],
+      status: map['status'] ?? '',
       createdAt: (map['createdAt'] as Timestamp).toDate(),
     );
   }

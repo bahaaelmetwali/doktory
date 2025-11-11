@@ -23,31 +23,25 @@ class UserAppointmentCard extends StatelessWidget {
       'ar',
     ).format(appointment.appointmentDate);
 
-    return Padding(
-      padding: EdgeInsets.all(8.r),
-      child: CustomInformationWidget(
-        onMorePressed: () {
-          context.push(
-            AppRouterNames.appointmentDetailsView,
-            extra: appointment,
-          );
-        },
-        content: [
-          CustomRow(title: 'اسم الدكتور', information: appointment.doctorName),
-          SizedBox(height: 10.h),
-          CustomRow(title: 'تاريخ الحجز', information: dateFormatted),
-          SizedBox(height: 10.h),
-          CustomRow(title: 'الوقت', information: timeFormatted),
-          SizedBox(height: 10.h),
-          CustomRow(
-            title: 'حالة الطلب',
-            information: appointment.status,
-            infoColor: AppColors.getStatusColor(appointment.status),
-          ),
-        ],
-        iconPath: 'assets/icons/information.svg',
-        title: 'بيانات الحجز',
-      ),
+    return CustomInformationWidget(
+      onMorePressed: () {
+        context.push(AppRouterNames.appointmentDetailsView, extra: appointment);
+      },
+      content: [
+        CustomRow(title: 'اسم الدكتور', information: appointment.doctorName),
+        SizedBox(height: 10.h),
+        CustomRow(title: 'تاريخ الحجز', information: dateFormatted),
+        SizedBox(height: 10.h),
+        CustomRow(title: 'الوقت', information: timeFormatted),
+        SizedBox(height: 10.h),
+        CustomRow(
+          title: 'حالة الطلب',
+          information: appointment.status,
+          infoColor: AppColors.getStatusColor(appointment.status),
+        ),
+      ],
+      iconPath: 'assets/icons/information.svg',
+      title: 'بيانات الحجز',
     );
   }
 }
