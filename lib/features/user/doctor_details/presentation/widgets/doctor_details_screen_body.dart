@@ -1,3 +1,4 @@
+import 'package:doktory/core/utils/get_time.dart';
 import 'package:doktory/core/widgets/custom_app_bar.dart';
 import 'package:doktory/core/widgets/custom_button.dart';
 import 'package:doktory/features/user/doctor_details/presentation/widgets/information_doctor_section.dart';
@@ -52,30 +53,7 @@ class DoctorDetailsScreenBody extends StatelessWidget {
 
                   LocationDoctorSection(doctor: doctor),
                   SizedBox(height: 20.h),
-                  CustomButton(
-                    onPressed: () async {
-                      DateTime? selectedDate = await selectDate(context);
-
-                      if (selectedDate == null) return;
-
-                      TimeOfDay? selectedTime = await selectTime(context);
-
-                      if (selectedTime == null) return;
-
-                      // final appointmentDateTime = DateTime(
-                      //   selectedDate.year,
-                      //   selectedDate.month,
-                      //   selectedDate.day,
-                      //   selectedTime.hour,
-                      //   selectedTime.minute,
-                      // );
-
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('تم الحجز بنجاح!')),
-                      );
-                    },
-                    text: 'احجز الان',
-                  ),
+                  AddAppointmentProcess(),
                 ],
               ),
             ),
@@ -84,22 +62,36 @@ class DoctorDetailsScreenBody extends StatelessWidget {
       ),
     );
   }
+}
 
-  Future<TimeOfDay?> selectTime(BuildContext context) async {
-    TimeOfDay? selectedTime = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-    );
-    return selectedTime;
-  }
+class AddAppointmentProcess extends StatelessWidget {
+  const AddAppointmentProcess({super.key});
 
-  Future<DateTime?> selectDate(BuildContext context) async {
-    DateTime? selectedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(Duration(days: 365)),
+  @override
+  Widget build(BuildContext context) {
+    return CustomButton(
+      onPressed: () async {
+        DateTime? selectedDate = await GetTime.selectDate(context);
+
+        if (selectedDate == null) return;
+
+        TimeOfDay? selectedTime = await GetTime.selectTime(context);
+
+        if (selectedTime == null) return;
+
+        final appointmentDateTime = DateTime(
+          selectedDate.year,
+          selectedDate.month,
+          selectedDate.day,
+          selectedTime.hour,
+          selectedTime.minute,
+        );
+
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('تم الحجز بنجاح!')));
+      },
+      text: 'احجز الان',
     );
-    return selectedDate;
   }
 }
