@@ -1,5 +1,5 @@
 import 'package:doktory/features/user/home/presentation/views/home_screen.dart';
-import 'package:doktory/features/user/user_appointments_screen.dart';
+import 'package:doktory/features/user/doctor_details/presentation/views/user_appointments_screen.dart';
 import 'package:doktory/features/user/user_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:doktory/core/constants.dart';

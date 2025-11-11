@@ -10,11 +10,13 @@ class CustomInformationWidget extends StatelessWidget {
     required this.content,
     required this.iconPath,
     required this.title,
+    this.onMorePressed,
   });
+
   final List<Widget> content;
   final String iconPath;
   final String title;
-
+  final VoidCallback? onMorePressed;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,23 +27,41 @@ class CustomInformationWidget extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(12.r),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
-                SvgPicture.asset(
-                  iconPath,
-                  width: 20.w,
-                  height: 20.h,
-                  color: AppColors.primary,
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      iconPath,
+                      width: 20.w,
+                      height: 20.h,
+                      color: AppColors.primary,
+                    ),
+                    SizedBox(width: 5.w),
+                    Text(
+                      title,
+                      style: Styles.textStyle14Regular.copyWith(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(width: 5.w),
-                Text(
-                  title,
-                  style: Styles.textStyle14Regular.copyWith(
-                    color: AppColors.primary,
-                    fontWeight: FontWeight.w700,
+
+                Spacer(),
+                if (onMorePressed != null)
+                  GestureDetector(
+                    onTap: onMorePressed,
+                    child: Text(
+                      'المزيد',
+                      style: Styles.textStyle14Regular.copyWith(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
                   ),
-                ),
               ],
             ),
             Divider(color: Colors.grey.shade300, thickness: 1.25.h),

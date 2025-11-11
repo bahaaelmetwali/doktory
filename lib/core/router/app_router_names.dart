@@ -13,4 +13,5 @@ class AppRouterNames {
   static const allDoctorsScreen = '/allDoctorsScreen';
   static const categoryDoctors = '/categoryDoctors';
   static const doctorDetailsScreen = '/doctorDetailsScreen';
+  static const appointmentDetailsView = '/appointmentDetailsView';
 }

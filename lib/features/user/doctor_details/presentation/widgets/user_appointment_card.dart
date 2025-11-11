@@ -1,6 +1,6 @@
-import 'package:doktory/core/utils/styles.dart';
 import 'package:doktory/core/widgets/custom_information_widget.dart';
 import 'package:doktory/features/user/doctor_details/data/models/appointment_model.dart';
+import 'package:doktory/features/user/doctor_details/presentation/widgets/custom_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -36,70 +36,18 @@ class UserAppointmentCard extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(8.r),
       child: CustomInformationWidget(
+        onMorePressed: () {},
         content: [
-          Row(
-            children: [
-              Text(
-                'اسم الدكتور',
-                style: Styles.textStyle14SemiBold.copyWith(color: Colors.grey),
-              ),
-              Spacer(),
-              Text(
-                appointment.doctorName,
-                style: Styles.textStyle14SemiBold.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
+          CustomRow(title: 'اسم الدكتور', information: appointment.doctorName),
           SizedBox(height: 10.h),
-          Row(
-            children: [
-              Text(
-                'تاريخ الحجز',
-                style: Styles.textStyle14SemiBold.copyWith(color: Colors.grey),
-              ),
-              Spacer(),
-              Text(
-                dateFormatted,
-                style: Styles.textStyle14SemiBold.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
+          CustomRow(title: 'تاريخ الحجز', information: dateFormatted),
           SizedBox(height: 10.h),
-          Row(
-            children: [
-              Text(
-                'الوقت',
-                style: Styles.textStyle14SemiBold.copyWith(color: Colors.grey),
-              ),
-              Spacer(),
-              Text(
-                timeFormatted,
-                style: Styles.textStyle14SemiBold.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
+          CustomRow(title: 'الوقت', information: timeFormatted),
           SizedBox(height: 10.h),
-          Row(
-            children: [
-              Text(
-                'حالة الطلب',
-                style: Styles.textStyle14SemiBold.copyWith(color: Colors.grey),
-              ),
-              Spacer(),
-              Text(
-                appointment.status,
-                style: Styles.textStyle14SemiBold.copyWith(
-                  fontWeight: FontWeight.w500,
-                  color: _getStatusColor(appointment.status),
-                ),
-              ),
-            ],
+          CustomRow(
+            title: 'حالة الطلب',
+            information: appointment.status,
+            infoColor: _getStatusColor(appointment.status),
           ),
         ],
         iconPath: 'assets/icons/information.svg',

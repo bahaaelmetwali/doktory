@@ -7,7 +7,6 @@ import 'package:doktory/core/location/domain/usecases/location_use_case.dart';
 import 'package:doktory/core/utils/cache_helper.dart';
 import 'package:doktory/core/utils/location_api_service.dart';
 import 'package:doktory/features/shared/auth/data/data_source/auth_remote_data_source.dart';
-
 import 'package:doktory/features/shared/auth/data/data_source/user_remote_data_source.dart';
 import 'package:doktory/features/shared/auth/data/repo_impl/auth_repository_Impl.dart';
 import 'package:doktory/features/shared/auth/data/repo_impl/user_repository_Impl.dart';
@@ -26,8 +25,6 @@ import 'package:doktory/features/user/doctor_details/data/data_source/repo_impl/
 import 'package:doktory/features/user/doctor_details/domain/usecases/add_appointment_use_case.dart';
 import 'package:doktory/features/user/doctor_details/domain/usecases/get_appointments_for_user_use_case.dart';
 import 'package:doktory/features/user/doctor_details/domain/usecases/get_full_user_data_use_case.dart';
-import 'package:doktory/features/user/doctor_details/presentation/cubits/appointment/appointment_cubit.dart';
-import 'package:doktory/features/user/doctor_details/presentation/cubits/get_user_appointments_/get_user_appointments_cubit.dart';
 import 'package:doktory/features/user/home/data/data_source/doctor_remote_data_source.dart';
 import 'package:doktory/features/user/home/data/repo_impl/doctor_repository_impl.dart';
 import 'package:doktory/features/user/home/domain/usecases/get_doctors_use_case.dart';
