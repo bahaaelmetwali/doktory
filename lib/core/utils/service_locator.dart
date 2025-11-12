@@ -166,7 +166,7 @@ Future<void> setupServiceLocator() async {
   );
 
   getIt.registerLazySingleton<LogInCubit>(
-    () => LogInCubit(getIt<LoginUseCase>()),
+    () => LogInCubit(getIt<LoginUseCase>(), getIt<GetUserDataUseCase>()),
   );
 
   getIt.registerLazySingleton<AuthCheckCubit>(

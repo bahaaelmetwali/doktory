@@ -41,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
             if (userRole == 'عميل') {
               context.go(AppRouterNames.homeUserScreen);
             } else if (userRole == 'دكتور') {
-              // context.go(AppRouterNames.doctorHomeScreen);
+              context.go(AppRouterNames.allAppointmentsScreen);
             }
           } else if (state is AuthCheckNeedsCompletion) {
             context.go(AppRouterNames.selectRoleScreen);

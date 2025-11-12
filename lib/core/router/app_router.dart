@@ -1,4 +1,5 @@
 import 'package:doktory/core/router/app_router_names.dart';
+import 'package:doktory/features/doctor/doctor_navigation.dart';
 import 'package:doktory/features/shared/auth/data/models/user_model.dart';
 import 'package:doktory/features/shared/auth/presentation/views/add_location_screen.dart';
 import 'package:doktory/features/shared/auth/presentation/views/complete_data_screen.dart';
@@ -59,7 +60,7 @@ abstract class AppRouter {
           return const AddLocationScreen();
         },
       ),
-
+      // userScreens
       GoRoute(
         path: AppRouterNames.homeUserScreen,
         builder: (context, state) => const UserNavigation(currentIndex: 0),
@@ -96,6 +97,15 @@ abstract class AppRouter {
           final AppointmentModel appointment = state.extra as AppointmentModel;
           return AppointmentDetailsScreen(appointment: appointment);
         },
+      ),
+      //doctorScreens
+      GoRoute(
+        path: AppRouterNames.allAppointmentsScreen,
+        builder: (context, state) => const DoctorNavigation(currentIndex: 0),
+      ),
+      GoRoute(
+        path: AppRouterNames.scheduleScreen,
+        builder: (context, state) => const DoctorNavigation(currentIndex: 1),
       ),
     ],
   );

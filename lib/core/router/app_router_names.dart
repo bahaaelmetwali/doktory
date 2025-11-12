@@ -9,9 +9,10 @@ class AppRouterNames {
   static const homeUserScreen = '/homeUserScreen';
   static const userAppointmentsScreen = '/userAppointmentsScreen';
   static const userProfileScreen = '/userProfileScreen';
-
   static const allDoctorsScreen = '/allDoctorsScreen';
   static const categoryDoctors = '/categoryDoctors';
   static const doctorDetailsScreen = '/doctorDetailsScreen';
   static const appointmentDetailsView = '/appointmentDetailsView';
+  static const allAppointmentsScreen = '/allAppointmentsScreen';
+  static const scheduleScreen = '/scheduleScreen';
 }

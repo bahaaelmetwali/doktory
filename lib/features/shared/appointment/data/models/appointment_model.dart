@@ -9,6 +9,7 @@ class AppointmentModel {
   final DateTime appointmentDate;
   final String status;
   final DateTime createdAt;
+  final String? rejectionReason;
 
   AppointmentModel({
     required this.id,
@@ -19,6 +20,7 @@ class AppointmentModel {
     required this.appointmentDate,
     required this.status,
     required this.createdAt,
+    this.rejectionReason,
   });
 
   Map<String, dynamic> toMap() {
@@ -31,6 +33,7 @@ class AppointmentModel {
       'appointmentDate': appointmentDate,
       'status': status,
       'createdAt': createdAt,
+      if (rejectionReason != null) 'rejectionReason': rejectionReason,
     };
   }
 
@@ -44,6 +47,7 @@ class AppointmentModel {
       appointmentDate: (map['appointmentDate'] as Timestamp).toDate(),
       status: map['status'] ?? '',
       createdAt: (map['createdAt'] as Timestamp).toDate(),
+      rejectionReason: map['rejectionReason'],
     );
   }
 }
