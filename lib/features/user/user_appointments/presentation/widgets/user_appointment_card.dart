@@ -1,14 +1,15 @@
 import 'package:doktory/core/constants.dart';
+import 'package:doktory/core/router/app_router_names.dart';
 import 'package:doktory/core/widgets/custom_information_widget.dart';
-import 'package:doktory/features/user/doctor_details/data/models/appointment_model.dart';
-import 'package:doktory/features/user/doctor_details/presentation/widgets/custom_row.dart';
+import 'package:doktory/features/shared/appointment/data/models/appointment_model.dart';
+import 'package:doktory/features/user/user_appointments/presentation/widgets/custom_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
-class AppointmentCardSection extends StatelessWidget {
-  const AppointmentCardSection({super.key, required this.appointment});
-
+class UserAppointmentCard extends StatelessWidget {
+  const UserAppointmentCard({super.key, required this.appointment});
   final AppointmentModel appointment;
 
   @override
@@ -21,7 +22,11 @@ class AppointmentCardSection extends StatelessWidget {
       'hh:mm a',
       'ar',
     ).format(appointment.appointmentDate);
+
     return CustomInformationWidget(
+      onMorePressed: () {
+        context.push(AppRouterNames.appointmentDetailsView, extra: appointment);
+      },
       content: [
         CustomRow(title: 'اسم الدكتور', information: appointment.doctorName),
         SizedBox(height: 10.h),

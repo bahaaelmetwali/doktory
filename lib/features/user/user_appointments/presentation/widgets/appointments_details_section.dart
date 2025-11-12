@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:doktory/core/constants.dart';
-import 'package:doktory/features/user/doctor_details/data/models/appointment_model.dart';
-import 'package:doktory/features/user/doctor_details/presentation/cubits/doctor_details/doctor_details_cubit.dart';
-import 'package:doktory/features/user/doctor_details/presentation/cubits/doctor_details/doctor_details_state.dart';
-import 'package:doktory/features/user/doctor_details/presentation/widgets/appointment_card_section.dart';
+import 'package:doktory/features/shared/appointment/data/models/appointment_model.dart';
+import 'package:doktory/features/user/user_appointments/presentation/cubits/doctor_details/doctor_details_cubit.dart';
+import 'package:doktory/features/user/user_appointments/presentation/cubits/doctor_details/doctor_details_state.dart';
+import 'package:doktory/features/user/user_appointments/presentation/widgets/appointment_card_section.dart';
 import 'package:doktory/features/user/doctor_details/presentation/widgets/location_doctor_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

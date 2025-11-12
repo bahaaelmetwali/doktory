@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:doktory/core/errors/failure.dart';
 import 'package:doktory/core/utils/handle_request.dart';
-import 'package:doktory/features/user/doctor_details/data/data_source/appointment_data_source.dart';
-import 'package:doktory/features/user/doctor_details/data/models/appointment_model.dart';
-import 'package:doktory/features/user/doctor_details/domain/repo/appointments_repository.dart';
+import 'package:doktory/features/shared/appointment/data/data_source/appointment_data_source.dart';
+import 'package:doktory/features/shared/appointment/data/models/appointment_model.dart';
+import 'package:doktory/features/shared/appointment/domain/repo/appointments_repository.dart';
 
 class AppointmentsRepositoryImpl implements AppointmentsRepository {
   final AppointmentsRemoteDataSource _remoteDataSource;

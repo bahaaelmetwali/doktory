@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:doktory/core/errors/failure.dart';
-import 'package:doktory/features/user/doctor_details/data/models/appointment_model.dart';
+import 'package:doktory/features/shared/appointment/data/models/appointment_model.dart';
 
 abstract class AppointmentsRepository {
   Future<Either<Failure, void>> addAppointment(AppointmentModel appointment);

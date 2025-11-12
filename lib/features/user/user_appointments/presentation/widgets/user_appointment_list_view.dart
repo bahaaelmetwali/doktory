@@ -1,7 +1,7 @@
 import 'package:doktory/core/constants.dart';
 import 'package:doktory/core/widgets/show_custom_snack_bar.dart';
-import 'package:doktory/features/user/doctor_details/presentation/cubits/get_user_appointments/get_user_appointments_cubit.dart';
-import 'package:doktory/features/user/doctor_details/presentation/widgets/user_appointment_card.dart';
+import 'package:doktory/features/user/user_appointments/presentation/cubits/get_user_appointments/get_user_appointments_cubit.dart';
+import 'package:doktory/features/user/user_appointments/presentation/widgets/user_appointment_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

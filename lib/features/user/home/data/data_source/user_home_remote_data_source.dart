@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doktory/features/shared/auth/data/models/user_model.dart';
 
-abstract class DoctorRemoteDataSource {
+abstract class UserHomeRemoteDataSource {
   Future<List<UserModel>> getDoctors();
 }
 
-class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
+class UserHomeRemoteDataSourceImpl implements UserHomeRemoteDataSource {
   final FirebaseFirestore firestore;
 
-  DoctorRemoteDataSourceImpl({required this.firestore});
+  UserHomeRemoteDataSourceImpl({required this.firestore});
 
   @override
   Future<List<UserModel>> getDoctors() async {

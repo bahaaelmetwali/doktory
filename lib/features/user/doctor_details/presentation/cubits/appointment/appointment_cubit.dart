@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:doktory/features/shared/auth/data/models/user_model.dart';
-import 'package:doktory/features/user/doctor_details/data/models/appointment_model.dart';
-import 'package:doktory/features/user/doctor_details/domain/usecases/add_appointment_use_case.dart';
+import 'package:doktory/features/shared/appointment/data/models/appointment_model.dart';
+import 'package:doktory/features/shared/appointment/domain/use_cases/add_appointment_use_case.dart';
 import 'package:doktory/features/user/doctor_details/domain/usecases/get_full_user_data_use_case.dart';
 import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';

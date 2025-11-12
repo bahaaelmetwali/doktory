@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:doktory/features/user/doctor_details/data/models/appointment_model.dart';
+import 'package:doktory/features/shared/appointment/data/models/appointment_model.dart';
 
 abstract class AppointmentsRemoteDataSource {
   Future<void> addAppointment(AppointmentModel appointment);
