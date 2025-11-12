@@ -1,4 +1,3 @@
-import 'package:doktory/core/constants.dart';
 import 'package:doktory/core/utils/styles.dart';
 import 'package:doktory/features/doctor/all_appointments/presentation/widgets/info_row.dart';
 import 'package:flutter/material.dart';
