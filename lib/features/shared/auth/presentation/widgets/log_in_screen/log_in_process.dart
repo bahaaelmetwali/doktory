@@ -1,5 +1,4 @@
 import 'package:doktory/core/router/app_router_names.dart';
-import 'package:doktory/core/utils/cache_helper.dart';
 import 'package:doktory/core/widgets/custom_button.dart';
 import 'package:doktory/core/widgets/custom_loading_indicator.dart';
 import 'package:doktory/core/widgets/show_custom_snack_bar.dart';

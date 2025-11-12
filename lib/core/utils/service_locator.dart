@@ -6,6 +6,7 @@ import 'package:doktory/core/location/data/repo_impl/location_repo_impl.dart';
 import 'package:doktory/core/location/domain/usecases/location_use_case.dart';
 import 'package:doktory/core/utils/cache_helper.dart';
 import 'package:doktory/core/utils/location_api_service.dart';
+import 'package:doktory/features/doctor/all_appointments/use_cases/get_appointments_for_doctor_use_case.dart';
 import 'package:doktory/features/shared/auth/data/data_source/auth_remote_data_source.dart';
 import 'package:doktory/features/shared/auth/data/data_source/user_remote_data_source.dart';
 import 'package:doktory/features/shared/auth/data/repo_impl/auth_repository_Impl.dart';
@@ -159,7 +160,9 @@ Future<void> setupServiceLocator() async {
   getIt.registerLazySingleton<GetDoctorDataUseCase>(
     () => GetDoctorDataUseCase(getIt<UserRepositoryImpl>()),
   );
-
+  getIt.registerLazySingleton<GetAppointmentsForDoctorUseCase>(
+    () => GetAppointmentsForDoctorUseCase(getIt<AppointmentsRepositoryImpl>()),
+  );
   // 🧠 Cubits (حالة واجهة المستخدم)
   getIt.registerLazySingleton<RegisterCubit>(
     () => RegisterCubit(getIt<RegisterUseCase>(), getIt<CreateUserUseCase>()),
