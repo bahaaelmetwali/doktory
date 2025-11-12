@@ -29,12 +29,14 @@ class _HomeAppBarState extends State<HomeAppBar> {
       },
       child: BlocBuilder<AuthCheckCubit, AuthCheckState>(
         builder: (context, state) {
-          String userName = 'مرحبا بك !';
+          String? userName;
           String? userImage;
+          String? selectedRole;
 
           if (state is AuthCheckAuthenticated) {
-            userName = state.user.name ?? 'مرحبا بك !';
+            userName = state.user.name!;
             userImage = state.user.image;
+            selectedRole = state.user.role;
           }
 
           return Container(
@@ -71,7 +73,10 @@ class _HomeAppBarState extends State<HomeAppBar> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('مرحبا بك !', style: Styles.textStyle14SemiBold),
-                      Text(userName, style: Styles.textStyle14SemiBold),
+                      Text(
+                        selectedRole == 'دكتور' ? 'د. $userName' : userName!,
+                        style: Styles.textStyle14SemiBold,
+                      ),
                     ],
                   ),
                   Spacer(),

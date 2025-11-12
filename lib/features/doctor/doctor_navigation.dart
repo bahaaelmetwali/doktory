@@ -1,4 +1,4 @@
-import 'package:doktory/features/doctor/all_appointments_screen.dart';
+import 'package:doktory/features/doctor/all_appointments/presentation/views/all_appointments_screen.dart';
 import 'package:doktory/features/doctor/schedule_screen.dart';
 import 'package:doktory/features/user/user_profile_screen.dart';
 import 'package:flutter/material.dart';
