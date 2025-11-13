@@ -31,13 +31,7 @@ class UserCard extends StatelessWidget {
     ).format(appointment.appointmentDate);
 
     ImageProvider? getImage() {
-      if (imageBase64 != null) {
-        try {
-          return MemoryImage(base64Decode(imageBase64!));
-        } catch (_) {
-          return null;
-        }
-      } else if (user.image != null) {
+      if (user.image != null) {
         try {
           return MemoryImage(base64Decode(user.image!));
         } catch (_) {
