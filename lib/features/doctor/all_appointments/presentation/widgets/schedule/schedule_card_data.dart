@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:doktory/core/widgets/custom_information_widget.dart';
 import 'package:doktory/features/shared/auth/data/models/user_model.dart';
 import 'package:doktory/features/user/user_appointments/presentation/widgets/custom_row.dart';
@@ -58,6 +57,5 @@ class ScheduleCardData extends StatelessWidget {
       iconPath: 'assets/icons/information.svg',
       title: 'حجز',
     );
-    ;
   }
 }

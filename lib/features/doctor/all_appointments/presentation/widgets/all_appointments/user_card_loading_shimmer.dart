@@ -5,35 +5,51 @@ import 'package:shimmer_animation/shimmer_animation.dart';
 class UserCardLoadingShimmer extends StatelessWidget {
   const UserCardLoadingShimmer({super.key});
 
+  Widget _buildShimmerLine() {
+    return Container(
+      height: 14.h,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.grey.shade300,
+        borderRadius: BorderRadius.circular(8.r),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Shimmer(
       color: Colors.grey.shade300,
-      duration: const Duration(seconds: 2),
-      interval: const Duration(seconds: 0),
       child: Container(
-        padding: EdgeInsets.all(10.r),
+        padding: EdgeInsets.all(15.r),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16.r),
+          border: Border.all(color: Colors.grey.shade200),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 6,
+              offset: const Offset(0, 3),
+            ),
+          ],
         ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: Column(
           children: [
-            CircleAvatar(radius: 40.r, backgroundColor: Colors.grey.shade300),
-            SizedBox(width: 12.w),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(height: 12.h, color: Colors.grey.shade300),
-                  SizedBox(height: 5.h),
-                  Container(height: 12.h, color: Colors.grey.shade300),
-                  SizedBox(height: 5.h),
-                  Container(height: 12.h, color: Colors.grey.shade300),
-                ],
+            Center(
+              child: CircleAvatar(
+                radius: 45.r,
+                backgroundColor: Colors.grey.shade300,
               ),
             ),
+            SizedBox(height: 15.h),
+            _buildShimmerLine(),
+            SizedBox(height: 10.h),
+            _buildShimmerLine(),
+            SizedBox(height: 10.h),
+            _buildShimmerLine(),
+            SizedBox(height: 10.h),
+            _buildShimmerLine(),
           ],
         ),
       ),
