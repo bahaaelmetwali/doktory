@@ -13,7 +13,7 @@ class UserModel {
   final double? latitude;
   final double? longitude;
 
-  UserModel({
+  const UserModel({
     required this.uid,
     required this.email,
     this.name,

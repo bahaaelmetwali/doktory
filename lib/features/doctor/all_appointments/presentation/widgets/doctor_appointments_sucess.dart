@@ -3,8 +3,10 @@ import 'package:doktory/features/doctor/all_appointments/presentation/cubits/use
 import 'package:doktory/features/doctor/all_appointments/presentation/widgets/action_button.dart';
 import 'package:doktory/features/doctor/all_appointments/presentation/widgets/user_card.dart';
 import 'package:doktory/features/doctor/all_appointments/presentation/widgets/user_card_loading_shimmer.dart';
+import 'package:doktory/features/doctor/all_appointments/use_cases/update_appointment_status_use_case.dart';
 import 'package:doktory/features/shared/appointment/data/models/appointment_model.dart';
 import 'package:doktory/features/shared/auth/domain/usecases/get_user_data_use_case.dart';
+import 'package:doktory/features/user/user_appointments/presentation/cubits/appointment_status/appointment_status_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,32 +50,19 @@ class DoctorAppointmentsSucess extends StatelessWidget {
                 userCardContent = const SizedBox.shrink();
               }
 
-              return Column(
-                children: [
-                  userCardContent,
-                  SizedBox(height: 15.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ActionButton(
-                        text: 'قبول',
-                        onTap: () {
-                          // هنظبط القبول بعدين
-                        },
-                      ),
-                      SizedBox(width: 30.w),
-                      ActionButton(
-                        text: 'رفض',
-                        isFilled: false,
-                        onTap: () {
-                          // هنظبط الرفض بعدين
-                        },
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 10.h),
-                  Divider(color: Colors.grey.shade300, thickness: 1.25.h),
-                ],
+              return BlocProvider(
+                create: (context) => AppointmentStatusCubit(
+                  getIt<UpdateAppointmentStatusUseCase>(),
+                ),
+                child: Column(
+                  children: [
+                    userCardContent,
+                    SizedBox(height: 15.h),
+                    CustomDoctorButtons(appointment: appointment),
+                    SizedBox(height: 10.h),
+                    Divider(color: Colors.grey.shade300, thickness: 1.25.h),
+                  ],
+                ),
               );
             },
           ),

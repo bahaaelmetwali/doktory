@@ -5,7 +5,11 @@ abstract class AppointmentsRemoteDataSource {
   Future<void> addAppointment(AppointmentModel appointment);
   Future<List<AppointmentModel>> getAppointmentsForUser(String userId);
   Future<List<AppointmentModel>> getAppointmentsForDoctor(String doctorId);
-  Future<void> updateAppointmentStatus(String appointmentId, String newStatus);
+  Future<void> updateAppointmentStatus(
+    String appointmentId,
+    String newStatus, {
+    String? rejectionReason,
+  });
 }
 
 class AppointmentsRemoteDataSourceImpl implements AppointmentsRemoteDataSource {
@@ -50,13 +54,20 @@ class AppointmentsRemoteDataSourceImpl implements AppointmentsRemoteDataSource {
         .toList();
   }
 
-  @override
   Future<void> updateAppointmentStatus(
     String appointmentId,
-    String newStatus,
-  ) async {
-    await firestore.collection(_collection).doc(appointmentId).update({
-      'status': newStatus,
-    });
+    String newStatus, {
+    String? rejectionReason,
+  }) async {
+    final data = {'status': newStatus};
+
+    if (newStatus == 'ملغي' && rejectionReason != null) {
+      data['rejectionReason'] = rejectionReason;
+    }
+
+    await FirebaseFirestore.instance
+        .collection('appointments')
+        .doc(appointmentId)
+        .update(data);
   }
 }

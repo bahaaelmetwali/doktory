@@ -1,19 +1,26 @@
 part of 'log_in_cubit.dart';
 
-sealed class LogInState {}
+@immutable
+sealed class LogInState {
+  const LogInState();
+}
 
-class LogInInitial extends LogInState {}
+class LogInInitial extends LogInState {
+  const LogInInitial();
+}
 
-class LogInLoading extends LogInState {}
+class LogInLoading extends LogInState {
+  const LogInLoading();
+}
 
 class LogInSuccess extends LogInState {
   final UserModel user;
 
-  LogInSuccess(this.user);
+  const LogInSuccess(this.user);
 }
 
 class LogInFailure extends LogInState {
   final String message;
 
-  LogInFailure(this.message);
+  const LogInFailure(this.message);
 }

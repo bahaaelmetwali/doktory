@@ -13,5 +13,6 @@ abstract class AppointmentsRepository {
   Future<Either<Failure, void>> updateAppointmentStatus(
     String appointmentId,
     String newStatus,
+    String? rejectionReason,
   );
 }

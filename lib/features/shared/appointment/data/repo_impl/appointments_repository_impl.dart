@@ -45,12 +45,14 @@ class AppointmentsRepositoryImpl implements AppointmentsRepository {
   Future<Either<Failure, void>> updateAppointmentStatus(
     String appointmentId,
     String newStatus,
+    String? rejectionReason,
   ) {
     return handleRequest(
       request: () async {
         await _remoteDataSource.updateAppointmentStatus(
           appointmentId,
           newStatus,
+          rejectionReason: rejectionReason,
         );
       },
     );

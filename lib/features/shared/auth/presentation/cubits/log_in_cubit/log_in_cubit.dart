@@ -2,6 +2,7 @@ import 'package:doktory/features/shared/auth/data/models/auth_request_model.dart
 import 'package:doktory/features/shared/auth/data/models/user_model.dart';
 import 'package:doktory/features/shared/auth/domain/usecases/get_user_data_use_case.dart';
 import 'package:doktory/features/shared/auth/domain/usecases/login_use_case.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'log_in_state.dart';
@@ -22,7 +23,7 @@ class LogInCubit extends Cubit<LogInState> {
       },
       (firebaseUser) async {
         if (firebaseUser == null) {
-          emit(LogInFailure('فشل تسجيل الدخول، حاول مرة أخرى'));
+          emit(const LogInFailure('فشل تسجيل الدخول، حاول مرة أخرى'));
           return;
         }
 
@@ -34,7 +35,7 @@ class LogInCubit extends Cubit<LogInState> {
           userModel,
         ) {
           if (userModel == null) {
-            emit(LogInFailure('فشل جلب بيانات المستخدم'));
+            emit(const LogInFailure('فشل جلب بيانات المستخدم'));
           } else {
             emit(LogInSuccess(userModel));
           }
