@@ -5,21 +5,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CustomDoctorButtons extends StatelessWidget {
+class CustomDoctorButtons extends StatefulWidget {
   const CustomDoctorButtons({super.key, required this.appointment});
   final AppointmentModel appointment;
+
+  @override
+  State<CustomDoctorButtons> createState() => _CustomDoctorButtonsState();
+}
+
+class _CustomDoctorButtonsState extends State<CustomDoctorButtons> {
+  bool isAcceptLoading = false;
+  bool isRejectLoading = false;
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppointmentStatusCubit, AppointmentStatusState>(
       listener: (context, state) {
         if (state is AppointmentStatusSuccess) {
+          setState(() {
+            isAcceptLoading = false;
+            isRejectLoading = false;
+          });
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text('تم تحديث الحالة إلى ${state.newStatus} بنجاح'),
             ),
           );
         } else if (state is AppointmentStatusFailure) {
+          setState(() {
+            isAcceptLoading = false;
+            isRejectLoading = false;
+          });
           ScaffoldMessenger.of(
             context,
           ).showSnackBar(SnackBar(content: Text('حدث خطأ: ${state.message}')));
@@ -32,31 +48,33 @@ class CustomDoctorButtons extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ActionButton(
-              text: state is AppointmentStatusLoading
-                  ? 'جارٍ الحفظ...'
-                  : 'قبول',
-              onTap: state is AppointmentStatusLoading
-                  ? null
-                  : () {
-                      cubit.updateStatus(appointment.id, 'مقبول');
-                    },
+              text: 'قبول',
+              isLoading: isAcceptLoading,
+              onTap: () async {
+                setState(() {
+                  isAcceptLoading = true;
+                });
+                await cubit.updateStatus(widget.appointment.id, 'مقبول');
+              },
             ),
             SizedBox(width: 30.w),
             ActionButton(
               text: 'رفض',
               isFilled: false,
-              onTap: state is AppointmentStatusLoading
-                  ? null
-                  : () async {
-                      final reason = await _showRejectionDialog(context);
-                      if (reason != null && reason.isNotEmpty) {
-                        cubit.updateStatus(
-                          appointment.id,
-                          'مرفوض',
-                          rejectionReason: reason,
-                        );
-                      }
-                    },
+              isLoading: isRejectLoading,
+              onTap: () async {
+                final reason = await _showRejectionDialog(context);
+                if (reason != null && reason.isNotEmpty) {
+                  setState(() {
+                    isRejectLoading = true;
+                  });
+                  await cubit.updateStatus(
+                    widget.appointment.id,
+                    'مرفوض',
+                    rejectionReason: reason,
+                  );
+                }
+              },
             ),
           ],
         );

@@ -1,6 +1,6 @@
 import 'package:doktory/core/utils/service_locator.dart';
 import 'package:doktory/features/doctor/all_appointments/presentation/cubits/user_cubit/user_data_cubit.dart';
-import 'package:doktory/features/doctor/all_appointments/presentation/widgets/action_button.dart';
+import 'package:doktory/features/doctor/all_appointments/presentation/widgets/custom_doctor_buttons.dart';
 import 'package:doktory/features/doctor/all_appointments/presentation/widgets/user_card.dart';
 import 'package:doktory/features/doctor/all_appointments/presentation/widgets/user_card_loading_shimmer.dart';
 import 'package:doktory/features/doctor/all_appointments/use_cases/update_appointment_status_use_case.dart';
@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class DoctorAppointmentsSucess extends StatelessWidget {
+class DoctorAppointmentsSucess extends StatefulWidget {
   const DoctorAppointmentsSucess({
     super.key,
     required this.pendingAppointments,
@@ -20,13 +20,32 @@ class DoctorAppointmentsSucess extends StatelessWidget {
   final List<AppointmentModel> pendingAppointments;
 
   @override
+  State<DoctorAppointmentsSucess> createState() =>
+      _DoctorAppointmentsSucessState();
+}
+
+class _DoctorAppointmentsSucessState extends State<DoctorAppointmentsSucess> {
+  late List<AppointmentModel> appointments;
+  @override
+  void initState() {
+    super.initState();
+    appointments = widget.pendingAppointments;
+  }
+
+  void removeAppointment(String appointmentId) {
+    setState(() {
+      appointments.removeWhere((element) => element.id == appointmentId);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: pendingAppointments.length,
+      itemCount: appointments.length,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
-        final appointment = pendingAppointments[index];
+        final appointment = widget.pendingAppointments[index];
 
         return BlocProvider(
           create: (context) =>
@@ -54,15 +73,35 @@ class DoctorAppointmentsSucess extends StatelessWidget {
                 create: (context) => AppointmentStatusCubit(
                   getIt<UpdateAppointmentStatusUseCase>(),
                 ),
-                child: Column(
-                  children: [
-                    userCardContent,
-                    SizedBox(height: 15.h),
-                    CustomDoctorButtons(appointment: appointment),
-                    SizedBox(height: 10.h),
-                    Divider(color: Colors.grey.shade300, thickness: 1.25.h),
-                  ],
-                ),
+                child:
+                    BlocListener<
+                      AppointmentStatusCubit,
+                      AppointmentStatusState
+                    >(
+                      listener: (context, state) {
+                        if (state is AppointmentStatusSuccess) {
+                          removeAppointment(appointment.id);
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('تم ${state.newStatus} بنجاح'),
+                            ),
+                          );
+                        }
+                      },
+                      child: Column(
+                        children: [
+                          userCardContent,
+                          SizedBox(height: 15.h),
+                          CustomDoctorButtons(appointment: appointment),
+                          SizedBox(height: 10.h),
+                          Divider(
+                            color: Colors.grey.shade300,
+                            thickness: 1.25.h,
+                          ),
+                        ],
+                      ),
+                    ),
               );
             },
           ),
