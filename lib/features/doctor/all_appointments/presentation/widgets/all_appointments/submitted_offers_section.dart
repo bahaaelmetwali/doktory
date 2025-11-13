@@ -2,7 +2,7 @@ import 'package:doktory/core/constants.dart';
 import 'package:doktory/core/utils/styles.dart';
 import 'package:doktory/features/doctor/all_appointments/presentation/cubits/doctor_appointments/doctor_appointments_cubit.dart';
 import 'package:doktory/features/doctor/all_appointments/presentation/cubits/doctor_appointments/doctor_appointments_state.dart';
-import 'package:doktory/features/doctor/all_appointments/presentation/widgets/doctor_appointments_sucess.dart';
+import 'package:doktory/features/doctor/all_appointments/presentation/widgets/all_appointments/doctor_appointments_sucess.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,17 +28,28 @@ class SubmittedOffersSection extends StatelessWidget {
                   child: CircularProgressIndicator(color: AppColors.primary),
                 );
               } else if (state is DoctorAppointmentsFailure) {
-                return Center(child: Text('حدث خطأ: ${state.message}'));
+                return Center(
+                  child: Text(
+                    'حدث خطأ: ${state.message}',
+                    style: Styles.textStyle16Medium,
+                  ),
+                );
               } else if (state is DoctorAppointmentsSuccess) {
                 final pendingAppointments = state.appointments
                     .where(
                       (appointment) => appointment.status == "قيد الانتظار",
                     )
                     .toList();
-
-                return DoctorAppointmentsSucess(
-                  pendingAppointments: pendingAppointments,
-                );
+                return pendingAppointments.isEmpty
+                    ? Center(
+                        child: Text(
+                          'لا توجد حجوزات قيد الانتظار',
+                          style: Styles.textStyle16Medium,
+                        ),
+                      )
+                    : DoctorAppointmentsSucess(
+                        pendingAppointments: pendingAppointments,
+                      );
               } else {
                 return Center(
                   child: Text(

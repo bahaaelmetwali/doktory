@@ -1,4 +1,4 @@
-import 'package:doktory/features/doctor/all_appointments/presentation/widgets/action_button.dart';
+import 'package:doktory/features/doctor/all_appointments/presentation/widgets/all_appointments/action_button.dart';
 import 'package:doktory/features/shared/appointment/data/models/appointment_model.dart';
 import 'package:doktory/features/user/user_appointments/presentation/cubits/appointment_status/appointment_status_cubit.dart';
 import 'package:flutter/material.dart';

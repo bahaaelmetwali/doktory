@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:doktory/core/utils/styles.dart';
-import 'package:doktory/features/doctor/all_appointments/presentation/widgets/info_row.dart';
+import 'package:doktory/features/doctor/all_appointments/presentation/widgets/all_appointments/info_row.dart';
 import 'package:doktory/features/shared/appointment/data/models/appointment_model.dart';
 import 'package:doktory/features/shared/auth/data/models/user_model.dart';
 import 'package:flutter/material.dart';

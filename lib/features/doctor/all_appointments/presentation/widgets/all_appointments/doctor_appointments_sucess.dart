@@ -1,8 +1,8 @@
 import 'package:doktory/core/utils/service_locator.dart';
 import 'package:doktory/features/doctor/all_appointments/presentation/cubits/user_cubit/user_data_cubit.dart';
-import 'package:doktory/features/doctor/all_appointments/presentation/widgets/custom_doctor_buttons.dart';
-import 'package:doktory/features/doctor/all_appointments/presentation/widgets/user_card.dart';
-import 'package:doktory/features/doctor/all_appointments/presentation/widgets/user_card_loading_shimmer.dart';
+import 'package:doktory/features/doctor/all_appointments/presentation/widgets/all_appointments/custom_doctor_buttons.dart';
+import 'package:doktory/features/doctor/all_appointments/presentation/widgets/all_appointments/user_card.dart';
+import 'package:doktory/features/doctor/all_appointments/presentation/widgets/all_appointments/user_card_loading_shimmer.dart';
 import 'package:doktory/features/doctor/all_appointments/use_cases/update_appointment_status_use_case.dart';
 import 'package:doktory/features/shared/appointment/data/models/appointment_model.dart';
 import 'package:doktory/features/shared/auth/domain/usecases/get_user_data_use_case.dart';
