@@ -1,6 +1,6 @@
 import 'package:doktory/features/user/home/presentation/views/home_screen.dart';
 import 'package:doktory/features/user/user_appointments/presentation/views/user_appointments_screen.dart';
-import 'package:doktory/features/shared/user_profile_screen/presentation/views/user_profile_screen.dart';
+import 'package:doktory/features/shared/user_profile_screen/presentation/views/more_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:doktory/core/constants.dart';
 
@@ -22,7 +22,7 @@ class _UserHomeScreenState extends State<UserNavigation> {
   final List<Widget> screens = [
     HomeUserScreen(),
     UserAppointmentsScreen(),
-    UserProfileScreen(),
+    MoreScreen(),
   ];
   late int currentIndex;
 

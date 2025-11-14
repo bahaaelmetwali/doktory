@@ -70,7 +70,7 @@ abstract class AppRouter {
         builder: (context, state) => const UserNavigation(currentIndex: 1),
       ),
       GoRoute(
-        path: AppRouterNames.userProfileScreen,
+        path: AppRouterNames.moreProfile,
         builder: (context, state) => const UserNavigation(currentIndex: 2),
       ),
       GoRoute(
