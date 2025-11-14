@@ -6,6 +6,9 @@ import 'package:doktory/features/shared/auth/presentation/views/complete_data_sc
 import 'package:doktory/features/shared/auth/presentation/views/log_in_screen.dart';
 import 'package:doktory/features/shared/auth/presentation/views/sign_up_screen.dart';
 import 'package:doktory/features/shared/auth/presentation/views/select_role_screen.dart';
+import 'package:doktory/features/shared/more/presentation/views/privacy_policy_screen.dart';
+import 'package:doktory/features/shared/more/presentation/views/show_user_profile_screen.dart';
+import 'package:doktory/features/shared/more/presentation/views/terms_and_conditions_screen.dart';
 import 'package:doktory/features/shared/splash/presentation/views/splash_screen.dart';
 import 'package:doktory/features/shared/appointment/data/models/appointment_model.dart';
 import 'package:doktory/features/user/user_appointments/presentation/views/appointment_details_screen.dart';
@@ -106,6 +109,25 @@ abstract class AppRouter {
       GoRoute(
         path: AppRouterNames.scheduleScreen,
         builder: (context, state) => const DoctorNavigation(currentIndex: 1),
+      ),
+      //more
+      GoRoute(
+        path: AppRouterNames.termsAndConditionsScreen,
+        builder: (BuildContext context, GoRouterState state) {
+          return TermsAndConditionsScreen();
+        },
+      ),
+      GoRoute(
+        path: AppRouterNames.privacyPolicyScreen,
+        builder: (BuildContext context, GoRouterState state) {
+          return PrivacyPolicyScreen();
+        },
+      ),
+      GoRoute(
+        path: AppRouterNames.showUserProfileScreen,
+        builder: (BuildContext context, GoRouterState state) {
+          return ShowUserProfileScreen();
+        },
       ),
     ],
   );

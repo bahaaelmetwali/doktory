@@ -1,6 +1,6 @@
 import 'package:doktory/features/doctor/all_appointments/presentation/views/all_appointments_screen.dart';
 import 'package:doktory/features/doctor/all_appointments/presentation/views/schedule_screen.dart';
-import 'package:doktory/features/shared/user_profile_screen/presentation/views/more_screen.dart';
+import 'package:doktory/features/shared/more/presentation/views/more_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:doktory/core/constants.dart';
 

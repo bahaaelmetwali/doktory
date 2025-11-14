@@ -1,5 +1,5 @@
 import 'package:doktory/core/constants.dart';
-import 'package:doktory/features/shared/user_profile_screen/presentation/widgets/More_screen_body.dart';
+import 'package:doktory/features/shared/more/presentation/widgets/More_screen_body.dart';
 import 'package:flutter/material.dart';
 
 class MoreScreen extends StatelessWidget {

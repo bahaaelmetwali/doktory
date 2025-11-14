@@ -1,8 +1,10 @@
+import 'package:doktory/core/router/app_router_names.dart';
 import 'package:doktory/core/widgets/custom_app_bar.dart';
 import 'package:doktory/core/widgets/more_option_group.dart';
 import 'package:doktory/core/widgets/more_option_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class MoreScreenBody extends StatelessWidget {
   const MoreScreenBody({super.key});
@@ -25,7 +27,7 @@ class MoreScreenBody extends StatelessWidget {
                 iconPath: 'assets/icons/information.svg',
                 label: 'الشروط والاحكام',
                 onTap: () {
-                  // context.push(AppRouterNames.termsAndConditionsView);
+                  context.push(AppRouterNames.termsAndConditionsScreen);
                 },
               ),
 

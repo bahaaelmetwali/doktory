@@ -15,4 +15,7 @@ class AppRouterNames {
   static const appointmentDetailsView = '/appointmentDetailsView';
   static const allAppointmentsScreen = '/allAppointmentsScreen';
   static const scheduleScreen = '/scheduleScreen';
+  static const termsAndConditionsScreen = '/termsAndConditionsScreen';
+  static const privacyPolicyScreen = '/privacyPolicyScreen';
+  static const showUserProfileScreen = '/showUserProfileScreen';
 }
