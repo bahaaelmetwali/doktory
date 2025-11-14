@@ -35,7 +35,7 @@ class MoreScreenBody extends StatelessWidget {
                 iconPath: 'assets/icons/security-safe.svg',
                 label: 'سياسة الخصوصيه',
                 onTap: () {
-                  // context.push(AppRouterNames.privacyPolicyView);
+                  context.push(AppRouterNames.privacyPolicyScreen);
                 },
               ),
               MoreOptionItem(

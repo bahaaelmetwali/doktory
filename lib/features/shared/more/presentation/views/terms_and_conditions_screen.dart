@@ -1,3 +1,4 @@
+import 'package:doktory/core/constants.dart';
 import 'package:doktory/core/utils/styles.dart';
 import 'package:doktory/core/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class TermsAndConditionsScreen extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        backgroundColor: Color(0xffF2F2F2),
+        backgroundColor: AppColors.scaffold,
 
         body: Column(
           children: [
@@ -37,7 +38,7 @@ class TermsAndConditionsScreen extends StatelessWidget {
             ),
             Container(color: Colors.white, height: 20.h),
             Padding(
-              padding: EdgeInsets.all(16.sp),
+              padding: EdgeInsets.all(16.r),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
