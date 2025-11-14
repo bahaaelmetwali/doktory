@@ -8,28 +8,27 @@ class ActionButton extends StatelessWidget {
   final bool isFilled;
   final VoidCallback? onTap;
   final bool isLoading;
-
   const ActionButton({
     super.key,
     required this.text,
     this.onTap,
     this.isFilled = true,
     this.isLoading = false,
+    this.isLogoutButton,
   });
-
+  final bool? isLogoutButton;
   @override
   Widget build(BuildContext context) {
+    final Color color = isLogoutButton == null ? AppColors.primary : Colors.red;
     return GestureDetector(
       onTap: isLoading ? null : onTap,
       child: Container(
-        width: 140.w,
+        width: 120.w,
         height: 40.h,
         decoration: BoxDecoration(
-          color: isFilled ? AppColors.primary : Colors.white,
+          color: isFilled ? color : Colors.white,
           borderRadius: BorderRadius.circular(12.r),
-          border: isFilled
-              ? null
-              : Border.all(width: 1.w, color: AppColors.primary),
+          border: isFilled ? null : Border.all(width: 1.w, color: color),
         ),
         child: Center(
           child: Row(
@@ -39,7 +38,7 @@ class ActionButton extends StatelessWidget {
               Text(
                 text,
                 style: Styles.textStyle16Medium.copyWith(
-                  color: isFilled ? Colors.white : AppColors.primary,
+                  color: isFilled ? Colors.white : color,
                 ),
               ),
               if (isLoading) ...[
@@ -50,7 +49,7 @@ class ActionButton extends StatelessWidget {
                   child: CircularProgressIndicator(
                     strokeWidth: 2.w,
                     valueColor: AlwaysStoppedAnimation<Color>(
-                      isFilled ? Colors.white : AppColors.primary,
+                      isFilled ? Colors.white : color,
                     ),
                   ),
                 ),

@@ -26,6 +26,7 @@ import 'package:doktory/features/shared/appointment/data/data_source/appointment
 import 'package:doktory/features/shared/appointment/data/repo_impl/appointments_repository_impl.dart';
 import 'package:doktory/features/shared/appointment/domain/use_cases/add_appointment_use_case.dart';
 import 'package:doktory/features/shared/appointment/domain/use_cases/get_appointments_for_user_use_case.dart';
+import 'package:doktory/features/shared/more/domain/use_cases/log_out_use_case.dart';
 import 'package:doktory/features/user/doctor_details/domain/usecases/get_doctor_use_case.dart';
 import 'package:doktory/features/user/doctor_details/domain/usecases/get_full_user_data_use_case.dart';
 import 'package:doktory/features/user/home/data/data_source/user_home_remote_data_source.dart';
@@ -167,6 +168,9 @@ Future<void> setupServiceLocator() async {
 
   getIt.registerLazySingleton<UpdateAppointmentStatusUseCase>(
     () => UpdateAppointmentStatusUseCase(getIt<AppointmentsRepositoryImpl>()),
+  );
+  getIt.registerLazySingleton<LogoutUseCase>(
+    () => LogoutUseCase(getIt<AuthRepositoryImpl>()),
   );
   // 🧠 Cubits (حالة واجهة المستخدم)
   getIt.registerLazySingleton<RegisterCubit>(

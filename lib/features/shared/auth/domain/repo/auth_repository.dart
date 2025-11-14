@@ -7,4 +7,5 @@ abstract class AuthRepository {
   Future<Either<Failure, UserModel?>> register(AuthRequestModel model);
   Future<Either<Failure, UserModel?>> logIn(AuthRequestModel model);
   Future<Either<Failure, UserModel?>> getUser();
+  Future<Either<Failure, void>> logout();
 }

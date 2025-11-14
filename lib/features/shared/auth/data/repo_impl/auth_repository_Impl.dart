@@ -52,4 +52,13 @@ class AuthRepositoryImpl implements AuthRepository {
       },
     );
   }
+
+  @override
+  Future<Either<Failure, void>> logout() async {
+    return handleRequest(
+      request: () async {
+        await _authRemoteDataSource.logout();
+      },
+    );
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:doktory/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
@@ -37,11 +38,7 @@ void showCustomSnackBar(
             Expanded(
               child: Text(
                 message,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: Styles.textStyle14SemiBold.copyWith(color: Colors.white),
               ),
             ),
           ],
