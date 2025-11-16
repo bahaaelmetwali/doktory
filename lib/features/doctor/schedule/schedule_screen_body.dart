@@ -1,5 +1,5 @@
 import 'package:doktory/core/widgets/custom_app_bar.dart';
-import 'package:doktory/features/doctor/all_appointments/presentation/widgets/schedule/schedules_list_view.dart';
+import 'package:doktory/features/doctor/schedule/schedules_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

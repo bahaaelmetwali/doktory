@@ -61,7 +61,7 @@ class AppointmentsRemoteDataSourceImpl implements AppointmentsRemoteDataSource {
   }) async {
     final data = {'status': newStatus};
 
-    if (newStatus == 'ملغي' && rejectionReason != null) {
+    if (newStatus == 'مرفوض' && rejectionReason != null) {
       data['rejectionReason'] = rejectionReason;
     }
 

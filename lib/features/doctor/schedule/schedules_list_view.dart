@@ -2,7 +2,7 @@ import 'package:doktory/core/constants.dart';
 import 'package:doktory/core/utils/styles.dart';
 import 'package:doktory/features/doctor/all_appointments/presentation/cubits/doctor_appointments/doctor_appointments_cubit.dart';
 import 'package:doktory/features/doctor/all_appointments/presentation/cubits/doctor_appointments/doctor_appointments_state.dart';
-import 'package:doktory/features/doctor/all_appointments/presentation/widgets/schedule/schedule_card.dart';
+import 'package:doktory/features/doctor/schedule/schedule_card.dart';
 import 'package:doktory/features/shared/appointment/data/models/appointment_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

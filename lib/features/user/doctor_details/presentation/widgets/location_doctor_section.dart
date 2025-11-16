@@ -55,7 +55,7 @@ class LocationDoctorSection extends StatelessWidget {
 
         if (doctor.latitude != null && doctor.longitude != null)
           SizedBox(
-            height: 200.h,
+            height: 180.h,
             width: double.infinity,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(12.r),

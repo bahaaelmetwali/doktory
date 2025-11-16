@@ -1,3 +1,7 @@
+import 'package:doktory/core/constants.dart';
+import 'package:doktory/core/utils/styles.dart';
+import 'package:doktory/core/widgets/custom_text_form_field.dart';
+import 'package:doktory/core/widgets/show_custom_snack_bar.dart';
 import 'package:doktory/features/doctor/all_appointments/presentation/widgets/all_appointments/action_button.dart';
 import 'package:doktory/features/shared/appointment/data/models/appointment_model.dart';
 import 'package:doktory/features/user/user_appointments/presentation/cubits/appointment_status/appointment_status_cubit.dart';
@@ -26,19 +30,17 @@ class _CustomDoctorButtonsState extends State<CustomDoctorButtons> {
             isAcceptLoading = false;
             isRejectLoading = false;
           });
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('تم تحديث الحالة إلى ${state.newStatus} بنجاح'),
-            ),
-          );
+          showCustomSnackBar(context, message: 'تم تحديث الحالة بنجاح');
         } else if (state is AppointmentStatusFailure) {
           setState(() {
             isAcceptLoading = false;
             isRejectLoading = false;
           });
-          ScaffoldMessenger.of(
+          showCustomSnackBar(
             context,
-          ).showSnackBar(SnackBar(content: Text('حدث خطأ: ${state.message}')));
+            message: 'حدث خطأ: ${state.message}',
+            isError: true,
+          );
         }
       },
       builder: (context, state) {
@@ -87,22 +89,34 @@ class _CustomDoctorButtonsState extends State<CustomDoctorButtons> {
 
     return showDialog<String>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('سبب الرفض'),
-        content: TextField(
-          controller: controller,
-          decoration: const InputDecoration(hintText: 'اكتب سبب الرفض هنا...'),
+      builder: (context) => Directionality(
+        textDirection: TextDirection.rtl,
+        child: AlertDialog(
+          backgroundColor: AppColors.scaffold,
+          title: Center(
+            child: Text(' الرفض', style: Styles.textStyle18SemiBold),
+          ),
+          content: SizedBox(
+            width: double.maxFinite,
+            height: 100.h,
+            child: CustomTextFormField(
+              controller: controller,
+              name: 'سبب الرفض',
+              hintText: 'ادخل سبب الرفض',
+            ),
+          ),
+          actions: [
+            ActionButton(
+              text: "الغاء",
+              isFilled: false,
+              onTap: () => Navigator.pop(context),
+            ),
+            ActionButton(
+              onTap: () => Navigator.pop(context, controller.text.trim()),
+              text: 'تأكيد',
+            ),
+          ],
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('إلغاء'),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(context, controller.text.trim()),
-            child: const Text('تأكيد'),
-          ),
-        ],
       ),
     );
   }

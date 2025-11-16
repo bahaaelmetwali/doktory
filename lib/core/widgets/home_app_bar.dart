@@ -80,17 +80,6 @@ class _HomeAppBarState extends State<HomeAppBar> {
                     ],
                   ),
                   Spacer(),
-                  CircleAvatar(
-                    radius: 20.r,
-                    backgroundColor: Colors.grey[200],
-                    child: SvgPicture.asset(
-                      'assets/icons/notification.svg',
-                      colorFilter: const ColorFilter.mode(
-                        AppColors.primary,
-                        BlendMode.srcIn,
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),

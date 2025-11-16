@@ -45,7 +45,7 @@ class _DoctorAppointmentsSucessState extends State<DoctorAppointmentsSucess> {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
-        final appointment = widget.pendingAppointments[index];
+        final appointment = appointments[index];
 
         return BlocProvider(
           create: (context) =>
@@ -81,12 +81,6 @@ class _DoctorAppointmentsSucessState extends State<DoctorAppointmentsSucess> {
                       listener: (context, state) {
                         if (state is AppointmentStatusSuccess) {
                           removeAppointment(appointment.id);
-
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('تم ${state.newStatus} بنجاح'),
-                            ),
-                          );
                         }
                       },
                       child: Column(

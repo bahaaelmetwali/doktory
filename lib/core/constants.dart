@@ -17,11 +17,11 @@ abstract class AppColors {
 
   static Color getStatusColor(String status) {
     switch (status.toLowerCase()) {
-      case 'مؤكد':
+      case 'مقبول':
         return Colors.green;
       case 'قيد الانتظار':
         return const Color.fromARGB(255, 204, 167, 33);
-      case 'ملغي':
+      case 'مرفوض':
         return Colors.red;
       default:
         return Colors.grey;

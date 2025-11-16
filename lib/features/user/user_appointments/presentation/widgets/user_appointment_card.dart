@@ -41,6 +41,14 @@ class UserAppointmentCard extends StatelessWidget {
           information: appointment.status,
           infoColor: AppColors.getStatusColor(appointment.status),
         ),
+        SizedBox(height: 10.h),
+
+        if (appointment.status == 'مرفوض')
+          CustomRow(
+            title: 'سبب الرفض',
+            information: appointment.rejectionReason ?? '',
+            infoColor: Colors.red,
+          ),
       ],
       iconPath: 'assets/icons/information.svg',
       title: 'بيانات الحجز',

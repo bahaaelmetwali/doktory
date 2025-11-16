@@ -22,7 +22,9 @@ class MoreScreenBody extends StatelessWidget {
               MoreOptionItem(
                 iconPath: 'assets/icons/profile.svg',
                 label: 'الملف الشخصي',
-                onTap: () {},
+                onTap: () {
+                  context.push(AppRouterNames.showUserProfileScreen);
+                },
               ),
               MoreOptionItem(
                 iconPath: 'assets/icons/information.svg',
